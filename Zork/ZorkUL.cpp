@@ -249,7 +249,8 @@ string ZorkUL::go(string direction)
 	Room* nextRoom = currentRoom->nextRoom(direction);
 	if (nextRoom == NULL)
     {
-		return("direction null");
+        // No room in that direction
+        return "ERROR";
     }
 	else
 	{
