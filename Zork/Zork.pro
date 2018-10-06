@@ -26,10 +26,24 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    Character.cpp \
+    Command.cpp \
+    CommandWords.cpp \
+    item.cpp \
+    Parser.cpp \
+    Room.cpp \
+    ZorkUL.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    Character.h \
+    Command.h \
+    CommandWords.h \
+    item.h \
+    Parser.h \
+    Room.h \
+    ZorkUL.h
 
 FORMS += \
         mainwindow.ui

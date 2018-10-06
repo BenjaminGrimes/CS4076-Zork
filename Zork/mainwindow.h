@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPushButton>
+#include <QMessageBox>
+
+#include "ZorkUL.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,8 +19,14 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void btn_onclick();
+
 private:
     Ui::MainWindow *ui;
+
+    QPushButton *btn;
+    ZorkUL zUL;
 };
 
 #endif // MAINWINDOW_H

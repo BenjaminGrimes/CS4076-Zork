@@ -20,7 +20,7 @@ private:
 	bool processCommand(Command command);
 	void printHelp();
     void printMap();
-    void teleport();
+    //void teleport();
 	void goRoom(Command command);
     void createItems();
     void displayItems();
@@ -28,6 +28,8 @@ private:
 public:
 	ZorkUL();
 	void play();
+    void teleport();
+    string getCurrentRoom();
 	string go(string direction);
 };
 
