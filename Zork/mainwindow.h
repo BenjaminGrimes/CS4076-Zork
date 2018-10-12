@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QLabel>
+
 #include <string>
 
 #include "ZorkUL.h"
@@ -36,9 +38,13 @@ private:
     QPushButton *east_btn;
     QPushButton *west_btn;
 
+    QLabel *current_room_label;
+
     ZorkUL zUL;
 
     void setUpButtons();
+    void setUpLabels();
+    void updateRoomLabel();
     void goDirection(QString direction);
 };
 

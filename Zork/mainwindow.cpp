@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // zUL.play();
 
     setUpButtons();
+    setUpLabels();
 }
 
 MainWindow::~MainWindow()
@@ -20,7 +21,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setUpButtons ()
 {
-    btn = new QPushButton("BUTTON", this);
+    btn = new QPushButton("Teleport", this);
     btn->setGeometry(QRect(QPoint(100, 100),QSize(100, 100)));
     btn->connect(btn, SIGNAL(released()), this, SLOT(btn_onclick()));
 
@@ -39,6 +40,20 @@ void MainWindow::setUpButtons ()
     west_btn = new QPushButton("West", this);
     west_btn->setGeometry(QRect(QPoint(400, 500), QSize(100, 100)));
     west_btn->connect(west_btn, SIGNAL(released()), this, SLOT(west_btn_onclick()));
+}
+
+void MainWindow::setUpLabels()
+{
+    current_room_label = new QLabel(this);
+    current_room_label->setGeometry(QRect(QPoint(200, 200), QSize(200, 50)));
+    updateRoomLabel();
+}
+
+void MainWindow::updateRoomLabel()
+{
+    string temp = zUL.getCurrentRoom();
+    QString c_room = QString::fromStdString(temp);
+    current_room_label->setText("Current Room: " + c_room);
 }
 
 void MainWindow::btn_onclick()
@@ -89,7 +104,8 @@ void MainWindow::goDirection(QString direction)
         message = QString::fromStdString(zUL.getCurrentRoom());
     }
 
-    QMessageBox mBox(this);
-    QString mBox_title = "Current Room";
-    mBox.about(this, mBox_title, message);
+    updateRoomLabel();
+    //QMessageBox mBox(this);
+    //QString mBox_title = "Current Room";
+    //mBox.about(this, mBox_title, message);
 }
