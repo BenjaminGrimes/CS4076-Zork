@@ -34,24 +34,26 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    QGridLayout *grid;
-
-    QPushButton *btn;
-    QPushButton *north_btn;
-    QPushButton *south_btn;
-    QPushButton *east_btn;
-    QPushButton *west_btn;
-
-    QLabel *current_room_label;
-
     ZorkUL zUL;
 
-    QGridLayout *layout;
+    QGridLayout *grid;
+
+    // ----- Groups -----------
     QGroupBox *nav_box;
     QGroupBox *player_box;
     QGroupBox *inventory_box;
     QGroupBox *map_box;
     QGroupBox *story_box;
+    // ------------------------
+
+    // ----- Navigation group widgets -----
+    QLabel *current_room_label;
+    QPushButton *teleport_btn;
+    QPushButton *north_btn;
+    QPushButton *south_btn;
+    QPushButton *east_btn;
+    QPushButton *west_btn;
+    // ------------------------------------
 
     void setUpLayout();
 
@@ -62,8 +64,6 @@ private:
     QGroupBox* createStoryGroup();
     QGroupBox* createImageGroup();
 
-    void setUpButtons();
-    void setUpLabels();
     void updateRoomLabel();
     void goDirection(QString direction);
 };

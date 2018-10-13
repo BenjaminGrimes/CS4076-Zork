@@ -8,22 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // zUL.play();
-    grid = new QGridLayout;
-    // these are temp cells for groups
-    grid->addWidget(createImageGroup(), 0, 0);
-    grid->addWidget(createMapGroup(), 0, 1);
-    grid->addWidget(createStoryGroup(), 1, 0);
-    grid->addWidget(createPlayerInfoGroup(), 1, 1);
-    grid->addWidget(createInventoryGroup(), 2, 0);
-    grid->addWidget(createNavigationGroup(), 2,1);
 
-    // need to set central widget to display layout
-    auto central = new QWidget;
-    central->setLayout(grid);
-    setCentralWidget(central);
+    setUpLayout();
 
     /*
-    setUpLayout();
     setUpButtons();
     setUpLabels();
     */
@@ -92,47 +80,51 @@ QGroupBox* MainWindow::createInventoryGroup()
 QGroupBox* MainWindow::createNavigationGroup()
 {
     QGroupBox *groupBox = new QGroupBox(tr("Navigation Group"));
-    QLabel *label = new QLabel;
-    label->setText("NAVIGATION");
-    QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(label);
-    groupBox->setLayout(vbox);
+
+    current_room_label = new QLabel(this);
+    updateRoomLabel();
+
+    teleport_btn = new QPushButton("Teleport", this);
+    teleport_btn->connect(teleport_btn, SIGNAL(released()), this, SLOT(teleport_btn_onclick()));
+
+    north_btn = new QPushButton("North", this);
+    north_btn->connect(north_btn, SIGNAL(released()), this, SLOT(north_btn_onclick()));
+
+    south_btn = new QPushButton("South", this);
+    south_btn->connect(south_btn, SIGNAL(released()), this, SLOT(south_btn_onclick()));
+
+    east_btn = new QPushButton("East", this);
+    east_btn->connect(east_btn, SIGNAL(released()), this, SLOT(east_btn_onclick()));
+
+    west_btn = new QPushButton("West", this);
+    west_btn->connect(west_btn, SIGNAL(released()), this, SLOT(west_btn_onclick()));
+
+    QGridLayout *nav_grid = new QGridLayout;
+    nav_grid->addWidget(current_room_label, 0, 0);
+    nav_grid->addWidget(north_btn, 0, 1);
+    nav_grid->addWidget(west_btn, 1, 0);
+    nav_grid->addWidget(teleport_btn, 1, 1);
+    nav_grid->addWidget(east_btn, 1, 2);
+    nav_grid->addWidget(south_btn, 2, 1);
+    groupBox->setLayout(nav_grid);
     return groupBox;
 }
 
 void MainWindow::setUpLayout()
 {
-    layout = new QGridLayout;
-}
+    grid = new QGridLayout;
+    // these are temp cells for groups
+    grid->addWidget(createImageGroup(), 0, 0);
+    grid->addWidget(createMapGroup(), 0, 1);
+    grid->addWidget(createStoryGroup(), 1, 0);
+    grid->addWidget(createPlayerInfoGroup(), 1, 1);
+    grid->addWidget(createInventoryGroup(), 2, 0);
+    grid->addWidget(createNavigationGroup(), 2,1);
 
-void MainWindow::setUpButtons ()
-{
-    btn = new QPushButton("Teleport", this);
-    //btn->setGeometry(QRect(QPoint(100, 100),QSize(100, 100)));
-    btn->connect(btn, SIGNAL(released()), this, SLOT(teleport_btn_onclick()));
-
-    north_btn = new QPushButton("North", this);
-    //north_btn->setGeometry(QRect(QPoint(500, 400), QSize(100, 100)));
-    north_btn->connect(north_btn, SIGNAL(released()), this, SLOT(north_btn_onclick()));
-
-    south_btn = new QPushButton("South", this);
-    //south_btn->setGeometry(QRect(QPoint(500, 600), QSize(100, 100)));
-    south_btn->connect(south_btn, SIGNAL(released()), this, SLOT(south_btn_onclick()));
-
-    east_btn = new QPushButton("East", this);
-    //east_btn->setGeometry(QRect(QPoint(600, 500), QSize(100, 100)));
-    east_btn->connect(east_btn, SIGNAL(released()), this, SLOT(east_btn_onclick()));
-
-    west_btn = new QPushButton("West", this);
-    //west_btn->setGeometry(QRect(QPoint(400, 500), QSize(100, 100)));
-    west_btn->connect(west_btn, SIGNAL(released()), this, SLOT(west_btn_onclick()));
-}
-
-void MainWindow::setUpLabels()
-{
-    current_room_label = new QLabel(this);
-    //current_room_label->setGeometry(QRect(QPoint(200, 200), QSize(200, 50)));
-    updateRoomLabel();
+    // need to set central widget to display layout
+    auto central = new QWidget;
+    central->setLayout(grid);
+    setCentralWidget(central);
 }
 
 void MainWindow::updateRoomLabel()
