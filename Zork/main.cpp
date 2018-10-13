@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.setWindowTitle("Zork");
     w.showMaximized();
-    //w.show();
+    w.show();
 
     return a.exec();
 }

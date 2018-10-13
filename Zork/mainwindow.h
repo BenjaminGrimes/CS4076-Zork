@@ -5,6 +5,8 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QLabel>
+#include <QGroupBox>
+#include <QGridLayout>
 
 #include <string>
 
@@ -23,7 +25,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void btn_onclick();
+    void teleport_btn_onclick();
     void north_btn_onclick();
     void south_btn_onclick();
     void east_btn_onclick();
@@ -31,6 +33,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    QGridLayout *grid;
 
     QPushButton *btn;
     QPushButton *north_btn;
@@ -41,6 +45,22 @@ private:
     QLabel *current_room_label;
 
     ZorkUL zUL;
+
+    QGridLayout *layout;
+    QGroupBox *nav_box;
+    QGroupBox *player_box;
+    QGroupBox *inventory_box;
+    QGroupBox *map_box;
+    QGroupBox *story_box;
+
+    void setUpLayout();
+
+    QGroupBox* createNavigationGroup();
+    QGroupBox* createPlayerInfoGroup();
+    QGroupBox* createMapGroup();
+    QGroupBox* createInventoryGroup();
+    QGroupBox* createStoryGroup();
+    QGroupBox* createImageGroup();
 
     void setUpButtons();
     void setUpLabels();
