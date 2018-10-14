@@ -10,11 +10,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // zUL.play();
 
     setUpLayout();
-
-    /*
-    setUpButtons();
-    setUpLabels();
-    */
 }
 
 MainWindow::~MainWindow()
@@ -89,11 +84,29 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
 QGroupBox* MainWindow::createInventoryGroup()
 {
     QGroupBox *groupBox = new QGroupBox(tr("Inventory Group"));
-    QLabel *label = new QLabel;
-    label->setText("INVENTORY");
-    QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(label);
-    groupBox->setLayout(vbox);
+
+    QRadioButton *radio1 = new QRadioButton(tr("Item 1"));
+    QRadioButton *radio2 = new QRadioButton(tr("Item 2"));
+    QRadioButton *radio3 = new QRadioButton(tr("Item 3"));
+
+    radio1->setChecked(true);
+
+    QVBoxLayout *inv_vbox = new QVBoxLayout;
+    inv_vbox->addWidget(radio1);
+    inv_vbox->addWidget(radio2);
+    inv_vbox->addWidget(radio3);
+    inv_vbox->addStretch(1);
+
+    use_item_btn = new QPushButton("Use item", this);
+    use_item_btn->connect(use_item_btn, SIGNAL(released()), this, SLOT(use_item_btn_onclick()));
+
+    QGridLayout *inv_grid = new QGridLayout;
+
+    inv_grid->addWidget(use_item_btn, 2, 0, 1, 2);
+    inv_grid->addLayout(inv_vbox, 0, 0, 2, 2);
+
+    groupBox->setLayout(inv_grid);
+
     return groupBox;
 }
 
@@ -228,6 +241,11 @@ void MainWindow::west_btn_onclick()
 {
     QString direction = west_btn->text();
     goDirection(direction);
+}
+
+void MainWindow::use_item_btn_onclick()
+{
+    // TODO remove item from room, play in player inventory
 }
 
 void MainWindow::goDirection(QString direction)

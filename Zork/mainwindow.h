@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QGroupBox>
 #include <QGridLayout>
+#include <QRadioButton>
 
 #include <string>
 
@@ -31,6 +32,8 @@ private slots:
     void east_btn_onclick();
     void west_btn_onclick();
 
+    void use_item_btn_onclick();
+
 private:
     Ui::MainWindow *ui;
 
@@ -54,6 +57,10 @@ private:
     QPushButton *east_btn;
     QPushButton *west_btn;
     // ------------------------------------
+
+    // ------ Inventory Group Widgets ------
+    QPushButton *use_item_btn;
+    // -------------------------------------
 
     void setUpLayout();
 
