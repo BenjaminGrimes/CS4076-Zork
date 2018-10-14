@@ -28,6 +28,8 @@ public:
     string displayItem();
     int isItemInRoom(string inString);
     void removeItemFromRoom(int location);
+
+    vector<int> getExits();
 };
 
 #endif

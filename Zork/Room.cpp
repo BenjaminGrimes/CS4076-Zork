@@ -100,3 +100,29 @@ int Room::isItemInRoom(string inString)
     }
     return -1;
 }
+
+vector<int> Room::getExits()
+{
+    vector<int> temp;
+    if(exits["north"] != NULL)
+        temp.push_back(1);
+    else
+        temp.push_back(0);
+
+    if(exits["east"] != NULL)
+        temp.push_back(1);
+    else
+        temp.push_back(0);
+
+    if(exits["south"] != NULL)
+        temp.push_back(1);
+    else
+        temp.push_back(0);
+
+    if(exits["west"] != NULL)
+        temp.push_back(1);
+    else
+        temp.push_back(0);
+
+    return temp;
+}

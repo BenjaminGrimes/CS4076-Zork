@@ -37,6 +37,9 @@ void MainWindow::setUpLayout()
     auto central = new QWidget;
     central->setLayout(grid);
     setCentralWidget(central);
+
+    updateRoomLabel();
+    updateNavButtons();
 }
 
 QGroupBox* MainWindow::createImageGroup()
@@ -99,7 +102,6 @@ QGroupBox* MainWindow::createNavigationGroup()
     QGroupBox *groupBox = new QGroupBox(tr("Navigation Group"));
 
     current_room_label = new QLabel(this);
-    updateRoomLabel();
 
     teleport_btn = new QPushButton("Teleport", this);
     teleport_btn->connect(teleport_btn, SIGNAL(released()), this, SLOT(teleport_btn_onclick()));
@@ -125,6 +127,35 @@ QGroupBox* MainWindow::createNavigationGroup()
     nav_grid->addWidget(south_btn, 2, 1);
     groupBox->setLayout(nav_grid);
     return groupBox;
+}
+
+void MainWindow::updateNavButtons()
+{
+    teleport_btn->setEnabled(false);
+
+    vector<int>exits = zUL.currentRoom->getExits();
+    for(int temp : exits)
+        cout << temp << endl;
+
+    if(exits[0] == 0)
+        north_btn->setEnabled(false);
+    else
+        north_btn->setEnabled(true);
+
+    if(exits[1] == 0)
+        east_btn->setEnabled(false);
+    else
+        east_btn->setEnabled(true);
+
+    if(exits[2] == 0)
+        south_btn->setEnabled(false);
+    else
+        south_btn->setEnabled(true);
+
+    if(exits[3] == 0)
+        west_btn->setEnabled(false);
+    else
+        west_btn->setEnabled(true);
 }
 
 void MainWindow::updateRoomLabel()
@@ -183,6 +214,7 @@ void MainWindow::goDirection(QString direction)
     }
 
     updateRoomLabel();
+    updateNavButtons();
     //QMessageBox mBox(this);
     //QString mBox_title = "Current Room";
     //mBox.about(this, mBox_title, message);

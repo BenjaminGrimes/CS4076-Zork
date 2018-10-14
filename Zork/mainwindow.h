@@ -64,6 +64,7 @@ private:
     QGroupBox* createStoryGroup();
     QGroupBox* createImageGroup();
 
+    void updateNavButtons();
     void updateRoomLabel();
     void goDirection(QString direction);
 };
