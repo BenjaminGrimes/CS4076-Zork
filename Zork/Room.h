@@ -15,6 +15,8 @@ private:
 	map<string, Room*> exits;
 	string exitString();
     vector <Item> itemsInRoom;
+    vector<bool> exits_vector;
+    bool canTeleport;
 
 
 public:
@@ -29,7 +31,7 @@ public:
     int isItemInRoom(string inString);
     void removeItemFromRoom(int location);
 
-    vector<int> getExits();
+    vector<bool> getExits();
 };
 
 #endif

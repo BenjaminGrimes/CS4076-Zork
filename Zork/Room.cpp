@@ -2,20 +2,50 @@
 #include "Command.h"
 
 
-Room::Room(string description) {
+Room::Room(string description)
+{
 	this->description = description;
 }
 
 void Room::setExits(Room *north, Room *east, Room *south, Room *west)
 {
 	if (north != NULL)
+    {
 		exits["north"] = north;
+        exits_vector.push_back(true);
+    }
+    else
+        exits_vector.push_back(false);
+
 	if (east != NULL)
+    {
 		exits["east"] = east;
+        exits_vector.push_back(true);
+    }
+    else
+        exits_vector.push_back(false);
+
 	if (south != NULL)
+    {
 		exits["south"] = south;
+        exits_vector.push_back(true);
+    }
+    else
+        exits_vector.push_back(false);
+
 	if (west != NULL)
+    {
 		exits["west"] = west;
+        exits_vector.push_back(true);
+    }
+    else
+        exits_vector.push_back(false);
+
+    canTeleport = false;
+    if(canTeleport)
+        exits_vector.push_back(true);
+    else
+        exits_vector.push_back(false);
 }
 
 string Room::shortDescription()
@@ -101,28 +131,7 @@ int Room::isItemInRoom(string inString)
     return -1;
 }
 
-vector<int> Room::getExits()
+vector<bool> Room::getExits()
 {
-    vector<int> temp;
-    if(exits["north"] != NULL)
-        temp.push_back(1);
-    else
-        temp.push_back(0);
-
-    if(exits["east"] != NULL)
-        temp.push_back(1);
-    else
-        temp.push_back(0);
-
-    if(exits["south"] != NULL)
-        temp.push_back(1);
-    else
-        temp.push_back(0);
-
-    if(exits["west"] != NULL)
-        temp.push_back(1);
-    else
-        temp.push_back(0);
-
-    return temp;
+    return exits_vector;
 }

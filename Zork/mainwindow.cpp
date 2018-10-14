@@ -133,29 +133,61 @@ void MainWindow::updateNavButtons()
 {
     teleport_btn->setEnabled(false);
 
-    vector<int>exits = zUL.currentRoom->getExits();
-    for(int temp : exits)
-        cout << temp << endl;
+    vector<bool>exits = zUL.currentRoom->getExits();
 
-    if(exits[0] == 0)
+    if(!exits[0])
+    {
         north_btn->setEnabled(false);
+        north_btn->setToolTip("No north exit");
+    }
     else
+    {
         north_btn->setEnabled(true);
+        north_btn->setToolTip("");
+    }
 
-    if(exits[1] == 0)
+    if(!exits[1])
+    {
         east_btn->setEnabled(false);
+        east_btn->setToolTip("No east exit");
+    }
     else
+    {
         east_btn->setEnabled(true);
+        east_btn->setToolTip("");
+    }
 
-    if(exits[2] == 0)
+    if(!exits[2])
+    {
         south_btn->setEnabled(false);
+        south_btn->setToolTip("No south exit");
+    }
     else
+    {
         south_btn->setEnabled(true);
-
-    if(exits[3] == 0)
+        south_btn->setToolTip("");
+    }
+    if(!exits[3])
+    {
         west_btn->setEnabled(false);
+        west_btn->setToolTip("No west exit");
+    }
     else
+    {
         west_btn->setEnabled(true);
+        west_btn->setToolTip("");
+    }
+
+    if(!exits[4])
+    {
+        teleport_btn->setEnabled(false);
+        teleport_btn->setToolTip("Teleport unavailable");
+    }
+    else
+    {
+        teleport_btn->setEnabled(true);
+        teleport_btn->setToolTip("");
+    }
 }
 
 void MainWindow::updateRoomLabel()
