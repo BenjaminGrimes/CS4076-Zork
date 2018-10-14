@@ -22,6 +22,23 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setUpLayout()
+{
+    grid = new QGridLayout;
+    // these are temp cells for groups
+    grid->addWidget(createImageGroup(), 0, 0, 1, 2);
+    grid->addWidget(createMapGroup(), 0, 2, 2, 1);
+    grid->addWidget(createStoryGroup(), 1, 0, 1, 2);
+    grid->addWidget(createPlayerInfoGroup(), 3, 0);
+    grid->addWidget(createInventoryGroup(), 3, 1);
+    grid->addWidget(createNavigationGroup(), 3,2);
+
+    // need to set central widget to display layout
+    auto central = new QWidget;
+    central->setLayout(grid);
+    setCentralWidget(central);
+}
+
 QGroupBox* MainWindow::createImageGroup()
 {
     QGroupBox *groupBox = new QGroupBox(tr("Image Group"));
@@ -108,23 +125,6 @@ QGroupBox* MainWindow::createNavigationGroup()
     nav_grid->addWidget(south_btn, 2, 1);
     groupBox->setLayout(nav_grid);
     return groupBox;
-}
-
-void MainWindow::setUpLayout()
-{
-    grid = new QGridLayout;
-    // these are temp cells for groups
-    grid->addWidget(createImageGroup(), 0, 0);
-    grid->addWidget(createMapGroup(), 0, 1);
-    grid->addWidget(createStoryGroup(), 1, 0);
-    grid->addWidget(createPlayerInfoGroup(), 1, 1);
-    grid->addWidget(createInventoryGroup(), 2, 0);
-    grid->addWidget(createNavigationGroup(), 2,1);
-
-    // need to set central widget to display layout
-    auto central = new QWidget;
-    central->setLayout(grid);
-    setCentralWidget(central);
 }
 
 void MainWindow::updateRoomLabel()
