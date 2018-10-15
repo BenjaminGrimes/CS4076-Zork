@@ -8,6 +8,8 @@
 #include <QGroupBox>
 #include <QGridLayout>
 #include <QRadioButton>
+#include <QScrollArea>
+#include <QListWidget>
 
 #include <string>
 

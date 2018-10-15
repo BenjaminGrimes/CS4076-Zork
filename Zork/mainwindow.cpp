@@ -88,22 +88,87 @@ QGroupBox* MainWindow::createInventoryGroup()
     QRadioButton *radio1 = new QRadioButton(tr("Item 1"));
     QRadioButton *radio2 = new QRadioButton(tr("Item 2"));
     QRadioButton *radio3 = new QRadioButton(tr("Item 3"));
+    QRadioButton *radio4 = new QRadioButton(tr("Item 4"));
+    QRadioButton *radio5 = new QRadioButton(tr("Item 5"));
+    QRadioButton *radio6 = new QRadioButton(tr("Item 6"));
+    QRadioButton *radio7 = new QRadioButton(tr("Item 7"));
+    QRadioButton *radio8 = new QRadioButton(tr("Item 8"));
+    QRadioButton *radio9 = new QRadioButton(tr("Item 9"));
+    QRadioButton *radio10 = new QRadioButton(tr("Item 10"));
+    QRadioButton *radio11 = new QRadioButton(tr("Item 11"));
+    QRadioButton *radio12 = new QRadioButton(tr("Item 12"));
+    QRadioButton *radio13 = new QRadioButton(tr("Item 13"));
+    QRadioButton *radio14 = new QRadioButton(tr("Item 14"));
+    QRadioButton *radio15 = new QRadioButton(tr("Item 15"));
 
     radio1->setChecked(true);
 
+    /*
     QVBoxLayout *inv_vbox = new QVBoxLayout;
     inv_vbox->addWidget(radio1);
-    inv_vbox->addWidget(radio2);
-    inv_vbox->addWidget(radio3);
     inv_vbox->addStretch(1);
+    */
+
+    QListWidget *listWidget = new QListWidget(this);
+    QListWidgetItem *it;
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio1);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio2);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio3);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio4);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio5);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio6);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio7);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio8);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio9);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio10);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio11);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio12);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio13);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio14);
+
+    it = new QListWidgetItem(listWidget);
+    listWidget->setItemWidget(it, radio15);
 
     use_item_btn = new QPushButton("Use item", this);
     use_item_btn->connect(use_item_btn, SIGNAL(released()), this, SLOT(use_item_btn_onclick()));
 
+    /*
+    QScrollArea *scrollArea = new QScrollArea;
+    scrollArea->setBackgroundRole(QPalette::Dark);
+    scrollArea->setWidget(listWidget);
+    */
+
     QGridLayout *inv_grid = new QGridLayout;
 
-    inv_grid->addWidget(use_item_btn, 2, 0, 1, 2);
-    inv_grid->addLayout(inv_vbox, 0, 0, 2, 2);
+    inv_grid->addWidget(listWidget, 0, 0, 2, 2);
+    inv_grid->addWidget(use_item_btn, 2, 0, 2, 2);
 
     groupBox->setLayout(inv_grid);
 
