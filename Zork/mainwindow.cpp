@@ -43,7 +43,14 @@ QGroupBox* MainWindow::createImageGroup()
     QLabel *label = new QLabel;
     label->setText("IMAGE");
     QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(label);
+    //vbox->addWidget(label);
+
+    QLabel *imageLabel = new QLabel;
+    QImage image(":/TestImage1.jpg");
+    imageLabel->setPixmap(QPixmap::fromImage(image).scaled(200, 200, Qt::KeepAspectRatio));
+
+    vbox->addWidget(imageLabel);
+
     groupBox->setLayout(vbox);
     return groupBox;
 }
@@ -54,7 +61,14 @@ QGroupBox* MainWindow::createMapGroup()
     QLabel *label = new QLabel;
     label->setText("MAP");
     QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(label);
+    //vbox->addWidget(label);
+
+    QLabel *imageLabel = new QLabel;
+    QImage image(":/TestImage2.jpg");
+    imageLabel->setPixmap(QPixmap::fromImage(image).scaled(200, 200, Qt::KeepAspectRatio));
+
+    vbox->addWidget(imageLabel);
+
     groupBox->setLayout(vbox);
     return groupBox;
 }
@@ -64,8 +78,6 @@ QGroupBox* MainWindow::createStoryGroup()
     QGroupBox *groupBox = new QGroupBox(tr("Story Group"));
     QLabel *label = new QLabel;
     label->setText("STORY");
-    QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(label);
 
     story_text_browser = new QTextBrowser;
     story_text_browser->append("Some text");
