@@ -31,6 +31,7 @@ public:
 	void play();
     void teleport();
     string getCurrentRoom();
+    string getCurrentRoomDescription();
 	string go(string direction);
 };
 

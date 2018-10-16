@@ -241,6 +241,13 @@ string ZorkUL::getCurrentRoom()
     return currentRoom->shortDescription();
 }
 
+string ZorkUL::getCurrentRoomDescription()
+{
+    // TODO return story text, not just description of room.
+    // i.e. dont need to know current room or know the exits
+    return currentRoom->longDescription();
+}
+
 string ZorkUL::go(string direction)
 {
 	//Make the direction lowercase

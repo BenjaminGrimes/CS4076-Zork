@@ -97,6 +97,7 @@ private:
 
     void updateNavButtons();
     void updateRoomLabel();
+    void updateStoryText();
     void goDirection(QString direction);
 };
 

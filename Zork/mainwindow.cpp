@@ -34,6 +34,7 @@ void MainWindow::setUpLayout()
     setCentralWidget(central);
 
     updateRoomLabel();
+    updateStoryText();
     updateNavButtons();
 }
 
@@ -47,7 +48,7 @@ QGroupBox* MainWindow::createImageGroup()
 
     QLabel *imageLabel = new QLabel;
     QImage image(":/TestImage1.jpg");
-    imageLabel->setPixmap(QPixmap::fromImage(image).scaled(200, 200, Qt::KeepAspectRatio));
+    imageLabel->setPixmap(QPixmap::fromImage(image).scaled(100, 100, Qt::KeepAspectRatio));
 
     vbox->addWidget(imageLabel);
 
@@ -63,9 +64,10 @@ QGroupBox* MainWindow::createMapGroup()
     QVBoxLayout *vbox = new QVBoxLayout;
     //vbox->addWidget(label);
 
+
     QLabel *imageLabel = new QLabel;
     QImage image(":/TestImage2.jpg");
-    imageLabel->setPixmap(QPixmap::fromImage(image).scaled(200, 200, Qt::KeepAspectRatio));
+    imageLabel->setPixmap(QPixmap::fromImage(image).scaled(100, 100, Qt::KeepAspectRatio));
 
     vbox->addWidget(imageLabel);
 
@@ -82,10 +84,10 @@ QGroupBox* MainWindow::createStoryGroup()
     story_text_browser = new QTextBrowser;
     story_text_browser->append("Some text");
 
+
     QGridLayout *story_grid = new QGridLayout;
     story_grid->addWidget(story_text_browser, 0, 0, 2, 2);
-    story_grid->addWidget(label, 2, 0, 1, 2);
-
+    story_grid->addWidget(label, 0, 2, 2, 1);
 
     story_text_browser->append("Some more text");
 
@@ -245,6 +247,11 @@ void MainWindow::updateRoomLabel()
     current_room_label->setText("Current Room: " + c_room);
 }
 
+void MainWindow::updateStoryText()
+{
+    story_text_browser->append(QString::fromStdString(zUL.getCurrentRoomDescription()));
+}
+
 void MainWindow::teleport_btn_onclick()
 {
     zUL.teleport();
@@ -302,6 +309,7 @@ void MainWindow::goDirection(QString direction)
     }
 
     updateRoomLabel();
+    updateStoryText();
     updateNavButtons();
     //QMessageBox mBox(this);
     //QString mBox_title = "Current Room";
