@@ -74,10 +74,17 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
 {
     QGroupBox *groupBox = new QGroupBox(tr("Player Info Group"));
     QLabel *label = new QLabel;
-    label->setText("PLAYER INFO");
-    QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(label);
-    groupBox->setLayout(vbox);
+    label->setText("Health:");
+
+    player_health_bar = new QProgressBar;
+    player_health_bar->setRange(0, 100);
+    player_health_bar->setValue(50);
+
+    QGridLayout *p_info_grid = new QGridLayout;
+    p_info_grid->addWidget(label, 0, 0, 1, 1);
+    p_info_grid->addWidget(player_health_bar, 0, 1, 1, 2);
+
+    groupBox->setLayout(p_info_grid);
     return groupBox;
 }
 
@@ -88,28 +95,10 @@ QGroupBox* MainWindow::createInventoryGroup()
     QRadioButton *radio1 = new QRadioButton(tr("Item 1"));
     QRadioButton *radio2 = new QRadioButton(tr("Item 2"));
     QRadioButton *radio3 = new QRadioButton(tr("Item 3"));
-    QRadioButton *radio4 = new QRadioButton(tr("Item 4"));
-    QRadioButton *radio5 = new QRadioButton(tr("Item 5"));
-    QRadioButton *radio6 = new QRadioButton(tr("Item 6"));
-    QRadioButton *radio7 = new QRadioButton(tr("Item 7"));
-    QRadioButton *radio8 = new QRadioButton(tr("Item 8"));
-    QRadioButton *radio9 = new QRadioButton(tr("Item 9"));
-    QRadioButton *radio10 = new QRadioButton(tr("Item 10"));
-    QRadioButton *radio11 = new QRadioButton(tr("Item 11"));
-    QRadioButton *radio12 = new QRadioButton(tr("Item 12"));
-    QRadioButton *radio13 = new QRadioButton(tr("Item 13"));
-    QRadioButton *radio14 = new QRadioButton(tr("Item 14"));
-    QRadioButton *radio15 = new QRadioButton(tr("Item 15"));
 
     radio1->setChecked(true);
 
-    /*
-    QVBoxLayout *inv_vbox = new QVBoxLayout;
-    inv_vbox->addWidget(radio1);
-    inv_vbox->addStretch(1);
-    */
-
-    QListWidget *listWidget = new QListWidget(this);
+    listWidget = new QListWidget(this);
     QListWidgetItem *it;
     it = new QListWidgetItem(listWidget);
     listWidget->setItemWidget(it, radio1);
@@ -120,50 +109,8 @@ QGroupBox* MainWindow::createInventoryGroup()
     it = new QListWidgetItem(listWidget);
     listWidget->setItemWidget(it, radio3);
 
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio4);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio5);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio6);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio7);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio8);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio9);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio10);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio11);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio12);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio13);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio14);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio15);
-
     use_item_btn = new QPushButton("Use item", this);
     use_item_btn->connect(use_item_btn, SIGNAL(released()), this, SLOT(use_item_btn_onclick()));
-
-    /*
-    QScrollArea *scrollArea = new QScrollArea;
-    scrollArea->setBackgroundRole(QPalette::Dark);
-    scrollArea->setWidget(listWidget);
-    */
 
     QGridLayout *inv_grid = new QGridLayout;
 
@@ -311,6 +258,9 @@ void MainWindow::west_btn_onclick()
 void MainWindow::use_item_btn_onclick()
 {
     // TODO remove item from room, play in player inventory
+    QListWidgetItem *item = listWidget->currentItem();
+    delete listWidget->takeItem(listWidget->row(item));
+
 }
 
 void MainWindow::goDirection(QString direction)

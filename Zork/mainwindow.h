@@ -8,8 +8,8 @@
 #include <QGroupBox>
 #include <QGridLayout>
 #include <QRadioButton>
-#include <QScrollArea>
 #include <QListWidget>
+#include <QProgressBar>
 
 #include <string>
 
@@ -62,6 +62,26 @@ private:
 
     // ------ Inventory Group Widgets ------
     QPushButton *use_item_btn;
+    QListWidget *listWidget;
+    // -------------------------------------
+
+    // ------ Player Info Group Widgets ----
+    QProgressBar *player_health_bar;
+    // -------------------------------------
+
+
+    // ------ Map Group Widgets ------------
+
+    // -------------------------------------
+
+
+    // ------ Story Group Widgets ----------
+
+    // -------------------------------------
+
+
+    // ------ Image Group Widgets ----------
+
     // -------------------------------------
 
     void setUpLayout();
