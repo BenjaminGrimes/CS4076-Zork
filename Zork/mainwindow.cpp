@@ -66,7 +66,18 @@ QGroupBox* MainWindow::createStoryGroup()
     label->setText("STORY");
     QVBoxLayout *vbox = new QVBoxLayout;
     vbox->addWidget(label);
-    groupBox->setLayout(vbox);
+
+    story_text_browser = new QTextBrowser;
+    story_text_browser->append("Some text");
+
+    QGridLayout *story_grid = new QGridLayout;
+    story_grid->addWidget(story_text_browser, 0, 0, 2, 2);
+    story_grid->addWidget(label, 2, 0, 1, 2);
+
+
+    story_text_browser->append("Some more text");
+
+    groupBox->setLayout(story_grid);
     return groupBox;
 }
 

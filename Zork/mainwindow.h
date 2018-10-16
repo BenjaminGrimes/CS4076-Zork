@@ -10,6 +10,7 @@
 #include <QRadioButton>
 #include <QListWidget>
 #include <QProgressBar>
+#include <QTextBrowser>
 
 #include <string>
 
@@ -76,6 +77,7 @@ private:
 
 
     // ------ Story Group Widgets ----------
+    QTextBrowser *story_text_browser;
 
     // -------------------------------------
 
