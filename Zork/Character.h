@@ -13,7 +13,7 @@ private:
 	string description;
 	 vector < string > itemsInCharacter;
 public:
-	void addItems(string Item);
+    void addItems(string Item);
 
 
 
@@ -25,4 +25,22 @@ public:
 
 };
 
-#endif /*CHARACTER_H_*/
+#endif CHARACTER_H_*/
+
+#ifndef CHARACTER_H_
+#define CHARACTER_H_
+
+#include <vector>
+#include <string>
+
+class Character {
+private:
+
+public:
+    Character();
+
+    int getHealth();
+    void setHealth(int health);
+};
+
+#endif CHARACTER_H_

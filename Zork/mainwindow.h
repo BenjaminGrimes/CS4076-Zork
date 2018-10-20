@@ -68,6 +68,7 @@ private:
 
     // ------ Player Info Group Widgets ----
     QProgressBar *player_health_bar;
+    QStatusBar *health_status_bar;
     // -------------------------------------
 
 

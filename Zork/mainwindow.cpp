@@ -99,15 +99,19 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
 {
     QGroupBox *groupBox = new QGroupBox(tr("Player Info Group"));
     QLabel *label = new QLabel;
-    label->setText("Health:");
+    label->setText("Health");
 
     player_health_bar = new QProgressBar;
     player_health_bar->setRange(0, 100);
     player_health_bar->setValue(50);
 
+    health_status_bar = new QStatusBar;
+    health_status_bar->addPermanentWidget(label, 1);
+    health_status_bar->addPermanentWidget(player_health_bar, 4);
+
     QGridLayout *p_info_grid = new QGridLayout;
-    p_info_grid->addWidget(label, 0, 0, 1, 1);
-    p_info_grid->addWidget(player_health_bar, 0, 1, 1, 2);
+    //p_info_grid->addWidget(label, 0, 0, 1, 1);
+    p_info_grid->addWidget(health_status_bar, 0, 0, 2, 2 );
 
     groupBox->setLayout(p_info_grid);
     return groupBox;

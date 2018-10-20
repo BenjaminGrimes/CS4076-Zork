@@ -19,3 +19,10 @@ string Characterx::longDescription()
   return ret;
 }
 */
+
+#include "Character.h"
+
+Character::Character()
+{
+
+}
