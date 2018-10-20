@@ -54,6 +54,7 @@ private:
     // ----- Menus ------------
     void createActions();
     void createMenus();
+    void createStatusBar();
 
     QMenu *gameMenu;
     QAction *restartAct;

@@ -43,23 +43,36 @@ void MainWindow::setUpLayout()
 
 void MainWindow::createActions()
 {
-    restartAct = new QAction(tr("Restart"), this);
-    restartAct->setShortcuts(QKeySequence::New); //What does this do?
-    restartAct->setStatusTip(tr("Restart the game"));
+    gameMenu = menuBar()->addMenu(tr("Game"));
+    QToolBar *gameToolBar = addToolBar(tr("Game"));
+    // Temp image
+    const QIcon restartIcon = QIcon::fromTheme("document-restart", QIcon(":/restart.png"));
+    restartAct = new QAction(restartIcon, tr("Restart"), this);
+    restartAct->setShortcut((QKeySequence::New));
+    restartAct->setStatusTip("Restart the game");
     connect(restartAct, &QAction::triggered, this, &MainWindow::restart);
+    gameMenu->addAction(restartAct);
+    gameToolBar->addAction(restartAct);
 
-    exitAct = new QAction(tr("Exit"), this);
+    // Temp image
+    const QIcon exitIcon = QIcon::fromTheme("document-exit", QIcon(":/exit.png"));
+    exitAct = new QAction(exitIcon, tr("Exit"), this);
     exitAct->setShortcut(QKeySequence::Quit);
     exitAct->setStatusTip(tr("Exit the game"));
     connect(exitAct, &QAction::triggered, this, &QWidget::close);
+    gameMenu->addAction(exitAct);
+    gameToolBar->addAction(exitAct);
 }
+
 
 void MainWindow::createMenus()
 {
-    gameMenu = menuBar()->addMenu(tr("&Game"));
-    gameMenu->addAction(restartAct);
-    gameMenu->addSeparator();
-    gameMenu->addAction(exitAct);
+
+}
+
+void MainWindow::createStatusBar()
+{
+    statusBar()->showMessage(tr("Ready"));
 }
 
 void MainWindow::restart()

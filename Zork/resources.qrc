@@ -2,5 +2,7 @@
 <qresource>
     <file alias="TestImage1.jpg">images/TestImage1.jpg</file>
     <file alias="TestImage2.jpg">images/TestImage2.jpg</file>
+    <file alias="restart.png">images/save.png</file>
+    <file alias="exit.png">images/paste.png</file>
 </qresource>
 </RCC>
