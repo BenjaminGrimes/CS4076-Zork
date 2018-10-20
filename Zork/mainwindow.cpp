@@ -33,9 +33,38 @@ void MainWindow::setUpLayout()
     central->setLayout(grid);
     setCentralWidget(central);
 
+    createActions();
+    createMenus();
+
     updateRoomLabel();
     updateStoryText();
     updateNavButtons();
+}
+
+void MainWindow::createActions()
+{
+    restartAct = new QAction(tr("Restart"), this);
+    restartAct->setShortcuts(QKeySequence::New); //What does this do?
+    restartAct->setStatusTip(tr("Restart the game"));
+    connect(restartAct, &QAction::triggered, this, &MainWindow::restart);
+
+    exitAct = new QAction(tr("Exit"), this);
+    exitAct->setShortcut(QKeySequence::Quit);
+    exitAct->setStatusTip(tr("Exit the game"));
+    connect(exitAct, &QAction::triggered, this, &QWidget::close);
+}
+
+void MainWindow::createMenus()
+{
+    gameMenu = menuBar()->addMenu(tr("&Game"));
+    gameMenu->addAction(restartAct);
+    gameMenu->addSeparator();
+    gameMenu->addAction(exitAct);
+}
+
+void MainWindow::restart()
+{
+    cout << "Restarting..." << endl;
 }
 
 QGroupBox* MainWindow::createImageGroup()

@@ -11,6 +11,10 @@
 #include <QListWidget>
 #include <QProgressBar>
 #include <QTextBrowser>
+#include <QStatusBar>
+
+#include <QActionGroup>
+
 
 #include <string>
 
@@ -37,12 +41,24 @@ private slots:
 
     void use_item_btn_onclick();
 
+    // ------- Menus ------
+    void restart();
+    // --------------------
 private:
     Ui::MainWindow *ui;
 
     ZorkUL zUL;
 
     QGridLayout *grid;
+
+    // ----- Menus ------------
+    void createActions();
+    void createMenus();
+
+    QMenu *gameMenu;
+    QAction *restartAct;
+    QAction *exitAct;
+    // -----------------------
 
     // ----- Groups -----------
     QGroupBox *nav_box;
