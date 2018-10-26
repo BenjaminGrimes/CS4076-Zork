@@ -163,22 +163,20 @@ QGroupBox* MainWindow::createInventoryGroup()
 {
     QGroupBox *groupBox = new QGroupBox(tr("Inventory Group"));
 
-    QRadioButton *radio1 = new QRadioButton(tr("Item 1"));
-    QRadioButton *radio2 = new QRadioButton(tr("Item 2"));
-    QRadioButton *radio3 = new QRadioButton(tr("Item 3"));
-
-    radio1->setChecked(true);
+    QLabel *label1 = new QLabel(tr("Item 1"));
+    QLabel *label2 = new QLabel(tr("Item 2"));
+    QLabel *label3 = new QLabel(tr("Item 3"));
 
     listWidget = new QListWidget(this);
     QListWidgetItem *it;
     it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio1);
+    listWidget->setItemWidget(it, label1);
 
     it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio2);
+    listWidget->setItemWidget(it, label2);
 
     it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, radio3);
+    listWidget->setItemWidget(it, label3);
 
     use_item_btn = new QPushButton("Use item", this);
     use_item_btn->connect(use_item_btn, SIGNAL(released()), this, SLOT(use_item_btn_onclick()));
