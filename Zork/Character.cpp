@@ -22,7 +22,23 @@ string Characterx::longDescription()
 
 #include "Character.h"
 
-Character::Character()
+Character::Character(int h)
+    : health( h )
 {
 
+}
+
+int Character::getHealth()
+{
+    return health;
+}
+
+void Character::setHealth(int h)
+{
+    if(h < 0)
+    {
+        health-= h;
+        if(health < 0)
+            health = 0;
+    }
 }

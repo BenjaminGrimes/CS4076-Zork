@@ -33,7 +33,9 @@ SOURCES += \
     item.cpp \
     Parser.cpp \
     Room.cpp \
-    ZorkUL.cpp
+    ZorkUL.cpp \
+    Enemy.cpp \
+    Player.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -43,7 +45,9 @@ HEADERS += \
     item.h \
     Parser.h \
     Room.h \
-    ZorkUL.h
+    ZorkUL.h \
+    Enemy.h \
+    Player.h
 
 FORMS += \
         mainwindow.ui

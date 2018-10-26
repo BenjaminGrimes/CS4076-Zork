@@ -36,11 +36,17 @@ public:
 class Character {
 private:
 
+protected:
+    int health;
+
 public:
-    Character();
+    //Character();
+    Character(int health);
 
     int getHealth();
-    void setHealth(int health);
+    void setHealth(int h);
+
+    virtual void onDeath() = 0;
 };
 
-#endif CHARACTER_H_
+#endif //CHARACTER_H_
