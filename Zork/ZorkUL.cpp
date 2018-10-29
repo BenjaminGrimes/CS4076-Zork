@@ -236,7 +236,12 @@ void ZorkUL::goRoom(Command command)
 	}
 }
 
-string ZorkUL::getCurrentRoom()
+Room* ZorkUL::getCurrentRoom()
+{
+    return currentRoom;
+}
+
+string ZorkUL::getCurrentRoomName()
 {
     return currentRoom->shortDescription();
 }

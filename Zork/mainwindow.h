@@ -12,6 +12,8 @@
 #include <QProgressBar>
 #include <QTextBrowser>
 #include <QStatusBar>
+#include <QScrollArea>
+#include <QCheckBox>
 
 #include <QActionGroup>
 
@@ -19,6 +21,7 @@
 #include <string>
 
 #include "ZorkUL.h"
+#include "item.h"
 
 namespace Ui {
 class MainWindow;
@@ -41,6 +44,8 @@ private slots:
 
     void use_item_btn_onclick();
 
+    void take_item_btn_onclick();
+
     // ------- Menus ------
     void restart();
     // --------------------
@@ -50,6 +55,8 @@ private:
     ZorkUL zUL;
 
     QGridLayout *grid;
+
+    Room *current_room;
 
     // ----- Menus ------------
     void createActions();
@@ -96,7 +103,10 @@ private:
 
     // ------ Story Group Widgets ----------
     QTextBrowser *story_text_browser;
-
+    QPushButton *take_item_btn;
+    vector<Item>* itemsInRoom;
+    vector<QCheckBox*> room_items_checkboxes;
+    QVBoxLayout *room_items_container;
     // -------------------------------------
 
 
@@ -116,6 +126,7 @@ private:
     void updateNavButtons();
     void updateRoomLabel();
     void updateStoryText();
+    void updateRoomItems();
     void goDirection(QString direction);
 };
 

@@ -30,8 +30,10 @@ public:
 	ZorkUL();
 	void play();
     void teleport();
-    string getCurrentRoom();
+    Room* getCurrentRoom();
+    string getCurrentRoomName();
     string getCurrentRoomDescription();
+
 	string go(string direction);
 };
 

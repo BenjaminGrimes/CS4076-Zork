@@ -39,6 +39,7 @@ void MainWindow::setUpLayout()
     updateRoomLabel();
     updateStoryText();
     updateNavButtons();
+    updateRoomItems();
 }
 
 void MainWindow::createActions()
@@ -77,6 +78,7 @@ void MainWindow::createStatusBar()
 
 void MainWindow::restart()
 {
+    // TODO implement restart function
     cout << "Restarting..." << endl;
 }
 
@@ -120,18 +122,21 @@ QGroupBox* MainWindow::createMapGroup()
 QGroupBox* MainWindow::createStoryGroup()
 {
     QGroupBox *groupBox = new QGroupBox(tr("Story Group"));
-    QLabel *label = new QLabel;
-    label->setText("STORY");
 
     story_text_browser = new QTextBrowser;
-    story_text_browser->append("Some text");
 
+    room_items_container = new QVBoxLayout;
+    //QCheckBox *temp_cbox = new QCheckBox;
+    //temp_cbox->setText("Temp box");
+    //room_items_container->addWidget(temp_cbox);
+
+    take_item_btn = new QPushButton("Take item(s)", this);
+    connect(take_item_btn, SIGNAL(released()), this, SLOT(take_item_btn_onclick()));
 
     QGridLayout *story_grid = new QGridLayout;
     story_grid->addWidget(story_text_browser, 0, 0, 2, 2);
-    story_grid->addWidget(label, 0, 2, 2, 1);
-
-    story_text_browser->append("Some more text");
+    story_grid->addLayout(room_items_container, 0, 2, 2, 1);
+    story_grid->addWidget(take_item_btn, 2, 2, 1, 1);
 
     groupBox->setLayout(story_grid);
     return groupBox;
@@ -286,7 +291,7 @@ void MainWindow::updateNavButtons()
 
 void MainWindow::updateRoomLabel()
 {
-    string temp = zUL.getCurrentRoom();
+    string temp = zUL.getCurrentRoomName();
     QString c_room = QString::fromStdString(temp);
     current_room_label->setText("Current Room: " + c_room);
 }
@@ -296,10 +301,44 @@ void MainWindow::updateStoryText()
     story_text_browser->append(QString::fromStdString(zUL.getCurrentRoomDescription()));
 }
 
+void MainWindow::updateRoomItems()
+{
+    // Clear and delete checkboxes
+    while (auto item = room_items_container->takeAt(0)) {
+          delete item->widget();
+    }
+    room_items_checkboxes.clear();
+
+    // Get items in current room
+    current_room = zUL.getCurrentRoom();
+    itemsInRoom = current_room->getItemsInRoom();
+
+    unsigned int i = 0;
+    for(Item item : *itemsInRoom)
+    {
+        cout << item.getShortDescription() << endl;
+        QCheckBox *temp_cbox = new QCheckBox;
+        room_items_checkboxes.push_back(temp_cbox);
+        temp_cbox->setText(QString::fromStdString(item.getShortDescription()));
+        room_items_container->addWidget(room_items_checkboxes.at(i));
+        ++i;
+    }
+
+    // Print out description of rooms.
+    /*for(Item temp : *room_items)
+    {
+        cout << temp.getShortDescription() << endl;
+        QCheckBox *temp_cbox = new QCheckBox;
+        temp_cbox->setText(QString::fromStdString(temp.getShortDescription()));
+        room_items_checkboxes.push_back(temp_cbox);
+        room_items_container->addWidget(temp_cbox);
+    }*/
+}
+
 void MainWindow::teleport_btn_onclick()
 {
     zUL.teleport();
-    string message = zUL.getCurrentRoom();
+    string message = zUL.getCurrentRoomName();
     QString m = QString::fromStdString(message);
     QMessageBox messageBox(this);
     messageBox.about(this, "Current Room", m);
@@ -331,10 +370,16 @@ void MainWindow::west_btn_onclick()
 
 void MainWindow::use_item_btn_onclick()
 {
-    // TODO remove item from room, play in player inventory
+    // TODO remove item from room, put in player inventory
     QListWidgetItem *item = listWidget->currentItem();
     delete listWidget->takeItem(listWidget->row(item));
 
+}
+
+void MainWindow::take_item_btn_onclick()
+{
+    // TODO remove item(s) from list of items in room.
+    cout << "Taking Item(s)..." << endl;
 }
 
 void MainWindow::goDirection(QString direction)
@@ -349,12 +394,14 @@ void MainWindow::goDirection(QString direction)
     }
     else
     {
-        message = QString::fromStdString(zUL.getCurrentRoom());
+        message = QString::fromStdString(zUL.getCurrentRoomName());
     }
 
     updateRoomLabel();
     updateStoryText();
     updateNavButtons();
+    updateRoomItems();
+
     //QMessageBox mBox(this);
     //QString mBox_title = "Current Room";
     //mBox.about(this, mBox_title, message);

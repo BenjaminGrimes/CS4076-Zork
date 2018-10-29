@@ -31,6 +31,7 @@ public:
     int isItemInRoom(string inString);
     void removeItemFromRoom(int location);
 
+    vector<Item>* getItemsInRoom();
     vector<bool> getExits();
 };
 

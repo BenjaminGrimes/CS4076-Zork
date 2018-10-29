@@ -135,3 +135,8 @@ vector<bool> Room::getExits()
 {
     return exits_vector;
 }
+
+vector<Item>* Room::getItemsInRoom()
+{
+    return &itemsInRoom;
+}
