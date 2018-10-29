@@ -81,6 +81,13 @@ void Room::addItem(Item *inItem)
     itemsInRoom.push_back(*inItem);
 }
 
+void Room::removeItemFromRoom(int location)
+{
+    itemsInRoom.erase(itemsInRoom.begin()+location);
+    for(int i = 0; i < itemsInRoom.size(); i++)
+        cout << itemsInRoom.at(i).getShortDescription() << endl;
+}
+
 string Room::displayItem()
 {
     string tempString = "items in room = ";

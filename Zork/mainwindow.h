@@ -17,7 +17,6 @@
 
 #include <QActionGroup>
 
-
 #include <string>
 
 #include "ZorkUL.h"
@@ -127,6 +126,7 @@ private:
     void updateRoomLabel();
     void updateStoryText();
     void updateRoomItems();
+    void updateInventory();
     void goDirection(QString direction);
 };
 

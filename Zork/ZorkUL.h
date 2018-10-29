@@ -5,6 +5,7 @@
 #include "Parser.h"
 #include "Room.h"
 #include "item.h"
+#include "Player.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -14,7 +15,8 @@ class ZorkUL {
 private:
 	Parser parser;
     vector<Room*> rooms;
-	void createRooms();
+
+    void createRooms();
 	void printWelcome();
 	bool processCommand(Command command);
 	void printHelp();
@@ -26,6 +28,7 @@ private:
 
 public:
     Room *currentRoom;
+    Player player;
 
 	ZorkUL();
 	void play();
@@ -33,6 +36,8 @@ public:
     Room* getCurrentRoom();
     string getCurrentRoomName();
     string getCurrentRoomDescription();
+
+    void addItemToPlayerInventory(Item item);
 
 	string go(string direction);
 };

@@ -15,7 +15,7 @@ public:
     Player(int health);
 
     void addItemToInvetory(Item item);
-    const vector<Item>& getInventory();
+    vector<Item>& getInventory();
     void onDeath();
 };
 

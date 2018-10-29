@@ -12,7 +12,7 @@ void Player::addItemToInvetory(Item item)
     inventory.push_back(item);
 }
 
-const vector<Item>& Player::getInventory()
+vector<Item>& Player::getInventory()
 {
     return inventory;
 }

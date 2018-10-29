@@ -168,20 +168,8 @@ QGroupBox* MainWindow::createInventoryGroup()
 {
     QGroupBox *groupBox = new QGroupBox(tr("Inventory Group"));
 
-    QLabel *label1 = new QLabel(tr("Item 1"));
-    QLabel *label2 = new QLabel(tr("Item 2"));
-    QLabel *label3 = new QLabel(tr("Item 3"));
-
     listWidget = new QListWidget(this);
-    QListWidgetItem *it;
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, label1);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, label2);
-
-    it = new QListWidgetItem(listWidget);
-    listWidget->setItemWidget(it, label3);
+    listWidget->setSelectionMode(QAbstractItemView::NoSelection);
 
     use_item_btn = new QPushButton("Use item", this);
     use_item_btn->connect(use_item_btn, SIGNAL(released()), this, SLOT(use_item_btn_onclick()));
@@ -323,16 +311,26 @@ void MainWindow::updateRoomItems()
         room_items_container->addWidget(room_items_checkboxes.at(i));
         ++i;
     }
+}
 
-    // Print out description of rooms.
-    /*for(Item temp : *room_items)
+void MainWindow::updateInventory()
+{
+    vector<Item> p_inv = zUL.player.getInventory();
+
+    cout<< "Player inventory: ";
+    for(unsigned int i = 0; i < p_inv.size(); i++)
+        cout << p_inv.at(i).getShortDescription() << " ";
+    cout << endl;
+
+    QListWidgetItem *it;
+
+    listWidget->clear();
+
+    for(unsigned int i = 0; i < p_inv.size(); i++)
     {
-        cout << temp.getShortDescription() << endl;
-        QCheckBox *temp_cbox = new QCheckBox;
-        temp_cbox->setText(QString::fromStdString(temp.getShortDescription()));
-        room_items_checkboxes.push_back(temp_cbox);
-        room_items_container->addWidget(temp_cbox);
-    }*/
+        it = new QListWidgetItem(listWidget);
+        listWidget->setItemWidget(it, new QRadioButton(QString::fromStdString(p_inv.at(i).getShortDescription())));
+    }
 }
 
 void MainWindow::teleport_btn_onclick()
@@ -370,7 +368,7 @@ void MainWindow::west_btn_onclick()
 
 void MainWindow::use_item_btn_onclick()
 {
-    // TODO remove item from room, put in player inventory
+    // TODO remove item from player inventory
     QListWidgetItem *item = listWidget->currentItem();
     delete listWidget->takeItem(listWidget->row(item));
 
@@ -380,6 +378,28 @@ void MainWindow::take_item_btn_onclick()
 {
     // TODO remove item(s) from list of items in room.
     cout << "Taking Item(s)..." << endl;
+
+    //cout << "Size: " << room_items_checkboxes.size() << endl;
+    for(unsigned int i = 0; i < room_items_checkboxes.size(); )
+    {
+        // If QCheckBox is checked add it to players inventory
+        if(room_items_checkboxes.at(i)->isChecked())
+        {
+            cout << room_items_checkboxes.at(i)->text().toStdString() << " is checked" << endl;
+            zUL.addItemToPlayerInventory(itemsInRoom->at(i));
+
+            // Remove the item from the room
+            zUL.currentRoom->removeItemFromRoom(i);
+
+            // Remove element from vector, this avoids a crash
+            room_items_checkboxes.erase(room_items_checkboxes.begin()+i);
+        }
+        else
+            i++;
+    }
+    // Update layout
+    updateRoomItems();
+    updateInventory();
 }
 
 void MainWindow::goDirection(QString direction)

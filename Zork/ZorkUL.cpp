@@ -12,7 +12,7 @@ int main(int argc, char argv[])
 }
 */
 
-ZorkUL::ZorkUL()
+ZorkUL::ZorkUL() : player(100)
 {
 	createRooms();
 }
@@ -251,6 +251,12 @@ string ZorkUL::getCurrentRoomDescription()
     // TODO return story text, not just description of room.
     // i.e. dont need to know current room or know the exits
     return currentRoom->longDescription();
+}
+
+void ZorkUL::addItemToPlayerInventory(Item item)
+{
+    cout << "Adding item to player inventory: " << item.getShortDescription() << endl;
+    player.addItemToInvetory(item);
 }
 
 string ZorkUL::go(string direction)
