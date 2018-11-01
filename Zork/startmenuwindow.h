@@ -1,0 +1,50 @@
+#ifndef STARTMENUWINDOW_H
+#define STARTMENUWINDOW_H
+
+#include <QMainWindow>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QSlider>
+#include <QComboBox>
+
+#include "mainwindow.h"
+
+namespace Ui {
+class StartMenuWindow;
+}
+
+class StartMenuWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit StartMenuWindow(QWidget *parent = nullptr);
+    ~StartMenuWindow();
+
+private slots:
+    void start_btn_onclick();
+    void exit_btn_onclick();
+
+private:
+    Ui::StartMenuWindow *ui;
+
+    MainWindow w;
+
+    QGridLayout *grid;
+
+
+    QLabel *name_label;
+    QLabel *age_label;
+    QLabel *sex_label;
+    QLineEdit *name_lineEdit;
+    QComboBox *sex_comboBox;
+    QSlider *age_slider;
+    QPushButton *start_btn;
+    QPushButton *exit_btn;
+
+    void setUpLayout();
+};
+
+#endif // STARTMENUWINDOW_H

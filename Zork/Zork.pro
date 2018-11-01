@@ -35,7 +35,8 @@ SOURCES += \
     Room.cpp \
     ZorkUL.cpp \
     Enemy.cpp \
-    Player.cpp
+    Player.cpp \
+    startmenuwindow.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,10 +48,12 @@ HEADERS += \
     Room.h \
     ZorkUL.h \
     Enemy.h \
-    Player.h
+    Player.h \
+    startmenuwindow.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    startmenuwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

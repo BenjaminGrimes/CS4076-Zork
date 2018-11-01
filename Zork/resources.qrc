@@ -4,5 +4,6 @@
     <file alias="TestImage2.jpg">images/TestImage2.jpg</file>
     <file alias="restart.png">images/save.png</file>
     <file alias="exit.png">images/paste.png</file>
+    <file alias="ZORK_TITLE.png">images/ZORK_TITLE.png</file>
 </qresource>
 </RCC>
