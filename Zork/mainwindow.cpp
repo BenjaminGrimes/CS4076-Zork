@@ -369,8 +369,30 @@ void MainWindow::west_btn_onclick()
 void MainWindow::use_item_btn_onclick()
 {
     // TODO remove item from player inventory
-    QListWidgetItem *item = listWidget->currentItem();
-    delete listWidget->takeItem(listWidget->row(item));
+    // https://forum.qt.io/topic/91040/how-do-i-check-the-state-of-a-qlistwidget-s-item-s-radiobuttons/3
+    for(int i = 0; i < listWidget->count(); i++)
+    {
+        auto temp_radio_btn = static_cast<QRadioButton*>(listWidget->itemWidget(listWidget->item(i)));
+        if(temp_radio_btn->isChecked())
+        {
+            cout << temp_radio_btn->text().toStdString() << " RB is checked" << endl;
+
+            // Remove item from player inventory
+            vector<Item> inv = zUL.player.getInventory();
+            zUL.player.removeItemFromInventory(i);
+
+            inv = zUL.player.getInventory();
+            for(Item i : inv)
+                cout << i.getShortDescription() << " ";
+            cout << endl;
+
+            // Remove item from the list
+            delete listWidget->item(i);
+        }
+    }
+
+    //QListWidgetItem *item = listWidget->currentItem();
+    //delete listWidget->takeItem(listWidget->row(item));
 
 }
 
@@ -379,20 +401,23 @@ void MainWindow::take_item_btn_onclick()
     // TODO remove item(s) from list of items in room.
     cout << "Taking Item(s)..." << endl;
 
-    //cout << "Size: " << room_items_checkboxes.size() << endl;
+    cout << "Size: " << room_items_checkboxes.size() << endl;
     for(unsigned int i = 0; i < room_items_checkboxes.size(); )
     {
+        cout << "Here in the loop..." << endl;
         // If QCheckBox is checked add it to players inventory
         if(room_items_checkboxes.at(i)->isChecked())
         {
             cout << room_items_checkboxes.at(i)->text().toStdString() << " is checked" << endl;
-            zUL.addItemToPlayerInventory(itemsInRoom->at(i));
+            zUL.player.addItemToInvetory(itemsInRoom->at(i));
 
             // Remove the item from the room
             zUL.currentRoom->removeItemFromRoom(i);
 
             // Remove element from vector, this avoids a crash
             room_items_checkboxes.erase(room_items_checkboxes.begin()+i);
+
+
         }
         else
             i++;

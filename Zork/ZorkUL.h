@@ -37,8 +37,6 @@ public:
     string getCurrentRoomName();
     string getCurrentRoomDescription();
 
-    void addItemToPlayerInventory(Item item);
-
 	string go(string direction);
 };
 

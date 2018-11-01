@@ -253,12 +253,6 @@ string ZorkUL::getCurrentRoomDescription()
     return currentRoom->longDescription();
 }
 
-void ZorkUL::addItemToPlayerInventory(Item item)
-{
-    cout << "Adding item to player inventory: " << item.getShortDescription() << endl;
-    player.addItemToInvetory(item);
-}
-
 string ZorkUL::go(string direction)
 {
 	//Make the direction lowercase

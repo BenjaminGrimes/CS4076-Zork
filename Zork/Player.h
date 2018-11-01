@@ -14,7 +14,8 @@ private:
 public:
     Player(int health);
 
-    void addItemToInvetory(Item item);
+    void addItemToInvetory(Item & item);
+    void removeItemFromInventory(int pos);
     vector<Item>& getInventory();
     void onDeath();
 };
