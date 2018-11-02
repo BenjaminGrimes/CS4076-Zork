@@ -8,6 +8,7 @@
 #include <QLineEdit>
 #include <QSlider>
 #include <QComboBox>
+#include <QFormLayout>
 
 #include "mainwindow.h"
 
@@ -33,7 +34,7 @@ private:
     MainWindow w;
 
     QGridLayout *grid;
-
+    QFormLayout *formLayout;
 
     QLabel *name_label;
     QLabel *age_label;

@@ -17,6 +17,10 @@ StartMenuWindow::~StartMenuWindow()
 
 void StartMenuWindow::setUpLayout()
 {
+    QLabel *imageLabel = new QLabel;
+    QImage image(":/ZORK_TITLE.png");
+    imageLabel->setPixmap(QPixmap::fromImage(image).scaled(200,100, Qt::KeepAspectRatio));
+
     name_label = new QLabel("Enter name:");
     name_lineEdit = new QLineEdit;
 
@@ -32,23 +36,15 @@ void StartMenuWindow::setUpLayout()
     exit_btn = new QPushButton("Exit", this);
     connect(exit_btn, SIGNAL(released()), this, SLOT(exit_btn_onclick()));
 
-    grid = new QGridLayout;
-    grid->setColumnStretch(0, 1);
-    grid->setColumnStretch(1, 1);
-    for(int i = 0; i <= 3; i++)
-        grid->setRowStretch(i, 1);
-
-    grid->addWidget(name_label, 0, 0);
-    grid->addWidget(name_lineEdit, 0, 1);
-    grid->addWidget(sex_label, 1, 0);
-    grid->addWidget(sex_comboBox, 1, 1);
-    grid->addWidget(age_label, 2, 0);
-    grid->addWidget(age_slider, 2, 1);
-    grid->addWidget(start_btn, 3, 0);
-    grid->addWidget(exit_btn, 3, 1);
+    formLayout = new QFormLayout;
+    formLayout->addWidget(imageLabel);
+    formLayout->addRow("Name:", name_lineEdit);
+    formLayout->addRow("Age", age_slider);
+    formLayout->addRow("Sex:", sex_comboBox);
+    formLayout->addRow(start_btn, exit_btn);
 
     auto central = new QWidget;
-    central->setLayout(grid);
+    central->setLayout(formLayout);
     setCentralWidget(central);
 }
 
