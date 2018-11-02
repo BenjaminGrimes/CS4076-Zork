@@ -1,6 +1,12 @@
 #include "startmenuwindow.h"
 #include "ui_startmenuwindow.h"
 
+#define MIN_AGE_VAL 1
+#define MAX_AGE_VAL 100
+
+#define WINDOW_WIDTH 200
+#define WINDOW_HEIGHT 100
+
 StartMenuWindow::StartMenuWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::StartMenuWindow)
@@ -23,7 +29,7 @@ void StartMenuWindow::setUpLayout()
 
     QLabel *imageLabel = new QLabel;
     QImage image(":/ZORK_TITLE.png");
-    imageLabel->setPixmap(QPixmap::fromImage(image).scaled(200,100, Qt::KeepAspectRatio));
+    imageLabel->setPixmap(QPixmap::fromImage(image).scaled(WINDOW_WIDTH, WINDOW_HEIGHT, Qt::KeepAspectRatio));
 
     name_label = new QLabel("Enter name:");
     name_lineEdit = new QLineEdit;
@@ -31,10 +37,10 @@ void StartMenuWindow::setUpLayout()
 
     age_label = new QLabel("Select Age:");
     age_slider = new QSlider(Qt::Horizontal, this);
-    age_slider->setRange(1, 100);
+    age_slider->setRange(MIN_AGE_VAL, MAX_AGE_VAL);
     //cout << age_slider->value() << endl;
     age_value = new QSpinBox;
-    age_value->setRange(1, 100);
+    age_value->setRange(MIN_AGE_VAL, MAX_AGE_VAL);
     age_value->setSingleStep(1);
     QHBoxLayout *age_container = new QHBoxLayout;
     age_container->addWidget(age_value, 0, Qt::AlignLeft);
@@ -88,7 +94,6 @@ void StartMenuWindow::start_btn_onclick()
         error_label->setText("Please enter a name");
     }
     // TODO check for age selected
-    // TODO check for sex selected
     else if(sex_comboBox->currentIndex() == 0)
     {
         error_label->setText("Please select a sex");
@@ -97,6 +102,8 @@ void StartMenuWindow::start_btn_onclick()
     {
         w.setWindowTitle("ZORK");
         w.showMaximized();
+
+        // TODO Send info to mainwindow and set it in play info group
 
         // Hide this window
         this->hide();
