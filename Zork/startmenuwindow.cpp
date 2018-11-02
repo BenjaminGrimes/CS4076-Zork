@@ -20,18 +20,22 @@ StartMenuWindow::~StartMenuWindow()
 void StartMenuWindow::setUpLayout()
 {
     QVBoxLayout *container = new QVBoxLayout;
+
     QLabel *imageLabel = new QLabel;
     QImage image(":/ZORK_TITLE.png");
     imageLabel->setPixmap(QPixmap::fromImage(image).scaled(200,100, Qt::KeepAspectRatio));
 
     name_label = new QLabel("Enter name:");
     name_lineEdit = new QLineEdit;
+    name_lineEdit->setPlaceholderText("Enter your name");
 
     age_label = new QLabel("Select Age:");
     age_slider = new QSlider(Qt::Horizontal, this);
 
     sex_label = new QLabel("Select Sex:");
     sex_comboBox = new QComboBox;
+
+    error_label = new QLabel("");
 
     start_btn = new QPushButton("Start", this);
     connect(start_btn, SIGNAL(released()), this, SLOT(start_btn_onclick()));
@@ -50,6 +54,7 @@ void StartMenuWindow::setUpLayout()
 
     container->addWidget(imageLabel, 0, Qt::AlignCenter);
     container->addLayout(formLayout);
+    container->addWidget(error_label, 0, Qt::AlignCenter);
     container->addLayout(btn_container);
 
 
@@ -60,11 +65,25 @@ void StartMenuWindow::setUpLayout()
 
 void StartMenuWindow::start_btn_onclick()
 {
-    w.setWindowTitle("ZORK");
-    w.showMaximized();
+    // Get the count of character in name_lineEdit
+    int n_count = name_lineEdit->text().count();
+    cout << n_count << endl;
 
-    // Hide this window
-    this->hide();
+    if(n_count == 0)
+    {
+        // TODO tell user to enter name
+        error_label->setText("Please enter a name");
+    }
+    // TODO check for age selected
+    // TODO check for sex selected
+    else
+    {
+        w.setWindowTitle("ZORK");
+        w.showMaximized();
+
+        // Hide this window
+        this->hide();
+    }
 }
 
 void StartMenuWindow::exit_btn_onclick()

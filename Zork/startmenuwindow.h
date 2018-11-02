@@ -42,6 +42,9 @@ private:
     QLineEdit *name_lineEdit;
     QComboBox *sex_comboBox;
     QSlider *age_slider;
+
+    QLabel *error_label;
+
     QPushButton *start_btn;
     QPushButton *exit_btn;
 
