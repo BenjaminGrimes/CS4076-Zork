@@ -30,6 +30,15 @@ void Player::removeItemFromInventory(int pos)
     }*/
 }
 
+void Player::setPlayerInfo(QString name, int age, QString sex)
+{
+    this->name = name.toStdString();
+    this->age = age;
+    this->sex = sex.toStdString();
+
+    cout << "name:" << this->name << " age:" << this->age << " sex:" << this->sex << endl;
+}
+
 vector<Item>& Player::getInventory()
 {
     return inventory;
