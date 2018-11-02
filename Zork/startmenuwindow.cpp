@@ -31,6 +31,16 @@ void StartMenuWindow::setUpLayout()
 
     age_label = new QLabel("Select Age:");
     age_slider = new QSlider(Qt::Horizontal, this);
+    age_slider->setRange(1, 100);
+    //cout << age_slider->value() << endl;
+    age_value = new QSpinBox;
+    age_value->setRange(1, 100);
+    age_value->setSingleStep(1);
+    QHBoxLayout *age_container = new QHBoxLayout;
+    age_container->addWidget(age_value, 0, Qt::AlignLeft);
+    age_container->addWidget(age_slider);
+    connect(age_slider, SIGNAL(valueChanged(int)), age_value, SLOT(setValue(int)));
+    connect(age_value, SIGNAL(valueChanged(int)), age_slider, SLOT(setValue(int)));
 
     sex_label = new QLabel("Select Sex:");
     sex_comboBox = new QComboBox;
@@ -45,7 +55,7 @@ void StartMenuWindow::setUpLayout()
 
     formLayout = new QFormLayout;
     formLayout->addRow("Name:", name_lineEdit);
-    formLayout->addRow("Age:", age_slider);
+    formLayout->addRow("Age:", age_container);
     formLayout->addRow("Sex:", sex_comboBox);
 
     QHBoxLayout *btn_container = new QHBoxLayout;
