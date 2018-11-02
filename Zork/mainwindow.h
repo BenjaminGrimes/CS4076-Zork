@@ -48,8 +48,11 @@ private slots:
     // ------- Menus ------
     void restart();
     // --------------------
+
 private:
     Ui::MainWindow *ui;
+
+    friend class StartMenuWindow;
 
     ZorkUL zUL;
 

@@ -102,6 +102,7 @@ void StartMenuWindow::start_btn_onclick()
     {
         w.setWindowTitle("ZORK");
         w.showMaximized();
+        cout << "Health: " << w.zUL.player.getHealth() << endl;
 
         // TODO Send info to mainwindow and set it in play info group
 
