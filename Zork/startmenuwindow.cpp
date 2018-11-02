@@ -44,6 +44,9 @@ void StartMenuWindow::setUpLayout()
 
     sex_label = new QLabel("Select Sex:");
     sex_comboBox = new QComboBox;
+    sex_comboBox->addItem("---");
+    sex_comboBox->addItem("Male");
+    sex_comboBox->addItem("Female");
 
     error_label = new QLabel("");
 
@@ -86,6 +89,10 @@ void StartMenuWindow::start_btn_onclick()
     }
     // TODO check for age selected
     // TODO check for sex selected
+    else if(sex_comboBox->currentIndex() == 0)
+    {
+        error_label->setText("Please select a sex");
+    }
     else
     {
         w.setWindowTitle("ZORK");
