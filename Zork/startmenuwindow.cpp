@@ -7,6 +7,8 @@ StartMenuWindow::StartMenuWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->resize(400, 200);
+
     setUpLayout();
 }
 
@@ -17,6 +19,7 @@ StartMenuWindow::~StartMenuWindow()
 
 void StartMenuWindow::setUpLayout()
 {
+    QVBoxLayout *container = new QVBoxLayout;
     QLabel *imageLabel = new QLabel;
     QImage image(":/ZORK_TITLE.png");
     imageLabel->setPixmap(QPixmap::fromImage(image).scaled(200,100, Qt::KeepAspectRatio));
@@ -37,14 +40,21 @@ void StartMenuWindow::setUpLayout()
     connect(exit_btn, SIGNAL(released()), this, SLOT(exit_btn_onclick()));
 
     formLayout = new QFormLayout;
-    formLayout->addWidget(imageLabel);
     formLayout->addRow("Name:", name_lineEdit);
-    formLayout->addRow("Age", age_slider);
+    formLayout->addRow("Age:", age_slider);
     formLayout->addRow("Sex:", sex_comboBox);
-    formLayout->addRow(start_btn, exit_btn);
+
+    QHBoxLayout *btn_container = new QHBoxLayout;
+    btn_container->addWidget(start_btn);
+    btn_container->addWidget(exit_btn);
+
+    container->addWidget(imageLabel, 0, Qt::AlignCenter);
+    container->addLayout(formLayout);
+    container->addLayout(btn_container);
+
 
     auto central = new QWidget;
-    central->setLayout(formLayout);
+    central->setLayout(container);
     setCentralWidget(central);
 }
 
