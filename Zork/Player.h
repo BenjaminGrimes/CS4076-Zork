@@ -4,8 +4,13 @@
 #include <QString>
 #include <string>
 
+using std::string;
+
 #ifndef PLAYER_H
 #define PLAYER_H
+
+#define MAX_HEALTH 100
+#define MIN_HEALTH 0
 
 class Player : public Character
 {
