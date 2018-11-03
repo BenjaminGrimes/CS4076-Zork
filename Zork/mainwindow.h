@@ -130,6 +130,7 @@ private:
     void updateStoryText();
     void updateRoomItems();
     void updateInventory();
+    void updatePlayerInfo();
     void goDirection(QString direction);
 };
 

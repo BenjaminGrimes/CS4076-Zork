@@ -48,3 +48,49 @@ void Player::onDeath()
 {
     // TODO show game over screen
 }
+
+Player &Player::operator++()
+{
+    health += 10;
+
+    if(health > 100)
+        health = 0;
+
+    return *this;
+}
+
+Player Player::operator++( int )
+{
+    health += 10;
+
+    if(health > 100)
+        health = 100;
+    if(health < 0)
+        health = 0;
+
+    return *this;
+}
+
+Player &Player::operator--()
+{
+    health -= 10;
+
+    if(health > 100)
+        health = 100;
+    if(health < 0)
+        health = 0;
+
+    return *this;
+}
+
+Player Player::operator--(int)
+{
+    health -= 10;
+
+    if(health > 100)
+        health = 100;
+    if(health < 0)
+        health = 0;
+
+    return *this;
+}

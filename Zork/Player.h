@@ -7,7 +7,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-
 class Player : public Character
 {
 private:
@@ -24,6 +23,11 @@ public:
     void setPlayerInfo(QString name, int age, QString sex);
     vector<Item>& getInventory();
     void onDeath();
+
+    Player &operator++(); // Prefix increment
+    Player operator++(int); // Postfix increment
+    Player &operator--(); // Prefix decrement
+    Player operator--(int); // Postfix decrement
 };
 
 #endif // PLAYER_H

@@ -150,7 +150,7 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
 
     player_health_bar = new QProgressBar;
     player_health_bar->setRange(0, 100);
-    player_health_bar->setValue(50);
+    player_health_bar->setValue(zUL.player.getHealth());
 
     health_status_bar = new QStatusBar;
     health_status_bar->addPermanentWidget(label, 1);
@@ -333,6 +333,22 @@ void MainWindow::updateInventory()
     }
 }
 
+void MainWindow::updatePlayerInfo()
+{
+    /*
+    zUL.player--;
+    zUL.player--;
+    --zUL.player;
+    --zUL.player;
+    ++zUL.player;
+    zUL.player++;
+    */
+    cout << "Updating player info..." << endl;
+    cout << "Player health: " << zUL.player.getHealth() << endl;
+
+    player_health_bar->setValue(zUL.player.getHealth());
+}
+
 void MainWindow::teleport_btn_onclick()
 {
     zUL.teleport();
@@ -422,9 +438,11 @@ void MainWindow::take_item_btn_onclick()
         else
             i++;
     }
+
     // Update layout
     updateRoomItems();
     updateInventory();
+    updatePlayerInfo();
 }
 
 void MainWindow::goDirection(QString direction)
