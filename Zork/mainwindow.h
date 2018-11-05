@@ -14,6 +14,7 @@
 #include <QStatusBar>
 #include <QScrollArea>
 #include <QCheckBox>
+#include <QFormLayout>
 
 #include <QActionGroup>
 

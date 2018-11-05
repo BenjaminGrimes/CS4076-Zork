@@ -27,6 +27,9 @@ public:
     void removeItemFromInventory(int pos);
     void setPlayerInfo(QString name, int age, QString sex);
     vector<Item>& getInventory();
+    string getName();
+    int getAge();
+    string getSex();
     void onDeath();
 
     Player &operator++(); // Prefix increment

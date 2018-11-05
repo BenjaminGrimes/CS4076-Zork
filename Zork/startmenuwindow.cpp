@@ -100,9 +100,11 @@ void StartMenuWindow::start_btn_onclick()
     }
     else
     {
+        w.zUL.player.setPlayerInfo(name_lineEdit->text(), age_slider->value(), sex_comboBox->currentText());
         w.setWindowTitle("ZORK");
         w.showMaximized();
-        w.zUL.player.setPlayerInfo(name_lineEdit->text(), age_slider->value(), sex_comboBox->currentText());
+        w.setUpLayout();
+
 
         // TODO Send info to mainwindow and set it in play info group
 

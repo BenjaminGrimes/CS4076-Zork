@@ -44,6 +44,22 @@ vector<Item>& Player::getInventory()
     return inventory;
 }
 
+string Player::getName()
+{
+    cout << "Name: " << name << endl;
+    return name;
+}
+
+int Player::getAge()
+{
+    return age;
+}
+
+string Player::getSex()
+{
+    return sex;
+}
+
 void Player::onDeath()
 {
     // TODO show game over screen
