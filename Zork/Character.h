@@ -33,7 +33,8 @@ public:
 #include <vector>
 #include <string>
 
-class Character {
+class Character
+{
 private:
 
 protected:

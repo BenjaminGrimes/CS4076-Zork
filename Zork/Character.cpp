@@ -37,8 +37,14 @@ void Character::setHealth(int h)
 {
     if(h < 0)
     {
-        health-= h;
+        health -= h;
         if(health < 0)
             health = 0;
+    }
+    else
+    {
+        health += h;
+        if(health > 100)
+            health = 100;
     }
 }

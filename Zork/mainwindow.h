@@ -14,6 +14,7 @@
 #include <QStatusBar>
 #include <QScrollArea>
 #include <QCheckBox>
+#include <QFormLayout>
 
 #include <QActionGroup>
 
@@ -48,8 +49,11 @@ private slots:
     // ------- Menus ------
     void restart();
     // --------------------
+
 private:
     Ui::MainWindow *ui;
+
+    friend class StartMenuWindow;
 
     ZorkUL zUL;
 
@@ -127,6 +131,7 @@ private:
     void updateStoryText();
     void updateRoomItems();
     void updateInventory();
+    void updatePlayerInfo();
     void goDirection(QString direction);
 };
 

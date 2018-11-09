@@ -9,6 +9,7 @@
 #include <QSlider>
 #include <QComboBox>
 #include <QFormLayout>
+#include <QSpinBox>
 
 #include "mainwindow.h"
 
@@ -38,6 +39,7 @@ private:
 
     QLabel *name_label;
     QLabel *age_label;
+    QSpinBox *age_value;
     QLabel *sex_label;
     QLineEdit *name_lineEdit;
     QComboBox *sex_comboBox;

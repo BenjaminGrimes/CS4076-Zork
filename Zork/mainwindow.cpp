@@ -8,8 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // zUL.play();
-
-    setUpLayout();
 }
 
 MainWindow::~MainWindow()
@@ -148,19 +146,41 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
 {
     QGroupBox *groupBox = new QGroupBox(tr("Player Info Group"));
     QLabel *label = new QLabel;
-    label->setText("Health");
+    label->setText("Health:");
 
     player_health_bar = new QProgressBar;
     player_health_bar->setRange(0, 100);
-    player_health_bar->setValue(50);
+    player_health_bar->setValue(zUL.player.getHealth());
 
     health_status_bar = new QStatusBar;
     health_status_bar->addPermanentWidget(label, 1);
     health_status_bar->addPermanentWidget(player_health_bar, 4);
 
+    QLabel *name_title_label = new QLabel;
+    name_title_label->setText("Name:");
+    QLabel *name_label = new QLabel;
+    name_label->setText(QString::fromStdString(zUL.player.getName()));
+    cout << name_label->text().toStdString() << endl;
+
+    QLabel *age_title_label = new QLabel;
+    age_title_label->setText("Age:");
+    QLabel *age_label = new QLabel;
+    age_label->setText(QString::number(zUL.player.getAge()));
+
+    QLabel *sex_title_label = new QLabel;
+    sex_title_label->setText("Sex:");
+    QLabel *sex_label = new QLabel;
+    sex_label->setText(QString::fromStdString(zUL.player.getSex()));
+
     QGridLayout *p_info_grid = new QGridLayout;
     //p_info_grid->addWidget(label, 0, 0, 1, 1);
-    p_info_grid->addWidget(health_status_bar, 0, 0, 2, 2 );
+    p_info_grid->addWidget(health_status_bar, 0, 0, 1, 2);
+    p_info_grid->addWidget(name_title_label, 1, 0, 1, 1);
+    p_info_grid->addWidget(name_label, 1, 1, 1, 1);
+    p_info_grid->addWidget(age_title_label, 2, 0, 1 ,1);
+    p_info_grid->addWidget(age_label, 2, 1, 1, 1);
+    p_info_grid->addWidget(sex_title_label, 3, 0, 1, 1);
+    p_info_grid->addWidget(sex_label, 3, 1, 1, 1);
 
     groupBox->setLayout(p_info_grid);
     return groupBox;
@@ -335,6 +355,22 @@ void MainWindow::updateInventory()
     }
 }
 
+void MainWindow::updatePlayerInfo()
+{
+    /*
+    zUL.player--;
+    zUL.player--;
+    --zUL.player;
+    --zUL.player;
+    ++zUL.player;
+    zUL.player++;
+    */
+    cout << "Updating player info..." << endl;
+    cout << "Player health: " << zUL.player.getHealth() << endl;
+
+    player_health_bar->setValue(zUL.player.getHealth());
+}
+
 void MainWindow::teleport_btn_onclick()
 {
     zUL.teleport();
@@ -424,9 +460,11 @@ void MainWindow::take_item_btn_onclick()
         else
             i++;
     }
+
     // Update layout
     updateRoomItems();
     updateInventory();
+    updatePlayerInfo();
 }
 
 void MainWindow::goDirection(QString direction)
