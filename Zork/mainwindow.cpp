@@ -80,6 +80,8 @@ void MainWindow::restart()
 {
     // TODO implement restart function
     cout << "Restarting..." << endl;
+
+    this->close();
 }
 
 QGroupBox* MainWindow::createImageGroup()
