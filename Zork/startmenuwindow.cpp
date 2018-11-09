@@ -105,8 +105,7 @@ void StartMenuWindow::start_btn_onclick()
         w.showMaximized();
         w.setUpLayout();
 
-
-        // TODO Send info to mainwindow and set it in play info group
+        connect(w.restartAct, &QAction::triggered, this, &StartMenuWindow::clearAndReset);
 
         // Hide this window
         this->hide();
@@ -116,4 +115,16 @@ void StartMenuWindow::start_btn_onclick()
 void StartMenuWindow::exit_btn_onclick()
 {
     this->close();
+}
+
+void StartMenuWindow::clearAndReset()
+{
+    // reset all fields.
+    error_label->setText("");
+    name_lineEdit->setText("");
+    age_value->setValue(MIN_AGE_VAL);
+    age_slider->setValue(MIN_AGE_VAL);
+    sex_comboBox->setCurrentIndex(0);
+
+    this->setVisible(true);
 }

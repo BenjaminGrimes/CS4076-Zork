@@ -51,6 +51,7 @@ private:
     QPushButton *exit_btn;
 
     void setUpLayout();
+    void clearAndReset();
 };
 
 #endif // STARTMENUWINDOW_H
