@@ -35,6 +35,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    static int const EXIT_CODE_REBOOT;
+
 private slots:
     void teleport_btn_onclick();
     void north_btn_onclick();

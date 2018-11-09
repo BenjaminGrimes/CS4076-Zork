@@ -119,12 +119,5 @@ void StartMenuWindow::exit_btn_onclick()
 
 void StartMenuWindow::clearAndReset()
 {
-    // reset all fields.
-    error_label->setText("");
-    name_lineEdit->setText("");
-    age_value->setValue(MIN_AGE_VAL);
-    age_slider->setValue(MIN_AGE_VAL);
-    sex_comboBox->setCurrentIndex(0);
-
-    this->setVisible(true);
+    qApp->exit(MainWindow::EXIT_CODE_REBOOT);
 }

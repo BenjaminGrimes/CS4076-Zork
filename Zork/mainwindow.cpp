@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-// test 2
+
+int const MainWindow::EXIT_CODE_REBOOT = -123456789;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -79,7 +81,8 @@ void MainWindow::restart()
     // TODO implement restart function
     cout << "Restarting..." << endl;
 
-    this->close();
+    //https://wiki.qt.io/How_to_make_an_Application_restartable
+
 }
 
 QGroupBox* MainWindow::createImageGroup()

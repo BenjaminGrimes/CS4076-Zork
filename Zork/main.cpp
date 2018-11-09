@@ -4,18 +4,24 @@
 
 int main(int argc, char *argv[])
 {
+    int currentExitCode = 0;
+
+    do{
     QApplication a(argc, argv);
 
     // Show start menu window
     StartMenuWindow sw;
     sw.setWindowTitle("Zork - Start Menu");
     sw.show();
+    currentExitCode = a.exec();
+    } while(currentExitCode == MainWindow::EXIT_CODE_REBOOT);
+
+    return currentExitCode;
 
     /*
     MainWindow w;
     w.setWindowTitle("Zork");
-    w.showMaximized();*/
-    //w.show();
-
-    return a.exec();
+    w.showMaximized();
+    w.show();
+    */
 }
