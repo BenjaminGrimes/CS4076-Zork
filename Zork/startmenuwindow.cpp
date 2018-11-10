@@ -90,10 +90,8 @@ void StartMenuWindow::start_btn_onclick()
 
     if(n_count == 0)
     {
-        // TODO tell user to enter name
         error_label->setText("Please enter a name");
     }
-    // TODO check for age selected
     else if(sex_comboBox->currentIndex() == 0)
     {
         error_label->setText("Please select a sex");

@@ -371,12 +371,28 @@ void MainWindow::updatePlayerInfo()
     cout << "Updating player info..." << endl;
     cout << "Player health: " << zUL.player.getHealth() << endl;
 
-    zUL.player.setHealth(-100);
     if(zUL.player.getHealth() <= 0)
     {
-        QMessageBox mBox(this);
-        QString mBox_title = "GAME OVER";
-        mBox.about(this, mBox_title, "GAMEOVER!");
+        //QMessageBox mBox(this);
+        //QString mBox_title = "GAME OVER";
+        //mBox.about(this, mBox_title, "GAMEOVER!");
+
+        QMessageBox mBox;
+        mBox.setText("Game Over!");
+        QAbstractButton *restartBtn = mBox.addButton("Restart", QMessageBox::YesRole);
+        QAbstractButton *exitBtn = mBox.addButton("Exit", QMessageBox::NoRole);
+        mBox.exec();
+
+        if(mBox.clickedButton() == restartBtn)
+        {
+            cout << "Restarting..." << endl;
+            restartAct->trigger();
+        }
+        else if(mBox.clickedButton() == exitBtn)
+        {
+            cout << "Exiting..." << endl;
+            qApp->exit(0);
+        }
     }
     else
     {
