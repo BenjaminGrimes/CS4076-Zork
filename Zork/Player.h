@@ -1,13 +1,14 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include "Character.h"
 #include <vector>
 #include <item.h>
 #include <QString>
 #include <string>
+#include <QMessageBox>
 
 using std::string;
-
-#ifndef PLAYER_H
-#define PLAYER_H
 
 #define MAX_HEALTH 100
 #define MIN_HEALTH 0

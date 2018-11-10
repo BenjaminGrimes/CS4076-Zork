@@ -36,15 +36,9 @@ int Character::getHealth()
 void Character::setHealth(int h)
 {
     if(h < 0)
-    {
-        health -= h;
-        if(health < 0)
-            health = 0;
-    }
+        health = 0;
+    else if(health > 100)
+        health = 100;
     else
-    {
-        health += h;
-        if(health > 100)
-            health = 100;
-    }
+        health = h;
 }

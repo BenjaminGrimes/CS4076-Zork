@@ -371,7 +371,17 @@ void MainWindow::updatePlayerInfo()
     cout << "Updating player info..." << endl;
     cout << "Player health: " << zUL.player.getHealth() << endl;
 
-    player_health_bar->setValue(zUL.player.getHealth());
+    zUL.player.setHealth(-100);
+    if(zUL.player.getHealth() <= 0)
+    {
+        QMessageBox mBox(this);
+        QString mBox_title = "GAME OVER";
+        mBox.about(this, mBox_title, "GAMEOVER!");
+    }
+    else
+    {
+        player_health_bar->setValue(zUL.player.getHealth());
+    }
 }
 
 void MainWindow::teleport_btn_onclick()
@@ -457,8 +467,6 @@ void MainWindow::take_item_btn_onclick()
 
             // Remove element from vector, this avoids a crash
             room_items_checkboxes.erase(room_items_checkboxes.begin()+i);
-
-
         }
         else
             i++;

@@ -1,10 +1,10 @@
+#ifndef ENEMY_H
+#define ENEMY_H
+
 #include "Character.h"
 #include <string>
 
 using std::string;
-
-#ifndef ENEMY_H
-#define ENEMY_H
 
 #define MAX_HEALTH 100
 #define MIN_HEALTH 0
