@@ -2,7 +2,7 @@
 
 Enemy::Enemy() : Character (MAX_HEALTH)
 {
-
+    name = "ENEMY";
 }
 
 void Enemy::onDeath()
@@ -62,4 +62,9 @@ string Enemy::getDescription()
 {
     string temp = "Enemy is here! Health = " + std::to_string(health);
     return temp;
+}
+
+string Enemy::getName()
+{
+    return name;
 }

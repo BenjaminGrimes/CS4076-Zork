@@ -20,6 +20,7 @@ public:
     void onDeath();
 
     string getDescription();
+    string getName();
 
     Enemy &operator++(); // Prefix increment
     Enemy operator++(int); // Postfix increment

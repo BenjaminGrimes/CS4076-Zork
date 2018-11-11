@@ -162,9 +162,9 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
 
     QGridLayout *p_info_grid = new QGridLayout;
     //p_info_grid->addWidget(label, 0, 0, 1, 1);
-    p_info_grid->addWidget(health_status_bar, 0, 0, 1, 2);
-    p_info_grid->addWidget(name_title_label, 1, 0, 1, 1);
-    p_info_grid->addWidget(name_label, 1, 1, 1, 1);
+    p_info_grid->addWidget(name_title_label, 0, 0, 1, 1);
+    p_info_grid->addWidget(name_label, 0, 1, 1, 1);
+    p_info_grid->addWidget(health_status_bar, 1, 0, 1, 2);
     p_info_grid->addWidget(age_title_label, 2, 0, 1 ,1);
     p_info_grid->addWidget(age_label, 2, 1, 1, 1);
     p_info_grid->addWidget(sex_title_label, 3, 0, 1, 1);
@@ -312,15 +312,26 @@ void MainWindow::updateRoomItems()
     current_room = zUL.getCurrentRoom();
     itemsInRoom = current_room->getItemsInRoom();
 
-    unsigned int i = 0;
-    for(Item item : *itemsInRoom)
+    if(current_room->getItemsInRoom()->size() == 0)
     {
-        cout << item.getShortDescription() << endl;
-        QCheckBox *temp_cbox = new QCheckBox;
-        room_items_checkboxes.push_back(temp_cbox);
-        temp_cbox->setText(QString::fromStdString(item.getShortDescription()));
-        room_items_container->addWidget(room_items_checkboxes.at(i));
-        ++i;
+        take_item_btn->setEnabled(false);
+        take_item_btn->setToolTip("No items to take");
+    }
+    else
+    {
+        take_item_btn->setEnabled(true);
+        take_item_btn->setToolTip("");
+
+        unsigned int i = 0;
+        for(Item item : *itemsInRoom)
+        {
+            cout << item.getShortDescription() << endl;
+            QCheckBox *temp_cbox = new QCheckBox;
+            room_items_checkboxes.push_back(temp_cbox);
+            temp_cbox->setText(QString::fromStdString(item.getShortDescription()));
+            room_items_container->addWidget(room_items_checkboxes.at(i));
+            ++i;
+        }
     }
 }
 
@@ -390,8 +401,13 @@ void MainWindow::updateCombatField()
 
         // Start combat
 
+        // Enable Enemy info widgets
         enemy_name_label->setVisible(true);
         enemy_status_bar->setVisible(true);
+
+        // Set widgets
+        enemy_name_label->setText("Name: " + QString::fromStdString(zUL.currentRoom->getEnemy()->getName()));
+        enemy_health_bar->setValue(zUL.currentRoom->getEnemy()->getHealth());
 
 
         // disable nav buttons
