@@ -48,6 +48,8 @@ private slots:
 
     void take_item_btn_onclick();
 
+    void attack_btn_onclick();
+
 private:
     Ui::MainWindow *ui;
 
@@ -103,10 +105,12 @@ private:
 
     // ------ Story Group Widgets ----------
     QTextBrowser *story_text_browser;
-    QPushButton *take_item_btn;
     vector<Item>* itemsInRoom;
     vector<QCheckBox*> room_items_checkboxes;
     QVBoxLayout *room_items_container;
+    QPushButton *take_item_btn;
+    QVBoxLayout *combat_container;
+    QPushButton *attack_btn;
     // -------------------------------------
 
     void setUpLayout();

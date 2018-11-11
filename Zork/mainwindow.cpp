@@ -71,7 +71,7 @@ void MainWindow::createStatusBar()
 
 QGroupBox* MainWindow::createMapGroup()
 {
-    QGroupBox *groupBox = new QGroupBox(tr("Map Group"));
+    QGroupBox *groupBox = new QGroupBox(tr("Map"));
     QLabel *label = new QLabel;
     label->setText("MAP");
     QVBoxLayout *vbox = new QVBoxLayout;
@@ -90,22 +90,26 @@ QGroupBox* MainWindow::createMapGroup()
 
 QGroupBox* MainWindow::createStoryGroup()
 {
-    QGroupBox *groupBox = new QGroupBox(tr("Story Group"));
+    QGroupBox *groupBox = new QGroupBox(tr("Story"));
 
     story_text_browser = new QTextBrowser;
 
+    combat_container = new QVBoxLayout;
+
+    attack_btn = new QPushButton("Attack", this);
+    connect(attack_btn, SIGNAL(released()), this, SLOT(attack_btn_onclick()));
+
     room_items_container = new QVBoxLayout;
-    //QCheckBox *temp_cbox = new QCheckBox;
-    //temp_cbox->setText("Temp box");
-    //room_items_container->addWidget(temp_cbox);
 
     take_item_btn = new QPushButton("Take item(s)", this);
     connect(take_item_btn, SIGNAL(released()), this, SLOT(take_item_btn_onclick()));
 
     QGridLayout *story_grid = new QGridLayout;
-    story_grid->addWidget(story_text_browser, 0, 0, 2, 2);
-    story_grid->addLayout(room_items_container, 0, 2, 2, 1);
-    story_grid->addWidget(take_item_btn, 2, 2, 1, 1);
+    story_grid->addWidget(story_text_browser, 0, 0, 2, 3);
+    story_grid->addLayout(combat_container, 2, 0, 2, 2);
+    story_grid->addWidget(attack_btn, 4, 0, 1, 2);
+    story_grid->addLayout(room_items_container, 2, 2, 2, 1);
+    story_grid->addWidget(take_item_btn, 4, 2, 1, 1);
 
     groupBox->setLayout(story_grid);
     return groupBox;
@@ -113,7 +117,7 @@ QGroupBox* MainWindow::createStoryGroup()
 
 QGroupBox* MainWindow::createPlayerInfoGroup()
 {
-    QGroupBox *groupBox = new QGroupBox(tr("Player Info Group"));
+    QGroupBox *groupBox = new QGroupBox(tr("Player Info"));
     QLabel *label = new QLabel;
     label->setText("Health:");
 
@@ -157,7 +161,7 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
 
 QGroupBox* MainWindow::createInventoryGroup()
 {
-    QGroupBox *groupBox = new QGroupBox(tr("Inventory Group"));
+    QGroupBox *groupBox = new QGroupBox(tr("Inventory"));
 
     listWidget = new QListWidget(this);
     listWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -177,7 +181,7 @@ QGroupBox* MainWindow::createInventoryGroup()
 
 QGroupBox* MainWindow::createNavigationGroup()
 {
-    QGroupBox *groupBox = new QGroupBox(tr("Navigation Group"));
+    QGroupBox *groupBox = new QGroupBox(tr("Navigation"));
 
     current_room_label = new QLabel(this);
 
@@ -458,6 +462,11 @@ void MainWindow::take_item_btn_onclick()
     updateRoomItems();
     updateInventory();
     updatePlayerInfo();
+}
+
+void MainWindow::attack_btn_onclick()
+{
+    cout << "Attack pressed..." << endl;
 }
 
 void MainWindow::goDirection(QString direction)
