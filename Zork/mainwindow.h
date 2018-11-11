@@ -127,6 +127,8 @@ private:
     void updateRoomItems();
     void updateInventory();
     void updatePlayerInfo();
+    void updateCombatField();
+
     void goDirection(QString direction);
 };
 

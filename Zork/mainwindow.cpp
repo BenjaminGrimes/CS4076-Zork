@@ -39,6 +39,7 @@ void MainWindow::setUpLayout()
     updateStoryText();
     updateNavButtons();
     updateRoomItems();
+    updateCombatField();
 }
 
 void MainWindow::createActions()
@@ -330,14 +331,6 @@ void MainWindow::updateInventory()
 
 void MainWindow::updatePlayerInfo()
 {
-    /*
-    zUL.player--;
-    zUL.player--;
-    --zUL.player;
-    --zUL.player;
-    ++zUL.player;
-    zUL.player++;
-    */
     cout << "Updating player info..." << endl;
     cout << "Player health: " << zUL.player.getHealth() << endl;
 
@@ -367,6 +360,27 @@ void MainWindow::updatePlayerInfo()
     else
     {
         player_health_bar->setValue(zUL.player.getHealth());
+    }
+}
+
+void MainWindow::updateCombatField()
+{
+    if(zUL.currentRoom->isEnemyInRoom())
+    {
+        if(attack_btn->isEnabled() == false)
+        {
+            attack_btn->setEnabled(true);
+            attack_btn->setToolTip("");
+        }
+
+        // Start combat
+        // disable nav buttons
+
+    }
+    else
+    {
+        attack_btn->setEnabled(false);
+        attack_btn->setToolTip("No enemy in current room");
     }
 }
 
@@ -405,7 +419,6 @@ void MainWindow::west_btn_onclick()
 
 void MainWindow::use_item_btn_onclick()
 {
-    // TODO remove item from player inventory
     // https://forum.qt.io/topic/91040/how-do-i-check-the-state-of-a-qlistwidget-s-item-s-radiobuttons/3
     for(int i = 0; i < listWidget->count(); i++)
     {
@@ -488,6 +501,7 @@ void MainWindow::goDirection(QString direction)
     updateStoryText();
     updateNavButtons();
     updateRoomItems();
+    updateCombatField();
 
     //QMessageBox mBox(this);
     //QString mBox_title = "Current Room";
