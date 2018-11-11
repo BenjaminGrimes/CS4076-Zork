@@ -97,6 +97,20 @@ QGroupBox* MainWindow::createStoryGroup()
 
     combat_container = new QVBoxLayout;
 
+    QLabel *enemy_health_label = new QLabel("Enemy Health:", this);
+
+    enemy_name_label = new QLabel("Enemy Name:", this);
+    enemy_health_bar = new QProgressBar(this);
+    enemy_health_bar->setRange(0, 100);
+    enemy_health_bar->setValue(50);
+
+    enemy_status_bar = new QStatusBar(this);
+    enemy_status_bar->addPermanentWidget(enemy_health_label, 1);
+    enemy_status_bar->addPermanentWidget(enemy_health_bar, 4);
+
+    combat_container->addWidget(enemy_name_label);
+    combat_container->addWidget(enemy_status_bar);
+
     attack_btn = new QPushButton("Attack", this);
     connect(attack_btn, SIGNAL(released()), this, SLOT(attack_btn_onclick()));
 
@@ -287,6 +301,7 @@ void MainWindow::updateStoryText()
 
 void MainWindow::updateRoomItems()
 {
+    // TODO Disable take button if no items in the room.
     // Clear and delete checkboxes
     while (auto item = room_items_container->takeAt(0)) {
           delete item->widget();
@@ -374,13 +389,38 @@ void MainWindow::updateCombatField()
         }
 
         // Start combat
-        // disable nav buttons
 
+        enemy_name_label->setVisible(true);
+        enemy_status_bar->setVisible(true);
+
+
+        // disable nav buttons
+        north_btn->setEnabled(false);
+        north_btn->setToolTip("Cannot go to room, you are in combat");
+        north_btn->setChecked(false);
+
+        east_btn->setEnabled(false);
+        east_btn->setToolTip("Cannot go to room, you are in combat");
+        east_btn->setChecked(false);
+
+        south_btn->setEnabled(false);
+        south_btn->setToolTip("Cannot go to room, you are in combat");
+        south_btn->setChecked(false);
+
+        west_btn->setEnabled(false);
+        west_btn->setToolTip("Cannot go to room, you are in combat");
+        west_btn->setChecked(false);
     }
     else
     {
-        attack_btn->setEnabled(false);
-        attack_btn->setToolTip("No enemy in current room");
+        if(attack_btn->isEnabled())
+        {
+            attack_btn->setEnabled(false);
+            attack_btn->setToolTip("No enemy in current room");
+        }
+
+        enemy_name_label->setVisible(false);
+        enemy_status_bar->setVisible(false);
     }
 }
 

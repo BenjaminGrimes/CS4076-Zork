@@ -110,6 +110,9 @@ private:
     QVBoxLayout *room_items_container;
     QPushButton *take_item_btn;
     QVBoxLayout *combat_container;
+    QLabel *enemy_name_label;
+    QProgressBar *enemy_health_bar;
+    QStatusBar *enemy_status_bar;
     QPushButton *attack_btn;
     // -------------------------------------
 
