@@ -48,10 +48,6 @@ private slots:
 
     void take_item_btn_onclick();
 
-    // ------- Menus ------
-    void restart();
-    // --------------------
-
 private:
     Ui::MainWindow *ui;
 
@@ -65,7 +61,6 @@ private:
 
     // ----- Menus ------------
     void createActions();
-    void createMenus();
     void createStatusBar();
 
     QMenu *gameMenu;
@@ -114,11 +109,6 @@ private:
     QVBoxLayout *room_items_container;
     // -------------------------------------
 
-
-    // ------ Image Group Widgets ----------
-
-    // -------------------------------------
-
     void setUpLayout();
 
     QGroupBox* createNavigationGroup();
@@ -126,7 +116,6 @@ private:
     QGroupBox* createMapGroup();
     QGroupBox* createInventoryGroup();
     QGroupBox* createStoryGroup();
-    QGroupBox* createImageGroup();
 
     void updateNavButtons();
     void updateRoomLabel();

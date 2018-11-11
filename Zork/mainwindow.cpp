@@ -21,9 +21,9 @@ void MainWindow::setUpLayout()
 {
     grid = new QGridLayout;
     // these are temp cells for groups
-    grid->addWidget(createImageGroup(), 0, 0, 1, 2);
+    //grid->addWidget(createImageGroup(), 0, 0, 1, 2);
+    grid->addWidget(createStoryGroup(), 0, 0, 2, 2);
     grid->addWidget(createMapGroup(), 0, 2, 2, 1);
-    grid->addWidget(createStoryGroup(), 1, 0, 1, 2);
     grid->addWidget(createPlayerInfoGroup(), 3, 0);
     grid->addWidget(createInventoryGroup(), 3, 1);
     grid->addWidget(createNavigationGroup(), 3,2);
@@ -34,7 +34,6 @@ void MainWindow::setUpLayout()
     setCentralWidget(central);
 
     createActions();
-    createMenus();
 
     updateRoomLabel();
     updateStoryText();
@@ -51,7 +50,7 @@ void MainWindow::createActions()
     restartAct = new QAction(restartIcon, tr("Restart"), this);
     restartAct->setShortcut((QKeySequence::New));
     restartAct->setStatusTip("Restart the game");
-    connect(restartAct, &QAction::triggered, this, &MainWindow::restart);
+    //connect(restartAct, &QAction::triggered, this, &MainWindow::restart);
     gameMenu->addAction(restartAct);
     gameToolBar->addAction(restartAct);
 
@@ -65,42 +64,9 @@ void MainWindow::createActions()
     gameToolBar->addAction(exitAct);
 }
 
-
-void MainWindow::createMenus()
-{
-
-}
-
 void MainWindow::createStatusBar()
 {
     statusBar()->showMessage(tr("Ready"));
-}
-
-void MainWindow::restart()
-{
-    // TODO implement restart function
-    cout << "Restarting..." << endl;
-
-    //https://wiki.qt.io/How_to_make_an_Application_restartable
-
-}
-
-QGroupBox* MainWindow::createImageGroup()
-{
-    QGroupBox *groupBox = new QGroupBox(tr("Image Group"));
-    QLabel *label = new QLabel;
-    label->setText("IMAGE");
-    QVBoxLayout *vbox = new QVBoxLayout;
-    //vbox->addWidget(label);
-
-    QLabel *imageLabel = new QLabel;
-    QImage image(":/TestImage1.jpg");
-    imageLabel->setPixmap(QPixmap::fromImage(image).scaled(100, 100, Qt::KeepAspectRatio));
-
-    vbox->addWidget(imageLabel);
-
-    groupBox->setLayout(vbox);
-    return groupBox;
 }
 
 QGroupBox* MainWindow::createMapGroup()
