@@ -29,6 +29,7 @@ void ZorkUL::createRooms()
         b->addItem(new Item("yy", 4, 44));
 	c = new Room("c");
 	d = new Room("d");
+        d->addEnemy(new Enemy());
 	e = new Room("e");
 	f = new Room("f");
 	g = new Room("g");

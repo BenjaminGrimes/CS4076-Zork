@@ -5,6 +5,7 @@
 Room::Room(string description)
 {
 	this->description = description;
+    enemyInRoom = false;
 }
 
 void Room::setExits(Room *north, Room *east, Room *south, Room *west)
@@ -55,7 +56,7 @@ string Room::shortDescription()
 
 string Room::longDescription()
 {
-	return "room = " + description + ".\n" + displayItem() + exitString();
+    return "room = " + description + ".\n" + displayItem() + "\n" + displayEnemy() + exitString() + "\n";
 }
 
 string Room::exitString()
@@ -76,8 +77,6 @@ Room* Room::nextRoom(string direction)
 
 void Room::addItem(Item *inItem)
 {
-    //cout <<endl;
-    //cout << "Just added" + inItem->getLongDescription();
     itemsInRoom.push_back(*inItem);
 }
 
@@ -105,6 +104,22 @@ string Room::displayItem()
             x++;
         }
     }
+    return tempString;
+}
+
+string Room::displayEnemy()
+{
+    string tempString;
+    if(isEnemyInRoom())
+    {
+        cout << "enemy here" << endl;
+        tempString = enemy.getDescription();
+    }
+    else
+    {
+        tempString = "No enemy in room.";
+    }
+
     return tempString;
 }
 
@@ -146,4 +161,21 @@ vector<bool> Room::getExits()
 vector<Item>* Room::getItemsInRoom()
 {
     return &itemsInRoom;
+}
+
+bool Room::isEnemyInRoom()
+{
+    return enemyInRoom;
+}
+
+void Room::addEnemy(Enemy* enemy)
+{
+    cout << "Adding enemy..." << endl;
+    enemyInRoom = true;
+    this->enemy = *enemy;
+}
+
+Enemy* Room::getEnemy()
+{
+    return &enemy;
 }

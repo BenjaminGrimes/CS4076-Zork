@@ -15,9 +15,11 @@ private:
     string name;
 
 public:
-    Enemy(int health);
+    Enemy();
 
     void onDeath();
+
+    string getDescription();
 
     Enemy &operator++(); // Prefix increment
     Enemy operator++(int); // Postfix increment

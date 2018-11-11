@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(int health) : Character (health)
+Enemy::Enemy() : Character (MAX_HEALTH)
 {
 
 }
@@ -56,4 +56,10 @@ Enemy Enemy::operator--(int)
         health = MIN_HEALTH;
 
     return *this;
+}
+
+string Enemy::getDescription()
+{
+    string temp = "Enemy is here! Health = " + std::to_string(health);
+    return temp;
 }
