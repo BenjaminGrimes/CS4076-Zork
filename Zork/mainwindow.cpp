@@ -108,8 +108,15 @@ QGroupBox* MainWindow::createStoryGroup()
     enemy_status_bar->addPermanentWidget(enemy_health_label, 1);
     enemy_status_bar->addPermanentWidget(enemy_health_bar, 4);
 
+    use_sword_radio = new QRadioButton("Attack using weapon", this);
+    use_magic_radio = new QRadioButton("Attack using magic", this);
+
+    use_sword_radio->setChecked(true);
+
     combat_container->addWidget(enemy_name_label);
     combat_container->addWidget(enemy_status_bar);
+    combat_container->addWidget(use_sword_radio);
+    combat_container->addWidget(use_magic_radio);
 
     attack_btn = new QPushButton("Attack", this);
     connect(attack_btn, SIGNAL(released()), this, SLOT(attack_btn_onclick()));
@@ -404,11 +411,13 @@ void MainWindow::updateCombatField()
         // Enable Enemy info widgets
         enemy_name_label->setVisible(true);
         enemy_status_bar->setVisible(true);
+        use_sword_radio->setVisible(true);
+        use_magic_radio->setVisible(true);
 
         // Set widgets
         enemy_name_label->setText("Name: " + QString::fromStdString(zUL.currentRoom->getEnemy()->getName()));
         enemy_health_bar->setValue(zUL.currentRoom->getEnemy()->getHealth());
-
+        use_sword_radio->setChecked(true);
 
         // disable nav buttons
         north_btn->setEnabled(false);
@@ -437,6 +446,8 @@ void MainWindow::updateCombatField()
 
         enemy_name_label->setVisible(false);
         enemy_status_bar->setVisible(false);
+        use_sword_radio->setVisible(false);
+        use_magic_radio->setVisible(false);
     }
 }
 

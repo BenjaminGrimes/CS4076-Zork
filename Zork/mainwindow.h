@@ -113,6 +113,8 @@ private:
     QLabel *enemy_name_label;
     QProgressBar *enemy_health_bar;
     QStatusBar *enemy_status_bar;
+    QRadioButton *use_sword_radio;
+    QRadioButton *use_magic_radio;
     QPushButton *attack_btn;
     // -------------------------------------
 
