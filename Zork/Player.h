@@ -17,6 +17,7 @@ class Player : public Character
 {
 private:
     string name;
+    int magic_level;
     int age;
     string sex;
     vector<Item> inventory;

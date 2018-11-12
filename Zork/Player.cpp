@@ -2,7 +2,7 @@
 
 Player::Player(int health) : Character (health)
 {
-
+    magic_level = 50;
 }
 
 void Player::addItemToInvetory(Item &item)
