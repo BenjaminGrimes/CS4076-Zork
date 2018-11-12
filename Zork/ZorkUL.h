@@ -36,6 +36,10 @@ public:
     Room* getCurrentRoom();
     string getCurrentRoomName();
     string getCurrentRoomDescription();
+    template <typename T> T getRandom(T num){
+        qsrand(time(NULL));
+        return qrand()%num;
+    }
 
 	string go(string direction);
 };

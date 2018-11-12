@@ -36,7 +36,8 @@ SOURCES += \
     ZorkUL.cpp \
     Enemy.cpp \
     Player.cpp \
-    startmenuwindow.cpp
+    startmenuwindow.cpp \
+    weapon.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -49,7 +50,8 @@ HEADERS += \
     ZorkUL.h \
     Enemy.h \
     Player.h \
-    startmenuwindow.h
+    startmenuwindow.h \
+    weapon.h
 
 FORMS += \
         mainwindow.ui \

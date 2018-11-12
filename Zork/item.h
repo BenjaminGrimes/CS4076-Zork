@@ -8,7 +8,7 @@ using namespace std;
 
 class Item {
 private:
-	string description;
+
 	string longDescription;
 	int weightGrams;
 	float value;
@@ -16,6 +16,7 @@ private:
 
 public:
     Item (string description, int inWeight, float inValue);
+    string description;
     Item (string description);
 	string getShortDescription();
     string getLongDescription();

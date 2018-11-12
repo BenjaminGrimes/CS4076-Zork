@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include <weapon.h>
 Player::Player(int health) : Character (health)
 {
     magic_level = 50;
