@@ -2,7 +2,7 @@
 
 using namespace std;
 #include "ZorkUL.h"
-
+#include <weapon.h>
 /*
 int main(int argc, char argv[])
 {
@@ -28,6 +28,7 @@ void ZorkUL::createRooms()
         b->addItem(new Item("xx", 3, 33));
         b->addItem(new Item("yy", 4, 44));
 	c = new Room("c");
+        c -> addItem(new weapon("Sword",getRandom<int>(100),getRandom<int>(100)));
 	d = new Room("d");
         d->addEnemy(new Enemy());
 	e = new Room("e");
