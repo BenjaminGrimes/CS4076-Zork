@@ -547,6 +547,15 @@ void MainWindow::take_item_btn_onclick()
 void MainWindow::attack_btn_onclick()
 {
     cout << "Attack pressed..." << endl;
+    if(use_sword_radio->isChecked())
+    {
+        cout << "use weapon..." << endl;
+
+    }
+    else if(use_magic_radio->isChecked())
+    {
+        cout << "use magic..." << endl;
+    }
 }
 
 void MainWindow::goDirection(QString direction)

@@ -2,6 +2,7 @@
 #include <weapon.h>
 Player::Player(int health) : Character (health)
 {
+    //player_weapon = new weapon("Sword", 10, 10);
     magic_level = 50;
 }
 

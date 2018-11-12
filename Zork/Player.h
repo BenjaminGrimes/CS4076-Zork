@@ -7,6 +7,7 @@
 #include <QString>
 #include <string>
 #include <QMessageBox>
+#include "weapon.h"
 
 using std::string;
 
@@ -21,6 +22,7 @@ private:
     int age;
     string sex;
     vector<Item> inventory;
+    //weapon *player_weapon;
 
 public:
     Player(int health);
