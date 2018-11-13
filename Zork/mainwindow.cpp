@@ -580,15 +580,16 @@ void MainWindow::take_item_btn_onclick()
 void MainWindow::attack_btn_onclick()
 {
     cout << "Attack pressed..." << endl;
+    attack_btn->setDefault(false);
     if(use_sword_radio->isChecked())
     {
         cout << "use weapon..." << endl;
         Enemy &e = zUL.getCurrentRoom()->getEnemy();
-        --e;
+        e -= zUL.player.getWeaponDamage();
         updateCombatField();
         if(e.getHealth() > 0)
         {
-            zUL.player--;
+            zUL.player -= e.getDamage();
             updatePlayerInfo();
         }
         else
