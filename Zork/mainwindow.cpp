@@ -101,6 +101,9 @@ QGroupBox* MainWindow::createStoryGroup()
 
     enemy_name_label = new QLabel("Enemy Name:", this);
     enemy_health_bar = new QProgressBar(this);
+    enemy_health_bar->setStyleSheet("QProgressBar::chunk "
+                                    "{ background-color: rgb(255, 100, 0); }"
+                                    "QProgressBar { text-align: center; }");
     enemy_health_bar->setRange(0, 100);
     enemy_health_bar->setValue(50);
 
@@ -143,6 +146,7 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
     label->setText("Health:");
 
     player_health_bar = new QProgressBar(this);
+    player_health_bar->setStyleSheet("QProgressBar { text-align: center; }");
     player_health_bar->setRange(MIN_HEALTH, MAX_HEALTH);
     player_health_bar->setValue(zUL.player.getHealth());
 
@@ -150,11 +154,12 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
     health_status_bar->addPermanentWidget(label, 1);
     health_status_bar->addPermanentWidget(player_health_bar, 4);
 
+    cout << QApplication::style() << endl;
+
     player_magic_bar = new QProgressBar(this);
     player_magic_bar->setStyleSheet("QProgressBar::chunk "
                                     "{ background-color: rgb(0, 100, 255); }"
                                     "QProgressBar { text-align: center; }");
-    player_magic_bar->setFormat("%v%");
     player_magic_bar->setRange(MIN_MAGIC_LEVEL, MAX_MAGIC_LEVEL);
     player_magic_bar->setValue(zUL.player.getMagicLevel());
 
