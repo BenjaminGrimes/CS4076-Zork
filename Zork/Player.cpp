@@ -2,14 +2,13 @@
 #include <weapon.h>
 Player::Player(int health) : Character (health)
 {
-    //player_weapon = new weapon("Sword", 10, 10);
     magic_level = 50;
+    magic_dmg = 15;
 }
 
 void Player::addItemToInvetory(Item &item)
 {
     // TODO validate item
-    p_weapon = new weapon("Sword", 1, 1);
     inventory.push_back(item);
 }
 
@@ -21,14 +20,6 @@ void Player::removeItemFromInventory(int pos)
     {
         cout << inventory.at(i).getShortDescription() << endl;
     }
-    /*for(int i = 0; i < inventory.size(); i++)
-    {
-        // TODO Check if items are the same
-        if(&inventory.at(i) == &item)
-            cout << "Found item" << endl;
-        else
-            cout << &inventory.at(i) << " != " << &item << endl;
-    }*/
 }
 
 void Player::setPlayerInfo(QString name, int age, QString sex)
@@ -66,6 +57,17 @@ int Player::getMagicLevel()
     return magic_level;
 }
 
+int Player::getMagicDamage()
+{
+    return magic_dmg;
+}
+
+int Player::getWeaponDamage()
+{
+    //return p_weapon.getWeaponDamage();
+    return 10;
+}
+
 void Player::onDeath()
 {
     // TODO show game over screen
@@ -73,46 +75,58 @@ void Player::onDeath()
 
 Player &Player::operator++()
 {
-    health += 10;
+    magic_level += 10;
 
-    if(health > MAX_HEALTH)
-        health = MAX_HEALTH;
-    if(health < MIN_HEALTH)
-        health = MIN_HEALTH;
+    if(magic_level > MAX_MAGIC_LEVEL)
+        magic_level = MAX_MAGIC_LEVEL;
 
     return *this;
 }
 
 Player Player::operator++( int )
 {
-    health += 10;
+    magic_level += 10;
 
-    if(health > MAX_HEALTH)
-        health = MAX_HEALTH;
-    if(health < MIN_HEALTH)
-        health = MIN_HEALTH;
+    if(magic_level > MAX_MAGIC_LEVEL)
+        magic_level = MAX_MAGIC_LEVEL;
 
     return *this;
 }
 
 Player &Player::operator--()
 {
-    health -= 10;
+    magic_level -= 10;
 
-    if(health > MAX_HEALTH)
-        health = MAX_HEALTH;
-    if(health < MIN_HEALTH)
-        health = MIN_HEALTH;
+    if(magic_level < MIN_MAGIC_LEVEL)
+        magic_level = MIN_MAGIC_LEVEL;
 
     return *this;
 }
 
 Player Player::operator--(int)
 {
-    health -= 10;
+    magic_level -= 10;
+
+    if(magic_level < MIN_MAGIC_LEVEL)
+        magic_level = MIN_MAGIC_LEVEL;
+
+    return *this;
+}
+
+Player Player::operator+=(const int num)
+{
+    health += num;
 
     if(health > MAX_HEALTH)
         health = MAX_HEALTH;
+
+    return *this;
+}
+
+Player Player::operator-=(const int num)
+{
+    health -= num;
+
     if(health < MIN_HEALTH)
         health = MIN_HEALTH;
 

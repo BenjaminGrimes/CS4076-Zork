@@ -22,10 +22,11 @@ class Player : public Character
 private:
     string name;
     int magic_level;
+    int magic_dmg;
     int age;
     string sex;
     vector<Item> inventory;
-    Item *p_weapon;
+    //weapon p_weapon;
 
 public:
     Player(int health);
@@ -38,6 +39,8 @@ public:
     int getAge();
     string getSex();
     int getMagicLevel();
+    int getMagicDamage();
+    int getWeaponDamage();
 
     void onDeath();
 
@@ -45,6 +48,9 @@ public:
     Player operator++(int); // Postfix increment
     Player &operator--(); // Prefix decrement
     Player operator--(int); // Postfix decrement
+
+    Player operator+=(const int num);
+    Player operator-=(const int num);
 };
 
 #endif // PLAYER_H

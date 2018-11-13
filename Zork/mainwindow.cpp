@@ -410,6 +410,7 @@ void MainWindow::updatePlayerInfo()
     else
     {
         player_health_bar->setValue(zUL.player.getHealth());
+        player_magic_bar->setValue(zUL.player.getMagicLevel());
     }
 }
 
@@ -599,19 +600,24 @@ void MainWindow::attack_btn_onclick()
     else if(use_magic_radio->isChecked())
     {
         // check if magic left
-        cout << "use magic..." << endl;
-        Enemy &e = zUL.getCurrentRoom()->getEnemy();
-        --e;
-        updateCombatField();
-        if(e.getHealth() > 0)
+        if(zUL.player.getMagicLevel() > 0)
         {
-            zUL.player--;
-            updatePlayerInfo();
-        }
-        else
-        {
-            current_room->removeEnemy();
+            cout << "use magic..." << endl;
+            Enemy &e = zUL.getCurrentRoom()->getEnemy();
+            e -= zUL.player.getMagicDamage();
             updateCombatField();
+
+            zUL.player--;
+            if(e.getHealth() > 0)
+            {
+                zUL.player -= e.getDamage();
+                updatePlayerInfo();
+            }
+            else
+            {
+                current_room->removeEnemy();
+                updateCombatField();
+            }
         }
     }
 }
