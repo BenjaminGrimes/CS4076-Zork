@@ -110,7 +110,6 @@ QGroupBox* MainWindow::createStoryGroup()
 
     use_sword_radio = new QRadioButton("Attack using weapon", this);
     use_magic_radio = new QRadioButton("Attack using magic", this);
-
     use_sword_radio->setChecked(true);
 
     combat_container->addWidget(enemy_name_label);

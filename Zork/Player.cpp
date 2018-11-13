@@ -9,7 +9,7 @@ Player::Player(int health) : Character (health)
 void Player::addItemToInvetory(Item &item)
 {
     // TODO validate item
-
+    p_weapon = new weapon("Sword", 1, 1);
     inventory.push_back(item);
 }
 

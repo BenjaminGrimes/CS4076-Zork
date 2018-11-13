@@ -13,7 +13,6 @@ private:
     int weapon_level;
 public:
     weapon(string des ,int in_damage, int in_durability );
-    weapon( int in_damage, int in_durability , int in_level);
     int getWeaponDamage();
     int getWeaponLevel();
     int getWeaponDurability();
