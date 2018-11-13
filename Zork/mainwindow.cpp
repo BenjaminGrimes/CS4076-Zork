@@ -582,7 +582,19 @@ void MainWindow::attack_btn_onclick()
     if(use_sword_radio->isChecked())
     {
         cout << "use weapon..." << endl;
-
+        Enemy &e = zUL.getCurrentRoom()->getEnemy();
+        --e;
+        updateCombatField();
+        if(e.getHealth() > 0)
+        {
+            zUL.player--;
+            updatePlayerInfo();
+        }
+        else
+        {
+            current_room->removeEnemy();
+            updateCombatField();
+        }
     }
     else if(use_magic_radio->isChecked())
     {
