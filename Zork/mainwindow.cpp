@@ -142,13 +142,25 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
     QLabel *label = new QLabel;
     label->setText("Health:");
 
-    player_health_bar = new QProgressBar;
-    player_health_bar->setRange(0, 100);
+    player_health_bar = new QProgressBar(this);
+    player_health_bar->setRange(MIN_HEALTH, MAX_HEALTH);
     player_health_bar->setValue(zUL.player.getHealth());
 
-    health_status_bar = new QStatusBar;
+    health_status_bar = new QStatusBar(this);
     health_status_bar->addPermanentWidget(label, 1);
     health_status_bar->addPermanentWidget(player_health_bar, 4);
+
+    player_magic_bar = new QProgressBar(this);
+    player_magic_bar->setStyleSheet("QProgressBar::chunk "
+                                    "{ background-color: rgb(0, 100, 255); }"
+                                    "QProgressBar { text-align: center; }");
+    player_magic_bar->setFormat("%v%");
+    player_magic_bar->setRange(MIN_MAGIC_LEVEL, MAX_MAGIC_LEVEL);
+    player_magic_bar->setValue(zUL.player.getMagicLevel());
+
+    magic_status_bar = new QStatusBar(this);
+    magic_status_bar->addPermanentWidget(new QLabel("Magic Level:"), 1);
+    magic_status_bar->addPermanentWidget(player_magic_bar, 4);
 
     QLabel *name_title_label = new QLabel;
     name_title_label->setText("Name:");
@@ -175,6 +187,7 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
     p_info_grid->addWidget(age_label, 2, 1, 1, 1);
     p_info_grid->addWidget(sex_title_label, 3, 0, 1, 1);
     p_info_grid->addWidget(sex_label, 3, 1, 1, 1);
+    p_info_grid->addWidget(magic_status_bar, 4, 0, 1, 2);
 
     groupBox->setLayout(p_info_grid);
     return groupBox;

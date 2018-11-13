@@ -61,6 +61,11 @@ string Player::getSex()
     return sex;
 }
 
+int Player::getMagicLevel()
+{
+    return magic_level;
+}
+
 void Player::onDeath()
 {
     // TODO show game over screen

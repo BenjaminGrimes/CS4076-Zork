@@ -95,6 +95,8 @@ private:
     // ------ Player Info Group Widgets ----
     QProgressBar *player_health_bar;
     QStatusBar *health_status_bar;
+    QProgressBar *player_magic_bar;
+    QStatusBar *magic_status_bar;
     // -------------------------------------
 
 

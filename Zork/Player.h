@@ -14,6 +14,9 @@ using std::string;
 #define MAX_HEALTH 100
 #define MIN_HEALTH 0
 
+#define MAX_MAGIC_LEVEL 100
+#define MIN_MAGIC_LEVEL 0
+
 class Player : public Character
 {
 private:
@@ -34,6 +37,8 @@ public:
     string getName();
     int getAge();
     string getSex();
+    int getMagicLevel();
+
     void onDeath();
 
     Player &operator++(); // Prefix increment
