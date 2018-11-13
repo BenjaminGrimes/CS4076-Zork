@@ -39,7 +39,8 @@ public:
     vector<bool> getExits();
     bool isEnemyInRoom();
     void addEnemy(Enemy *enemy);
-    Enemy* getEnemy();
+    void removeEnemy();
+    Enemy& getEnemy();
     string displayEnemy();
 };
 

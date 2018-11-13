@@ -36,24 +36,20 @@ Enemy Enemy::operator++(int)
 
 Enemy &Enemy::operator--()
 {
-    health -= 10;
+    setHealth(getHealth()-10);
 
+    /*
     if(health > MAX_HEALTH)
         health = MAX_HEALTH;
     if(health < MIN_HEALTH)
         health = MIN_HEALTH;
-
+    */
     return *this;
 }
 
 Enemy Enemy::operator--(int)
 {
-    health -= 10;
-
-    if(health > MAX_HEALTH)
-        health = MAX_HEALTH;
-    if(health < MIN_HEALTH)
-        health = MIN_HEALTH;
+    setHealth(getHealth()-10);
 
     return *this;
 }

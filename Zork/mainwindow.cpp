@@ -417,6 +417,7 @@ void MainWindow::updateCombatField()
 {
     if(zUL.currentRoom->isEnemyInRoom())
     {
+        cout << "Enemy in room..." << endl;
         if(attack_btn->isEnabled() == false)
         {
             attack_btn->setEnabled(true);
@@ -432,8 +433,8 @@ void MainWindow::updateCombatField()
         use_magic_radio->setVisible(true);
 
         // Set widgets
-        enemy_name_label->setText("Name: " + QString::fromStdString(zUL.currentRoom->getEnemy()->getName()));
-        enemy_health_bar->setValue(zUL.currentRoom->getEnemy()->getHealth());
+        enemy_name_label->setText("Name: " + QString::fromStdString(zUL.currentRoom->getEnemy().getName()));
+        enemy_health_bar->setValue(zUL.getCurrentRoom()->getEnemy().getHealth());
         use_sword_radio->setChecked(true);
 
         // disable nav buttons
@@ -465,6 +466,20 @@ void MainWindow::updateCombatField()
         enemy_status_bar->setVisible(false);
         use_sword_radio->setVisible(false);
         use_magic_radio->setVisible(false);
+
+
+        // enable nav buttons
+        north_btn->setEnabled(true);
+        north_btn->setToolTip("");
+
+        east_btn->setEnabled(true);
+        east_btn->setToolTip("");
+
+        south_btn->setEnabled(true);
+        south_btn->setToolTip("");
+
+        west_btn->setEnabled(true);
+        west_btn->setToolTip("");
     }
 }
 
@@ -571,7 +586,21 @@ void MainWindow::attack_btn_onclick()
     }
     else if(use_magic_radio->isChecked())
     {
+        // check if magic left
         cout << "use magic..." << endl;
+        Enemy &e = zUL.getCurrentRoom()->getEnemy();
+        --e;
+        updateCombatField();
+        if(e.getHealth() > 0)
+        {
+            zUL.player--;
+            updatePlayerInfo();
+        }
+        else
+        {
+            current_room->removeEnemy();
+            updateCombatField();
+        }
     }
 }
 

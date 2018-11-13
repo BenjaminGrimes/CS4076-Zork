@@ -175,7 +175,12 @@ void Room::addEnemy(Enemy* enemy)
     this->enemy = *enemy;
 }
 
-Enemy* Room::getEnemy()
+void Room::removeEnemy()
 {
-    return &enemy;
+    enemyInRoom = false;
+}
+
+Enemy& Room::getEnemy()
+{
+    return enemy;
 }
