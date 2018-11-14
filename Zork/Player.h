@@ -27,6 +27,7 @@ private:
     string sex;
     vector<Item> inventory;
     //weapon p_weapon;
+    Item *p_weaponPtr;
 
 public:
     Player(int health);

@@ -17,13 +17,14 @@ private:
 public:
     string description;
 
-    Item (string description, int inWeight, float inValue);
     Item (string description);
-	string getShortDescription();
+    Item (string description, int inWeight, float inValue);
+
+    string getShortDescription();
     string getLongDescription();
 	int getWeight();
 	void setWeight(int weightGrams);
-	float getValue();
+    float getValue();
 	void setValue(float value);
 	int getWeaponCheck();
 	void setWeaponCheck(int weaponCheck);

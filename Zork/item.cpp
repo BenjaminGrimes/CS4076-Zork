@@ -1,16 +1,16 @@
 #include "item.h"
 
-Item::Item (string inDescription, int inWeightGrams, float inValue/**, int weaponCheck*/)
-{
-	description = inDescription;
-	setWeight(inWeightGrams);
-	value = inValue;
-	/**weaponCheck(isWeapon);*/
-}
-
 Item::Item(string inDescription)
 {
-	description = inDescription;
+    description = inDescription;
+}
+
+Item::Item (string inDescription, int inWeightGrams, float inValue/**, int weaponCheck*/)
+{
+    description = inDescription;
+    setWeight(inWeightGrams);
+    value = inValue;
+    /**weaponCheck(isWeapon);*/
 }
 
 void Item::setWeight(int inWeightGrams)

@@ -10,6 +10,7 @@ void Player::addItemToInvetory(Item &item)
 {
     // TODO validate item
     inventory.push_back(item);
+    p_weaponPtr = new weapon("Sword", 10, 10);
 }
 
 void Player::removeItemFromInventory(int pos)

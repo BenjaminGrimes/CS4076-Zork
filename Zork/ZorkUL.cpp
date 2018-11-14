@@ -22,11 +22,11 @@ void ZorkUL::createRooms()
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j;
 
 	a = new Room("a");
-        a->addItem(new Item("x", 1, 11));
-        a->addItem(new Item("y", 2, 22));
+        a->addItem(new Item("x"));
+        a->addItem(new Item("y"));
 	b = new Room("b");
-        b->addItem(new Item("xx", 3, 33));
-        b->addItem(new Item("yy", 4, 44));
+        b->addItem(new Item("xx"));
+        b->addItem(new Item("yy"));
 	c = new Room("c");
         //c -> addItem(new weapon("Sword",getRandom<int>(100),getRandom<int>(100)));
 	d = new Room("d");
