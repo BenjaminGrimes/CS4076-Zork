@@ -6,6 +6,8 @@
 #include <iostream>
 using namespace std;
 
+#define DEFAULT_DAMAGE 0
+
 class Item {
 private:
 
@@ -28,6 +30,7 @@ public:
 	void setValue(float value);
 	int getWeaponCheck();
 	void setWeaponCheck(int weaponCheck);
+    virtual int getDamage();
 };
 
 #endif /*ITEM_H_*/

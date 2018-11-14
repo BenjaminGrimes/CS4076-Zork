@@ -4,13 +4,15 @@ Player::Player(int health) : Character (health)
 {
     magic_level = 50;
     magic_dmg = 15;
+
+    p_weaponPtr = new weapon("Sword", 10, 10);
+    cout << "Weapon damage: " << p_weaponPtr->getDamage() << endl;
 }
 
 void Player::addItemToInvetory(Item &item)
 {
     // TODO validate item
     inventory.push_back(item);
-    p_weaponPtr = new weapon("Sword", 10, 10);
 }
 
 void Player::removeItemFromInventory(int pos)
@@ -65,8 +67,7 @@ int Player::getMagicDamage()
 
 int Player::getWeaponDamage()
 {
-    //return p_weapon.getWeaponDamage();
-    return 10;
+    return p_weaponPtr->getDamage();
 }
 
 void Player::onDeath()

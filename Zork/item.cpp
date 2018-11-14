@@ -47,3 +47,7 @@ string Item::getLongDescription()
 	return " item(s), " + description + ".\n";
 }
 
+int Item::getDamage()
+{
+    return DEFAULT_DAMAGE;
+}

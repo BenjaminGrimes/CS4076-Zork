@@ -20,6 +20,9 @@ public:
     void setWeaponLevel();
     void setWeaponDurablilty( int in_durability);
     string getDescription();
+
+    virtual int getDamage();
+
     weapon operator++();
     weapon operator--();
 

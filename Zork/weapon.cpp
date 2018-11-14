@@ -23,7 +23,7 @@ weapon weapon::operator ++()
     this -> weapon_durability +=50;
 }
 
-int weapon::getWeaponDamage()
+int weapon::getDamage()
 {
     return weapon_damage;
 }
