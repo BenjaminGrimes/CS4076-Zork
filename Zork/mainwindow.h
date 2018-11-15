@@ -136,6 +136,9 @@ private:
     void updatePlayerInfo();
     void updateCombatField();
 
+    void startCombat();
+    void endCombat();
+
     void goDirection(QString direction);
 };
 

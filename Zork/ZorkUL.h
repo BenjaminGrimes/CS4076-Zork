@@ -15,6 +15,7 @@ class ZorkUL {
 private:
 	Parser parser;
     vector<Room*> rooms;
+    bool inCombat;
 
     void createRooms();
 	void printWelcome();
@@ -42,6 +43,9 @@ public:
     }
 
 	string go(string direction);
+
+    bool isInCombat();
+    void setInCombat(bool inCombat);
 };
 
 #endif /*ZORKUL_H_*/

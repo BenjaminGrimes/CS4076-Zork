@@ -120,6 +120,12 @@ QGroupBox* MainWindow::createStoryGroup()
     combat_container->addWidget(use_sword_radio);
     combat_container->addWidget(use_magic_radio);
 
+    // Hide combat widgets when starting game.
+    enemy_name_label->setVisible(false);
+    enemy_status_bar->setVisible(false);
+    use_sword_radio->setVisible(false);
+    use_magic_radio->setVisible(false);
+
     attack_btn = new QPushButton("Attack", this);
     connect(attack_btn, SIGNAL(released()), this, SLOT(attack_btn_onclick()));
 
@@ -255,7 +261,7 @@ void MainWindow::updateNavButtons()
     teleport_btn->setEnabled(false);
 
     vector<bool>exits = zUL.currentRoom->getExits();
-
+    cout << "N:" << exits[0] << " E:" << exits[1] << " S:" << exits[2] << " W:" << exits[3] << endl;
     if(!exits[0])
     {
         north_btn->setEnabled(false);
@@ -425,8 +431,6 @@ void MainWindow::updateCombatField()
             attack_btn->setToolTip("");
         }
 
-        // Start combat
-
         // Enable Enemy info widgets
         enemy_name_label->setVisible(true);
         enemy_status_bar->setVisible(true);
@@ -437,51 +441,61 @@ void MainWindow::updateCombatField()
         enemy_name_label->setText("Name: " + QString::fromStdString(zUL.currentRoom->getEnemy().getName()));
         enemy_health_bar->setValue(zUL.getCurrentRoom()->getEnemy().getHealth());
         use_sword_radio->setChecked(true);
-
-        // disable nav buttons
-        north_btn->setEnabled(false);
-        north_btn->setToolTip("Cannot go to room, you are in combat");
-        north_btn->setChecked(false);
-
-        east_btn->setEnabled(false);
-        east_btn->setToolTip("Cannot go to room, you are in combat");
-        east_btn->setChecked(false);
-
-        south_btn->setEnabled(false);
-        south_btn->setToolTip("Cannot go to room, you are in combat");
-        south_btn->setChecked(false);
-
-        west_btn->setEnabled(false);
-        west_btn->setToolTip("Cannot go to room, you are in combat");
-        west_btn->setChecked(false);
     }
-    else
+
+}
+
+void MainWindow::startCombat()
+{
+    // Start combat
+    zUL.setInCombat(true);
+
+    // disable nav buttons
+    north_btn->setEnabled(false);
+    north_btn->setToolTip("Cannot go to room, you are in combat");
+    north_btn->setChecked(false);
+
+    east_btn->setEnabled(false);
+    east_btn->setToolTip("Cannot go to room, you are in combat");
+    east_btn->setChecked(false);
+
+    south_btn->setEnabled(false);
+    south_btn->setToolTip("Cannot go to room, you are in combat");
+    south_btn->setChecked(false);
+
+    west_btn->setEnabled(false);
+    west_btn->setToolTip("Cannot go to room, you are in combat");
+    west_btn->setChecked(false);
+}
+
+void MainWindow::endCombat()
+{
+    zUL.setInCombat(false);
+
+    if(attack_btn->isEnabled())
     {
-        if(attack_btn->isEnabled())
-        {
-            attack_btn->setEnabled(false);
-            attack_btn->setToolTip("No enemy in current room");
-        }
-
-        enemy_name_label->setVisible(false);
-        enemy_status_bar->setVisible(false);
-        use_sword_radio->setVisible(false);
-        use_magic_radio->setVisible(false);
-
-
-        // enable nav buttons
-        north_btn->setEnabled(true);
-        north_btn->setToolTip("");
-
-        east_btn->setEnabled(true);
-        east_btn->setToolTip("");
-
-        south_btn->setEnabled(true);
-        south_btn->setToolTip("");
-
-        west_btn->setEnabled(true);
-        west_btn->setToolTip("");
+        attack_btn->setEnabled(false);
+        attack_btn->setToolTip("No enemy in current room");
     }
+
+    enemy_name_label->setVisible(false);
+    enemy_status_bar->setVisible(false);
+    use_sword_radio->setVisible(false);
+    use_magic_radio->setVisible(false);
+
+
+    // enable nav buttons
+    north_btn->setEnabled(true);
+    north_btn->setToolTip("");
+
+    east_btn->setEnabled(true);
+    east_btn->setToolTip("");
+
+    south_btn->setEnabled(true);
+    south_btn->setToolTip("");
+
+    west_btn->setEnabled(true);
+    west_btn->setToolTip("");
 }
 
 void MainWindow::teleport_btn_onclick()
@@ -579,14 +593,11 @@ void MainWindow::take_item_btn_onclick()
 
 void MainWindow::attack_btn_onclick()
 {
-    cout << "Attack pressed..." << endl;
     attack_btn->setDefault(false);
+    Enemy &e = zUL.getCurrentRoom()->getEnemy();
     if(use_sword_radio->isChecked())
     {
-        cout << "use weapon..." << endl;
-        Enemy &e = zUL.getCurrentRoom()->getEnemy();
         e -= zUL.player.getWeaponDamage();
-        updateCombatField();
         if(e.getHealth() > 0)
         {
             zUL.player -= e.getDamage();
@@ -595,7 +606,7 @@ void MainWindow::attack_btn_onclick()
         else
         {
             current_room->removeEnemy();
-            updateCombatField();
+            endCombat();
         }
     }
     else if(use_magic_radio->isChecked())
@@ -603,11 +614,7 @@ void MainWindow::attack_btn_onclick()
         // check if magic left
         if(zUL.player.getMagicLevel() > 0)
         {
-            cout << "use magic..." << endl;
-            Enemy &e = zUL.getCurrentRoom()->getEnemy();
             e -= zUL.player.getMagicDamage();
-            updateCombatField();
-
             zUL.player--;
             if(e.getHealth() > 0)
             {
@@ -617,10 +624,11 @@ void MainWindow::attack_btn_onclick()
             else
             {
                 current_room->removeEnemy();
-                updateCombatField();
+                endCombat();
             }
         }
     }
+    updateCombatField();
 }
 
 void MainWindow::goDirection(QString direction)
@@ -642,8 +650,11 @@ void MainWindow::goDirection(QString direction)
     updateStoryText();
     updateNavButtons();
     updateRoomItems();
-    updateCombatField();
-
+    if(zUL.getCurrentRoom()->isEnemyInRoom())
+    {
+        startCombat();
+        updateCombatField();
+    }
     //QMessageBox mBox(this);
     //QString mBox_title = "Current Room";
     //mBox.about(this, mBox_title, message);

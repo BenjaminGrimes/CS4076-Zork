@@ -44,8 +44,8 @@ public:
     //Character();
     Character(int health);
 
-    int getHealth();
-    void setHealth(int h);
+    virtual int getHealth();
+    virtual void setHealth(int h);
 
     virtual void onDeath() = 0;
 };

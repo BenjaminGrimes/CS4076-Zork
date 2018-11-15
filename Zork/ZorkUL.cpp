@@ -14,6 +14,7 @@ int main(int argc, char argv[])
 
 ZorkUL::ZorkUL() : player(100)
 {
+    setInCombat(false);
 	createRooms();
 }
 
@@ -271,4 +272,14 @@ string ZorkUL::go(string direction)
 		currentRoom = nextRoom;
 		return currentRoom->longDescription();
 	}
+}
+
+bool ZorkUL::isInCombat()
+{
+    return isInCombat();
+}
+
+void ZorkUL::setInCombat(bool inCombat)
+{
+    this->inCombat = inCombat;
 }
