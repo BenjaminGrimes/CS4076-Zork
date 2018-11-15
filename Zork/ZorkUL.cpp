@@ -23,11 +23,11 @@ void ZorkUL::createRooms()
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j;
 
 	a = new Room("a");
-        a->addItem(new Item("x"));
-        a->addItem(new Item("y"));
+        a->addItem(new Potion(Potion::PotionType::health_potion));
+        a->addItem(new Potion(Potion::PotionType::magic_potion));
 	b = new Room("b");
-        b->addItem(new Item("xx"));
-        b->addItem(new Item("yy"));
+        b->addItem(new Potion(Potion::PotionType::magic_potion));
+        b->addItem(new Potion(Potion::PotionType::health_potion));
 	c = new Room("c");
         //c -> addItem(new weapon("Sword",getRandom<int>(100),getRandom<int>(100)));
 	d = new Room("d");

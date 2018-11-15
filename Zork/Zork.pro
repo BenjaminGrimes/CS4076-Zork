@@ -37,7 +37,8 @@ SOURCES += \
     Enemy.cpp \
     Player.cpp \
     startmenuwindow.cpp \
-    weapon.cpp
+    weapon.cpp \
+    potion.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -51,7 +52,8 @@ HEADERS += \
     Enemy.h \
     Player.h \
     startmenuwindow.h \
-    weapon.h
+    weapon.h \
+    potion.h
 
 FORMS += \
         mainwindow.ui \

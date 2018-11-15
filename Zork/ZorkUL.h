@@ -6,6 +6,9 @@
 #include "Room.h"
 #include "item.h"
 #include "Player.h"
+#include "potion.h"
+
+
 #include <iostream>
 #include <string>
 #include <vector>
