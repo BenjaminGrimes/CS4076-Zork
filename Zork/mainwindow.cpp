@@ -546,15 +546,16 @@ void MainWindow::use_item_btn_onclick()
 
             int type = inv[i]->getPotionType();
 
-            if(type == Potion::PotionType::health_potion)
+            switch(type)
             {
-                cout << "Increasing health..." << endl;
-                zUL.player += 10;
-            }
-            else if(type == Potion::PotionType::magic_potion)
-            {
-                cout << "Increasing Magic level..." << endl;
-                zUL.player++;
+                case Potion::PotionType::health_potion:
+                    cout << "Increasing health..." << endl;
+                    zUL.player += 10;
+                    break;
+                case Potion::PotionType::magic_potion:
+                    cout << "Increasing Magic level..." << endl;
+                    zUL.player++;
+                break;
             }
 
             zUL.player.removeItemFromInventory(i);
