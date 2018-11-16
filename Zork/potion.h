@@ -10,7 +10,7 @@ public:
 
     Potion(PotionType t);
 
-    PotionType getPotionType();
+    virtual int getPotionType();
 
 private:
     PotionType type;

@@ -9,7 +9,7 @@ Player::Player(int health) : Character (health)
     cout << "Weapon damage: " << p_weaponPtr->getDamage() << endl;
 }
 
-void Player::addItemToInvetory(Item &item)
+void Player::addItemToInvetory(Item *item)
 {
     // TODO validate item
     inventory.push_back(item);
@@ -21,7 +21,7 @@ void Player::removeItemFromInventory(int pos)
     inventory.erase(inventory.begin()+pos);
     for(int i = 0; i < inventory.size(); i++)
     {
-        cout << inventory.at(i).getShortDescription() << endl;
+        cout << inventory.at(i)->getShortDescription() << endl;
     }
 }
 
@@ -34,7 +34,7 @@ void Player::setPlayerInfo(QString name, int age, QString sex)
     cout << "name:" << this->name << " age:" << this->age << " sex:" << this->sex << endl;
 }
 
-vector<Item>& Player::getInventory()
+vector<Item*>& Player::getInventory()
 {
     return inventory;
 }

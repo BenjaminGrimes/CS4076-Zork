@@ -51,3 +51,8 @@ int Item::getDamage()
 {
     return DEFAULT_DAMAGE;
 }
+
+int Item::getPotionType()
+{
+    return 0;
+}

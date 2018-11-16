@@ -16,7 +16,7 @@ private:
 	string description;
 	map<string, Room*> exits;
 	string exitString();
-    vector<Item> itemsInRoom;
+    vector<Item*> itemsInRoom;
     bool enemyInRoom;
     Enemy enemy;
     vector<bool> exits_vector;
@@ -35,7 +35,7 @@ public:
     int isItemInRoom(string inString);
     void removeItemFromRoom(int location);
 
-    vector<Item>* getItemsInRoom();
+    vector<Item*>* getItemsInRoom();
     vector<bool> getExits();
     bool isEnemyInRoom();
     void addEnemy(Enemy *enemy);

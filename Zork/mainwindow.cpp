@@ -353,12 +353,12 @@ void MainWindow::updateRoomItems()
         take_item_btn->setToolTip("");
 
         unsigned int i = 0;
-        for(Item item : *itemsInRoom)
+        for(Item *item : *itemsInRoom)
         {
-            cout << item.getShortDescription() << endl;
+            cout << item->getShortDescription() << endl;
             QCheckBox *temp_cbox = new QCheckBox;
             room_items_checkboxes.push_back(temp_cbox);
-            temp_cbox->setText(QString::fromStdString(item.getShortDescription()));
+            temp_cbox->setText(QString::fromStdString(item->getShortDescription()));
             room_items_container->addWidget(room_items_checkboxes.at(i));
             ++i;
         }
@@ -367,11 +367,11 @@ void MainWindow::updateRoomItems()
 
 void MainWindow::updateInventory()
 {
-    vector<Item> p_inv = zUL.player.getInventory();
+    vector<Item*> p_inv = zUL.player.getInventory();
 
     cout<< "Player inventory: ";
     for(unsigned int i = 0; i < p_inv.size(); i++)
-        cout << p_inv.at(i).getShortDescription() << " ";
+        cout << p_inv.at(i)->getShortDescription() << " ";
     cout << endl;
 
     QListWidgetItem *it;
@@ -381,7 +381,7 @@ void MainWindow::updateInventory()
     for(unsigned int i = 0; i < p_inv.size(); i++)
     {
         it = new QListWidgetItem(listWidget);
-        listWidget->setItemWidget(it, new QRadioButton(QString::fromStdString(p_inv.at(i).getShortDescription())));
+        listWidget->setItemWidget(it, new QRadioButton(QString::fromStdString(p_inv.at(i)->getShortDescription())));
     }
 }
 
@@ -542,18 +542,36 @@ void MainWindow::use_item_btn_onclick()
             cout << temp_radio_btn->text().toStdString() << " RB is checked" << endl;
 
             // Remove item from player inventory
-            vector<Item> inv = zUL.player.getInventory();
+            vector<Item*> inv = zUL.player.getInventory();
+
+            int type = inv[i]->getPotionType();
+
+            if(type == Potion::PotionType::health_potion)
+            {
+                cout << "Increasing health..." << endl;
+                zUL.player += 10;
+            }
+            else if(type == Potion::PotionType::magic_potion)
+            {
+                cout << "Increasing Magic level..." << endl;
+                zUL.player++;
+            }
+
             zUL.player.removeItemFromInventory(i);
 
+            /*
             inv = zUL.player.getInventory();
             for(Item i : inv)
                 cout << i.getShortDescription() << " ";
             cout << endl;
+            */
 
             // Remove item from the list
             delete listWidget->item(i);
         }
     }
+
+    updatePlayerInfo();
 
     //QListWidgetItem *item = listWidget->currentItem();
     //delete listWidget->takeItem(listWidget->row(item));

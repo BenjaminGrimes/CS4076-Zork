@@ -25,17 +25,17 @@ private:
     int magic_dmg;
     int age;
     string sex;
-    vector<Item> inventory;
+    vector<Item*> inventory;
     //weapon p_weapon;
     Item *p_weaponPtr;
 
 public:
     Player(int health);
 
-    void addItemToInvetory(Item & item);
+    void addItemToInvetory(Item  *item);
     void removeItemFromInventory(int pos);
     void setPlayerInfo(QString name, int age, QString sex);
-    vector<Item>& getInventory();
+    vector<Item*>& getInventory();
     string getName();
     int getAge();
     string getSex();

@@ -31,6 +31,7 @@ public:
 	int getWeaponCheck();
 	void setWeaponCheck(int weaponCheck);
     virtual int getDamage();
+    virtual int getPotionType();
 };
 
 #endif /*ITEM_H_*/

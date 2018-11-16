@@ -77,14 +77,14 @@ Room* Room::nextRoom(string direction)
 
 void Room::addItem(Item *inItem)
 {
-    itemsInRoom.push_back(*inItem);
+    itemsInRoom.push_back(inItem);
 }
 
 void Room::removeItemFromRoom(int location)
 {
     itemsInRoom.erase(itemsInRoom.begin()+location);
     for(int i = 0; i < itemsInRoom.size(); i++)
-        cout << itemsInRoom.at(i).getShortDescription() << endl;
+        cout << itemsInRoom.at(i)->getShortDescription() << endl;
 }
 
 string Room::displayItem()
@@ -100,7 +100,7 @@ string Room::displayItem()
         int x = (0);
         for (int n = sizeItems; n > 0; n--)
         {
-            tempString = tempString + itemsInRoom[x].getShortDescription() + "  " ;
+            tempString = tempString + itemsInRoom[x]->getShortDescription() + "  " ;
             x++;
         }
     }
@@ -141,7 +141,7 @@ int Room::isItemInRoom(string inString)
         for (int n = sizeItems; n > 0; n--)
         {
             // compare inString with short description
-            int tempFlag = inString.compare( itemsInRoom[x].getShortDescription());
+            int tempFlag = inString.compare( itemsInRoom[x]->getShortDescription());
             if (tempFlag == 0)
             {
                 itemsInRoom.erase(itemsInRoom.begin()+x);
@@ -158,7 +158,7 @@ vector<bool> Room::getExits()
     return exits_vector;
 }
 
-vector<Item>* Room::getItemsInRoom()
+vector<Item*>* Room::getItemsInRoom()
 {
     return &itemsInRoom;
 }

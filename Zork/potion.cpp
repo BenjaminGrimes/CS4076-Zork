@@ -5,7 +5,7 @@ Potion::Potion(PotionType t) : Item(t == health_potion ? "Health Potion" : "Magi
 
 }
 
-Potion::PotionType Potion::getPotionType()
+int Potion::getPotionType()
 {
     return type;
 }

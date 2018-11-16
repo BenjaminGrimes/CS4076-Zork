@@ -21,7 +21,9 @@
 #include <string>
 
 #include "ZorkUL.h"
-#include "item.h"
+//#include "item.h"
+#include "weapon.h"
+#include "potion.h"
 
 namespace Ui {
 class MainWindow;
@@ -107,7 +109,7 @@ private:
 
     // ------ Story Group Widgets ----------
     QTextBrowser *story_text_browser;
-    vector<Item>* itemsInRoom;
+    vector<Item*>* itemsInRoom;
     vector<QCheckBox*> room_items_checkboxes;
     QVBoxLayout *room_items_container;
     QPushButton *take_item_btn;
