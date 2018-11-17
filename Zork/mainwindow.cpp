@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    this->setWindowIcon(QIcon(":/ZORK_APP_ICON.png"));
     // zUL.play();
 }
 

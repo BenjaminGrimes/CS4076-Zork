@@ -15,6 +15,8 @@ StartMenuWindow::StartMenuWindow(QWidget *parent) :
 
     this->resize(400, 200);
 
+    this->setWindowIcon(QIcon(":/ZORK_APP_ICON.png"));
+
     setUpLayout();
 }
 

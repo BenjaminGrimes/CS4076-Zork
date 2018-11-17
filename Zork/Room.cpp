@@ -56,7 +56,7 @@ string Room::shortDescription()
 
 string Room::longDescription()
 {
-    return "room = " + description + ".\n" + displayItem() + "\n" + displayEnemy() + exitString() + "\n";
+    return "room = " + description + "\n" + displayEnemy() + "\n";
 }
 
 string Room::exitString()
@@ -112,8 +112,7 @@ string Room::displayEnemy()
     string tempString;
     if(isEnemyInRoom())
     {
-        cout << "enemy here" << endl;
-        tempString = enemy.getDescription();
+        tempString = enemy.getDescription() + "\n-------------Starting Combat-------------";
     }
     else
     {
