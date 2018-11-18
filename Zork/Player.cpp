@@ -15,7 +15,8 @@ Player::Player(int health) : Character (health)
     cout << "Weapon damage: " << p_weaponPtr->getDamage() << endl;
 }
 
-void Player::setRace(){
+void Player::setRace()
+{
     qsrand(time(NULL));
     int rand = (qrand()%2)+1;
     if(rand ==1){
@@ -28,13 +29,10 @@ void Player::setRace(){
         human *c = new human();
         this -> pl_race = c;
     }
-
-
-
 }
+
 void Player::addItemToInvetory(Item *item)
 {
-    // TODO validate item
     inventory.push_back(item);
 }
 
@@ -72,14 +70,20 @@ int Player::getAge()
 {
     return age;
 }
-void Player::setAttributes(){
+
+void Player::setAttributes()
+{
     setMagicLevel( pl_race->getMagicLevel());
     setMagicDamage( pl_race->getMagicDamage());
 }
-void Player::setMagicLevel(int _level){
+
+void Player::setMagicLevel(int _level)
+{
     magic_level = _level;
 }
-void Player::setMagicDamage(int _damage){
+
+void Player::setMagicDamage(int _damage)
+{
     magic_dmg = _damage;
 }
 
