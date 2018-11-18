@@ -38,7 +38,11 @@ SOURCES += \
     Player.cpp \
     startmenuwindow.cpp \
     weapon.cpp \
-    potion.cpp
+    potion.cpp \
+    race.cpp \
+    orc.cpp \
+    mage.cpp \
+    human.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -53,7 +57,11 @@ HEADERS += \
     Player.h \
     startmenuwindow.h \
     weapon.h \
-    potion.h
+    potion.h \
+    race.h \
+    orc.h \
+    mage.h \
+    human.h
 
 FORMS += \
         mainwindow.ui \
@@ -64,7 +72,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES +=
+DISTFILES += \
+    orc
 
 RESOURCES += \
     resources.qrc

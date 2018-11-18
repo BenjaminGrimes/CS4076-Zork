@@ -33,7 +33,7 @@ private:
 public:
     Room *currentRoom;
     Player player;
-
+    void RandomizeEnemy();
 	ZorkUL();
 	void play();
     void teleport();

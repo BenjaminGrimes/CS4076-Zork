@@ -17,7 +17,11 @@ ZorkUL::ZorkUL() : player(100)
     setInCombat(false);
 	createRooms();
 }
-
+void ZorkUL::RandomizeEnemy(){
+    int randRoom = getRandom<int>(9)+1;
+    rooms.at(randRoom) ->addEnemy(new Enemy());
+    cout << "Enemy add to room " << randRoom;
+}
 void ZorkUL::createRooms()
 {
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j;
@@ -31,7 +35,7 @@ void ZorkUL::createRooms()
 	c = new Room("c");
         //c -> addItem(new weapon("Sword",getRandom<int>(100),getRandom<int>(100)));
 	d = new Room("d");
-        d->addEnemy(new Enemy());
+        //d->addEnemy(new Enemy());
 	e = new Room("e");
 	f = new Room("f");
 	g = new Room("g");
@@ -63,6 +67,9 @@ void ZorkUL::createRooms()
     rooms.push_back(h);
     rooms.push_back(i);
     rooms.push_back(j);
+
+    RandomizeEnemy();
+
 }
 
 /**

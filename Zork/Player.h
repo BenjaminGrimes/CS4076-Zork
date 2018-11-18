@@ -8,7 +8,8 @@
 #include <string>
 #include <QMessageBox>
 #include "weapon.h"
-
+#include "race.h"
+#include "orc.h"
 using std::string;
 
 #define MAX_HEALTH 100
@@ -24,10 +25,13 @@ private:
     int magic_level;
     int magic_dmg;
     int age;
+    race *pl_race;
     string sex;
     vector<Item*> inventory;
+    void setAttributes();
     //weapon p_weapon;
     Item *p_weaponPtr;
+    void setRace();
 
 public:
     Player(int health);
@@ -42,7 +46,8 @@ public:
     int getMagicLevel();
     int getMagicDamage();
     int getWeaponDamage();
-
+    void setMagicLevel( int _level);
+    void setMagicDamage(int _damage);
     void onDeath();
 
     Player &operator++(); // Prefix increment

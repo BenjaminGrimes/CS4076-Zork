@@ -1,14 +1,37 @@
 #include "Player.h"
 #include <weapon.h>
+#include <orc.h>
+#include <mage.h>
+#include <human.h>
+#include <race.h>
 Player::Player(int health) : Character (health)
 {
-    magic_level = 50;
-    magic_dmg = 15;
+    setRace();
+    setAttributes();
+   //magic_level = 50;
+   //magic_dmg = 15;
 
     p_weaponPtr = new weapon("Sword", 10, 10);
     cout << "Weapon damage: " << p_weaponPtr->getDamage() << endl;
 }
 
+void Player::setRace(){
+    qsrand(time(NULL));
+    int rand = (qrand()%2)+1;
+    if(rand ==1){
+        orc *a = new orc();
+        this -> pl_race = a;
+    }else if(rand ==2){
+        mage *b = new mage();
+        this -> pl_race = b;
+    }else if(rand ==3){
+        human *c = new human();
+        this -> pl_race = c;
+    }
+
+
+
+}
 void Player::addItemToInvetory(Item *item)
 {
     // TODO validate item
@@ -30,8 +53,8 @@ void Player::setPlayerInfo(QString name, int age, QString sex)
     this->name = name.toStdString();
     this->age = age;
     this->sex = sex.toStdString();
-
-    cout << "name:" << this->name << " age:" << this->age << " sex:" << this->sex << endl;
+    string a = pl_race->getType();
+    cout << "name:" << this->name << " age:" << this->age << " sex:" << this->sex << a <<endl;
 }
 
 vector<Item*>& Player::getInventory()
@@ -48,6 +71,16 @@ string Player::getName()
 int Player::getAge()
 {
     return age;
+}
+void Player::setAttributes(){
+    setMagicLevel( pl_race->getMagicLevel());
+    setMagicDamage( pl_race->getMagicDamage());
+}
+void Player::setMagicLevel(int _level){
+    magic_level = _level;
+}
+void Player::setMagicDamage(int _damage){
+    magic_dmg = _damage;
 }
 
 string Player::getSex()
