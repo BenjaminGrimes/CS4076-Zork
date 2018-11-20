@@ -27,36 +27,37 @@ StartMenuWindow::~StartMenuWindow()
 
 void StartMenuWindow::setUpLayout()
 {
-    QVBoxLayout *container = new QVBoxLayout;
+    QVBoxLayout *container = new QVBoxLayout(this);
 
-    QLabel *imageLabel = new QLabel;
+    QLabel *imageLabel = new QLabel(this);
     QImage image(":/ZORK_TITLE.png");
     imageLabel->setPixmap(QPixmap::fromImage(image).scaled(WINDOW_WIDTH, WINDOW_HEIGHT, Qt::KeepAspectRatio));
 
-    name_label = new QLabel("Enter name:");
+    name_label = new QLabel("Name:", this);
     name_lineEdit = new QLineEdit;
     name_lineEdit->setPlaceholderText("Enter your name");
 
-    age_label = new QLabel("Select Age:");
+    age_label = new QLabel("Age:", this);
     age_slider = new QSlider(Qt::Horizontal, this);
     age_slider->setRange(MIN_AGE_VAL, MAX_AGE_VAL);
-    //cout << age_slider->value() << endl;
-    age_value = new QSpinBox;
+
+    age_value = new QSpinBox(this);
     age_value->setRange(MIN_AGE_VAL, MAX_AGE_VAL);
     age_value->setSingleStep(1);
-    QHBoxLayout *age_container = new QHBoxLayout;
+    QHBoxLayout *age_container = new QHBoxLayout(this);
     age_container->addWidget(age_value, 0, Qt::AlignLeft);
     age_container->addWidget(age_slider);
     connect(age_slider, SIGNAL(valueChanged(int)), age_value, SLOT(setValue(int)));
     connect(age_value, SIGNAL(valueChanged(int)), age_slider, SLOT(setValue(int)));
 
-    sex_label = new QLabel("Select Sex:");
-    sex_comboBox = new QComboBox;
+    sex_label = new QLabel("Sex:", this);
+    sex_comboBox = new QComboBox(this);
     sex_comboBox->addItem("---");
     sex_comboBox->addItem("Male");
     sex_comboBox->addItem("Female");
 
-    error_label = new QLabel("");
+    // TODO make text Red
+    error_label = new QLabel("", this);
 
     start_btn = new QPushButton("Start", this);
     connect(start_btn, SIGNAL(released()), this, SLOT(start_btn_onclick()));
@@ -64,12 +65,12 @@ void StartMenuWindow::setUpLayout()
     exit_btn = new QPushButton("Exit", this);
     connect(exit_btn, SIGNAL(released()), this, SLOT(exit_btn_onclick()));
 
-    formLayout = new QFormLayout;
-    formLayout->addRow("Name:", name_lineEdit);
-    formLayout->addRow("Age:", age_container);
-    formLayout->addRow("Sex:", sex_comboBox);
+    formLayout = new QFormLayout(this);
+    formLayout->addRow(name_label, name_lineEdit);
+    formLayout->addRow(age_label, age_container);
+    formLayout->addRow(sex_label, sex_comboBox);
 
-    QHBoxLayout *btn_container = new QHBoxLayout;
+    QHBoxLayout *btn_container = new QHBoxLayout(this);
     btn_container->addWidget(start_btn);
     btn_container->addWidget(exit_btn);
 
@@ -78,8 +79,7 @@ void StartMenuWindow::setUpLayout()
     container->addWidget(error_label, 0, Qt::AlignCenter);
     container->addLayout(btn_container);
 
-
-    auto central = new QWidget;
+    auto central = new QWidget(this);
     central->setLayout(container);
     setCentralWidget(central);
 }
@@ -88,7 +88,6 @@ void StartMenuWindow::start_btn_onclick()
 {
     // Get the count of character in name_lineEdit
     int n_count = name_lineEdit->text().count();
-    cout << n_count << endl;
 
     if(n_count == 0)
     {
