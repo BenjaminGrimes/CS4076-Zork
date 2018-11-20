@@ -2,14 +2,13 @@
 #define PLAYER_H
 
 #include "Character.h"
+#include "weapon.h"
 #include <vector>
 #include <item.h>
 #include <QString>
 #include <string>
 #include <QMessageBox>
-#include "weapon.h"
-#include "race.h"
-#include "orc.h"
+
 using std::string;
 
 #define MAX_HEALTH 100
@@ -25,12 +24,11 @@ private:
     int magic_level;
     int magic_dmg;
     int age;
-    race *pl_race;
     string sex;
     vector<Item*> inventory;
-    void setAttributes();
-    //weapon p_weapon;
     Item *p_weaponPtr;
+
+    void setAttributes();
     void setRace();
 
 public:
