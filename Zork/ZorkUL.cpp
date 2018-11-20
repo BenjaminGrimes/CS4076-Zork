@@ -18,59 +18,130 @@ void ZorkUL::RandomizeEnemy()
 
 void ZorkUL::createRooms()
 {
-    Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j;
+    Room *cave = new Room("Cave");
+    cave->setRoomDescription("In Cave");
+    cave->addItem(new Potion(Potion::PotionType::health_potion));
+    cave->addItem(new Potion(Potion::PotionType::magic_potion));
 
-	a = new Room("a");
-        a->setRoomDescription("In room a");
-        a->addItem(new Potion(Potion::PotionType::health_potion));
-        a->addItem(new Potion(Potion::PotionType::magic_potion));
-	b = new Room("b");
-        b->setRoomDescription("In room b");
-        b->addItem(new Potion(Potion::PotionType::magic_potion));
-        b->addItem(new Potion(Potion::PotionType::health_potion));
-	c = new Room("c");
-        c->setRoomDescription("In room c");
-	d = new Room("d");
-        d->setRoomDescription("In room d");
-        //d->addEnemy(new Enemy());
-	e = new Room("e");
-        e->setRoomDescription("In room e");
-	f = new Room("f");
-        f->setRoomDescription("In room f");
-	g = new Room("g");
-        g->setRoomDescription("In room g");
-    h = new Room("h");
-        h->setRoomDescription("In room h");
-    i = new Room("i");
-        i->setRoomDescription("In room i");
-    j = new Room("j");
-        j->setRoomDescription("In room j");
+    Room *woods = new Room("Woods");
+    woods->setRoomDescription("In Woods");
+    woods->addItem(new Potion(Potion::PotionType::magic_potion));
+    woods->addItem(new Potion(Potion::PotionType::health_potion));
 
+    Room *abandoned_house = new Room("Abandoned House");
+    abandoned_house->setRoomDescription("In Abandoned House");
 
-    //         (N, E, S, W)
-	a->setExits(f, b, d, c);
-	b->setExits(NULL, NULL, NULL, a);
-	c->setExits(NULL, a, NULL, NULL);
-	d->setExits(a, e, NULL, i);
-	e->setExits(NULL, NULL, NULL, d);
-	f->setExits(NULL, g, a, h);
-	g->setExits(NULL, NULL, NULL, f);
-	h->setExits(NULL, f, NULL, NULL);
-    i->setExits(NULL, d, j, NULL);
-    j->setExits(i, NULL, NULL, NULL);
+    Room *field = new Room("Field");
+    field->setRoomDescription("In Field");
+    //d->addEnemy(new Enemy());
 
-    currentRoom = a;
+    Room *meadow = new Room("Meadow");
+    meadow->setRoomDescription("In room e");
 
-    rooms.push_back(a);
-    rooms.push_back(b);
-    rooms.push_back(c);
-    rooms.push_back(d);
-    rooms.push_back(e);
-    rooms.push_back(f);
-    rooms.push_back(g);
-    rooms.push_back(h);
-    rooms.push_back(i);
-    rooms.push_back(j);
+    Room *abandoned_mill = new Room("Abandoned Mill");
+    abandoned_mill->setRoomDescription("In room f");
+
+    Room *bridge = new Room("Bridge");
+    bridge->setRoomDescription("In room g");
+
+    Room *empty_well = new Room("Empty Well");
+    empty_well->setRoomDescription("In room h");
+
+    Room *stables = new Room("Stables");
+    stables->setRoomDescription("In room i");
+
+    Room *abandoned_town = new Room("Abandoned Town");
+    abandoned_town->setRoomDescription("In room j");
+
+    Room *destroyed_fort = new Room("Destroyed Fort");
+    destroyed_fort->setRoomDescription("");
+
+    Room *ridge = new Room("Ridge");
+    ridge->setRoomDescription("");
+
+    Room *mountains = new Room("Mountains");
+    mountains->setRoomDescription("");
+
+    Room *valley = new Room("Valley");
+    valley->setRoomDescription("");
+
+    Room *shoreline = new Room("Shoreline");
+    shoreline->setRoomDescription("");
+
+    Room *river = new Room("River");
+    river->setRoomDescription("");
+
+    Room *island = new Room("Island");
+    island->setRoomDescription("");
+
+    Room *beach = new Room("Beach");
+    beach->setRoomDescription("");
+
+    Room *rocky_hills = new Room("Rocky Hills");
+    rocky_hills->setRoomDescription("");
+
+    Room *graveyard = new Room("Graveyard");
+    graveyard->setRoomDescription("");
+
+    Room *old_castle = new Room("Old Castle");
+    old_castle->setRoomDescription("");
+
+    Room *grassland = new Room("Grassland");
+    grassland->setRoomDescription("");
+
+    Room *home = new Room("Home");
+    home->setRoomDescription("");
+
+    // (N, E, S, W)
+    cave->setExits(woods, field, NULL, NULL);
+    woods->setExits(NULL, abandoned_house, cave, NULL);
+    abandoned_house->setExits(NULL, meadow, field, woods);
+    field->setExits(abandoned_house, stables, NULL, cave);
+    meadow->setExits(NULL, abandoned_mill, NULL, abandoned_house);
+    abandoned_mill->setExits(NULL, NULL, bridge, meadow);
+    bridge->setExits(abandoned_mill, NULL, empty_well, NULL);
+    empty_well->setExits(bridge, NULL, NULL, abandoned_town);
+    stables->setExits(NULL, NULL, abandoned_town, field);
+    abandoned_town->setExits(stables, empty_well, destroyed_fort, NULL);
+    destroyed_fort->setExits(abandoned_house, NULL, ridge, NULL);
+    ridge->setExits(destroyed_fort, mountains, NULL, NULL);
+    mountains->setExits(NULL, NULL, valley, ridge);
+    valley->setExits(mountains, NULL, NULL, shoreline);
+    shoreline->setExits(NULL, valley, NULL, river);
+    river->setExits(island, shoreline, NULL, NULL);
+    island->setExits(beach, NULL, river, NULL);
+    beach->setExits(rocky_hills, NULL, island, old_castle);
+    rocky_hills->setExits(NULL, NULL, beach, graveyard);
+    graveyard->setExits(NULL, rocky_hills, old_castle, NULL);
+    old_castle->setExits(graveyard, beach, grassland, NULL);
+    grassland->setExits(old_castle, NULL, home, NULL);
+    home->setExits(grassland, NULL, NULL, NULL);
+
+    currentRoom = cave;
+
+    rooms.push_back(cave);
+    rooms.push_back(woods);
+    rooms.push_back(abandoned_house);
+    rooms.push_back(field);
+    rooms.push_back(meadow);
+    rooms.push_back(abandoned_mill);
+    rooms.push_back(bridge);
+    rooms.push_back(empty_well);
+    rooms.push_back(stables);
+    rooms.push_back(abandoned_town);
+    rooms.push_back(destroyed_fort);
+    rooms.push_back(ridge);
+    rooms.push_back(mountains);
+    rooms.push_back(valley);
+    rooms.push_back(shoreline);
+    rooms.push_back(river);
+    rooms.push_back(island);
+    rooms.push_back(beach);
+    rooms.push_back(rocky_hills);
+    rooms.push_back(graveyard);
+    rooms.push_back(old_castle);
+    rooms.push_back(grassland);
+    rooms.push_back(home);
 
     RandomizeEnemy();
 }

@@ -498,24 +498,28 @@ void MainWindow::teleport_btn_onclick()
 
 void MainWindow::north_btn_onclick()
 {
+    north_btn->setChecked(false);
     QString direction = north_btn->text();
     goDirection(direction);
 }
 
 void MainWindow::south_btn_onclick()
 {
+    south_btn->setChecked(false);
     QString direction = south_btn->text();
     goDirection(direction);
 }
 
 void MainWindow::east_btn_onclick()
 {
+    east_btn->setChecked(false);
     QString direction = east_btn->text();
     goDirection(direction);
 }
 
 void MainWindow::west_btn_onclick()
 {
+    west_btn->setChecked(false);
     QString direction = west_btn->text();
     goDirection(direction);
 }
