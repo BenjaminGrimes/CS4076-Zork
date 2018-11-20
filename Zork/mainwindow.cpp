@@ -78,9 +78,12 @@ void MainWindow::createMapGroup()
     map_box = new QGroupBox("MAP");
     QVBoxLayout *vbox = new QVBoxLayout();
 
-    QLabel *imageLabel = new QLabel(this);
-    QImage image(":/TestImage2.jpg");
-    imageLabel->setPixmap(QPixmap::fromImage(image).scaled(100, 100, Qt::KeepAspectRatio));
+    QLabel *imageLabel = new QLabel(map_box);
+    imageLabel->setBackgroundRole(QPalette::Base);
+    imageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    imageLabel->setScaledContents(true);
+    QImage image(":/ZORK_MAP.png");
+    imageLabel->setPixmap(QPixmap::fromImage(image));
 
     vbox->addWidget(imageLabel);
 
@@ -373,10 +376,6 @@ void MainWindow::updatePlayerInfo()
 
     if(zUL.player.getHealth() <= 0)
     {
-        //QMessageBox mBox(this);
-        //QString mBox_title = "GAME OVER";
-        //mBox.about(this, mBox_title, "GAMEOVER!");
-
         QMessageBox mBox;
         mBox.setText("Game Over!");
         QAbstractButton *restartBtn = mBox.addButton("Restart", QMessageBox::YesRole);
