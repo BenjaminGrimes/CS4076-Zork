@@ -1,7 +1,10 @@
 #include "mage.h"
 
 mage::mage() : race(){
-     type = "Mage";
-     setMagicLevel(80);
-     setMagicDamage(25);
+    setAtt();
+}
+void mage::setAtt(){
+    type = "Mage";
+    setMagicLevel(80);
+    setMagicDamage(25);
 }

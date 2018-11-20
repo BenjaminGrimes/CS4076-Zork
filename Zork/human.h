@@ -4,5 +4,6 @@
 class human : public race{
     public:
         human();
+        virtual void setAtt();
 };
 #endif // MAGE_H

@@ -4,5 +4,6 @@
 class mage : public race{
     public:
         mage();
+        virtual void setAtt();
 };
 #endif // MAGE_H

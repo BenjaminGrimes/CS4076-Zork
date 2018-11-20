@@ -1,7 +1,10 @@
 #include "human.h"
 
 human::human() : race(){
-     type = "Human";
-     setMagicLevel(60);
-     setMagicDamage(15);
+    setAtt();
+}
+void human::setAtt(){
+    type = "Human";
+    setMagicLevel(60);
+    setMagicDamage(15);
 }

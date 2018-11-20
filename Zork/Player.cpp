@@ -21,7 +21,7 @@ void Player::setRace()
     int rand = (qrand()%2)+1;
     if(rand ==1){
         orc *a = new orc();
-        this -> pl_race = a;
+        this -> pl_race = a; //implicit coercion
     }else if(rand ==2){
         mage *b = new mage();
         this -> pl_race = b;
