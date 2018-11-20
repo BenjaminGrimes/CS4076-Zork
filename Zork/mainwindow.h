@@ -124,11 +124,11 @@ private:
 
     void setUpLayout();
 
-    QGroupBox* createNavigationGroup();
-    QGroupBox* createPlayerInfoGroup();
-    QGroupBox* createMapGroup();
-    QGroupBox* createInventoryGroup();
-    QGroupBox* createStoryGroup();
+    void createNavigationGroup();
+    void createPlayerInfoGroup();
+    void createMapGroup();
+    void createInventoryGroup();
+    void createStoryGroup();
 
     void updateNavButtons();
     void updateRoomLabel();

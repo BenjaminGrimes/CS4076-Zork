@@ -22,11 +22,17 @@ void MainWindow::setUpLayout()
     grid = new QGridLayout;
     // these are temp cells for groups
     //grid->addWidget(createImageGroup(), 0, 0, 1, 2);
-    grid->addWidget(createStoryGroup(), 0, 0, 2, 2);
-    grid->addWidget(createMapGroup(), 0, 2, 2, 1);
-    grid->addWidget(createPlayerInfoGroup(), 3, 0);
-    grid->addWidget(createInventoryGroup(), 3, 1);
-    grid->addWidget(createNavigationGroup(), 3,2);
+    createStoryGroup();
+    createMapGroup();
+    createPlayerInfoGroup();
+    createInventoryGroup();
+    createNavigationGroup();
+
+    grid->addWidget(story_box, 0, 0, 2, 2);
+    grid->addWidget(map_box, 0, 2, 2, 1);
+    grid->addWidget(player_box, 3, 0);
+    grid->addWidget(inventory_box, 3, 1);
+    grid->addWidget(nav_box, 3,2);
 
     // need to set central widget to display layout
     auto central = new QWidget;
@@ -70,32 +76,28 @@ void MainWindow::createStatusBar()
     statusBar()->showMessage(tr("Ready"));
 }
 
-QGroupBox* MainWindow::createMapGroup()
+void MainWindow::createMapGroup()
 {
-    QGroupBox *groupBox = new QGroupBox(tr("Map"));
-    QLabel *label = new QLabel;
-    label->setText("MAP");
-    QVBoxLayout *vbox = new QVBoxLayout;
-    //vbox->addWidget(label);
+    map_box = new QGroupBox("MAP", this);
+    QLabel *label = new QLabel("MAP", this);
+    QVBoxLayout *vbox = new QVBoxLayout(this);
 
-
-    QLabel *imageLabel = new QLabel;
+    QLabel *imageLabel = new QLabel(this);
     QImage image(":/TestImage2.jpg");
     imageLabel->setPixmap(QPixmap::fromImage(image).scaled(100, 100, Qt::KeepAspectRatio));
 
     vbox->addWidget(imageLabel);
 
-    groupBox->setLayout(vbox);
-    return groupBox;
+    map_box->setLayout(vbox);
 }
 
-QGroupBox* MainWindow::createStoryGroup()
+void MainWindow::createStoryGroup()
 {
-    QGroupBox *groupBox = new QGroupBox(tr("Story"));
+    story_box = new QGroupBox("Story", this);
 
-    story_text_browser = new QTextBrowser;
+    story_text_browser = new QTextBrowser(this);
 
-    combat_container = new QVBoxLayout;
+    combat_container = new QVBoxLayout(this);
 
     QLabel *enemy_health_label = new QLabel("Enemy Health:", this);
 
@@ -129,65 +131,56 @@ QGroupBox* MainWindow::createStoryGroup()
     attack_btn = new QPushButton("Attack", this);
     connect(attack_btn, SIGNAL(released()), this, SLOT(attack_btn_onclick()));
 
-    room_items_container = new QVBoxLayout;
+    room_items_container = new QVBoxLayout(this);
 
     take_item_btn = new QPushButton("Take item(s)", this);
     connect(take_item_btn, SIGNAL(released()), this, SLOT(take_item_btn_onclick()));
 
-    QGridLayout *story_grid = new QGridLayout;
+    QGridLayout *story_grid = new QGridLayout(this);
     story_grid->addWidget(story_text_browser, 0, 0, 2, 3);
     story_grid->addLayout(combat_container, 2, 0, 2, 2);
     story_grid->addWidget(attack_btn, 4, 0, 1, 2);
     story_grid->addLayout(room_items_container, 2, 2, 2, 1);
     story_grid->addWidget(take_item_btn, 4, 2, 1, 1);
 
-    groupBox->setLayout(story_grid);
-    return groupBox;
+    story_box->setLayout(story_grid);
 }
 
-QGroupBox* MainWindow::createPlayerInfoGroup()
+void MainWindow::createPlayerInfoGroup()
 {
-    QGroupBox *groupBox = new QGroupBox(tr("Player Info"));
-    QLabel *label = new QLabel;
-    label->setText("Health:");
+    player_box = new QGroupBox(tr("Player Info"), this);
+    QLabel *label = new QLabel("Health:", player_box);
 
-    player_health_bar = new QProgressBar(this);
+    player_health_bar = new QProgressBar(player_box);
     player_health_bar->setStyleSheet("QProgressBar { text-align: center; }");
     player_health_bar->setRange(MIN_HEALTH, MAX_HEALTH);
     player_health_bar->setValue(zUL.player.getHealth());
 
-    health_status_bar = new QStatusBar(this);
+    health_status_bar = new QStatusBar(player_box);
     health_status_bar->addPermanentWidget(label, 1);
     health_status_bar->addPermanentWidget(player_health_bar, 4);
 
-    cout << QApplication::style() << endl;
-
-    player_magic_bar = new QProgressBar(this);
+    player_magic_bar = new QProgressBar(player_box);
     player_magic_bar->setStyleSheet("QProgressBar::chunk "
                                     "{ background-color: rgb(0, 100, 255); }"
                                     "QProgressBar { text-align: center; }");
     player_magic_bar->setRange(MIN_MAGIC_LEVEL, MAX_MAGIC_LEVEL);
     player_magic_bar->setValue(zUL.player.getMagicLevel());
 
-    magic_status_bar = new QStatusBar(this);
-    magic_status_bar->addPermanentWidget(new QLabel("Magic Level:"), 1);
+    magic_status_bar = new QStatusBar(player_box);
+    magic_status_bar->addPermanentWidget(new QLabel("Magic Level:", player_box), 1);
     magic_status_bar->addPermanentWidget(player_magic_bar, 4);
 
-    QLabel *name_title_label = new QLabel;
-    name_title_label->setText("Name:");
-    QLabel *name_label = new QLabel;
-    name_label->setText(QString::fromStdString(zUL.player.getName()));
+    QLabel *name_title_label = new QLabel("Name:", player_box);
+    QLabel *name_label = new QLabel(QString::fromStdString(zUL.player.getName()), player_box);
+    //name_label->setText(QString::fromStdString(zUL.player.getName()));
     cout << name_label->text().toStdString() << endl;
 
-    QLabel *age_title_label = new QLabel;
-    age_title_label->setText("Age:");
-    QLabel *age_label = new QLabel;
-    age_label->setText(QString::number(zUL.player.getAge()));
+    QLabel *age_title_label = new QLabel("Age:", player_box);
+    QLabel *age_label = new QLabel(QString::number(zUL.player.getAge()), player_box);
 
-    QLabel *sex_title_label = new QLabel;
-    sex_title_label->setText("Sex:");
-    QLabel *sex_label = new QLabel;
-    sex_label->setText(QString::fromStdString(zUL.player.getSex()));
+    QLabel *sex_title_label = new QLabel("Sex:", player_box);
+    QLabel *sex_label = new QLabel(QString::fromStdString(zUL.player.getSex()), player_box);
 
     QGridLayout *p_info_grid = new QGridLayout;
     //p_info_grid->addWidget(label, 0, 0, 1, 1);
@@ -200,60 +193,56 @@ QGroupBox* MainWindow::createPlayerInfoGroup()
     p_info_grid->addWidget(sex_label, 3, 1, 1, 1);
     p_info_grid->addWidget(magic_status_bar, 4, 0, 1, 2);
 
-    groupBox->setLayout(p_info_grid);
-    return groupBox;
+    player_box->setLayout(p_info_grid);
 }
 
-QGroupBox* MainWindow::createInventoryGroup()
+void MainWindow::createInventoryGroup()
 {
-    QGroupBox *groupBox = new QGroupBox(tr("Inventory"));
+    inventory_box = new QGroupBox("Inventory", this);
 
-    listWidget = new QListWidget(this);
+    listWidget = new QListWidget(inventory_box);
     listWidget->setSelectionMode(QAbstractItemView::NoSelection);
 
-    use_item_btn = new QPushButton("Use item", this);
+    use_item_btn = new QPushButton("Use item", inventory_box);
     use_item_btn->connect(use_item_btn, SIGNAL(released()), this, SLOT(use_item_btn_onclick()));
 
-    QGridLayout *inv_grid = new QGridLayout;
+    QGridLayout *inv_grid = new QGridLayout(inventory_box);
 
     inv_grid->addWidget(listWidget, 0, 0, 2, 2);
     inv_grid->addWidget(use_item_btn, 2, 0, 2, 2);
 
-    groupBox->setLayout(inv_grid);
-
-    return groupBox;
+    inventory_box->setLayout(inv_grid);
 }
 
-QGroupBox* MainWindow::createNavigationGroup()
+void MainWindow::createNavigationGroup()
 {
-    QGroupBox *groupBox = new QGroupBox(tr("Navigation"));
+    nav_box = new QGroupBox("Navigation", this);
 
-    current_room_label = new QLabel(this);
+    current_room_label = new QLabel(nav_box);
 
-    teleport_btn = new QPushButton("Teleport", this);
+    teleport_btn = new QPushButton("Teleport", nav_box);
     teleport_btn->connect(teleport_btn, SIGNAL(released()), this, SLOT(teleport_btn_onclick()));
 
-    north_btn = new QPushButton("North", this);
+    north_btn = new QPushButton("North", nav_box);
     north_btn->connect(north_btn, SIGNAL(released()), this, SLOT(north_btn_onclick()));
 
-    south_btn = new QPushButton("South", this);
+    south_btn = new QPushButton("South", nav_box);
     south_btn->connect(south_btn, SIGNAL(released()), this, SLOT(south_btn_onclick()));
 
-    east_btn = new QPushButton("East", this);
+    east_btn = new QPushButton("East", nav_box);
     east_btn->connect(east_btn, SIGNAL(released()), this, SLOT(east_btn_onclick()));
 
-    west_btn = new QPushButton("West", this);
+    west_btn = new QPushButton("West", nav_box);
     west_btn->connect(west_btn, SIGNAL(released()), this, SLOT(west_btn_onclick()));
 
-    QGridLayout *nav_grid = new QGridLayout;
+    QGridLayout *nav_grid = new QGridLayout(nav_box);
     nav_grid->addWidget(current_room_label, 0, 0);
     nav_grid->addWidget(north_btn, 0, 1);
     nav_grid->addWidget(west_btn, 1, 0);
     nav_grid->addWidget(teleport_btn, 1, 1);
     nav_grid->addWidget(east_btn, 1, 2);
     nav_grid->addWidget(south_btn, 2, 1);
-    groupBox->setLayout(nav_grid);
-    return groupBox;
+    nav_box->setLayout(nav_grid);
 }
 
 void MainWindow::updateNavButtons()
