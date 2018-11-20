@@ -61,6 +61,8 @@ string Room::shortDescription()
 
 string Room::longDescription()
 {
+    if(enemyInRoom)
+        return description + "\n" + displayEnemy();
     return description;
 }
 

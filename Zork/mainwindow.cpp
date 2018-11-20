@@ -406,6 +406,7 @@ void MainWindow::updateCombatField()
     if(zUL.currentRoom->isEnemyInRoom())
     {
         cout << "Enemy in room..." << endl;
+
         if(attack_btn->isEnabled() == false)
         {
             attack_btn->setEnabled(true);
@@ -457,6 +458,7 @@ void MainWindow::startCombat()
 void MainWindow::endCombat()
 {
     zUL.setInCombat(false);
+    story_text_browser->append("-----------Combat has finished----------");
 
     if(attack_btn->isEnabled())
     {
@@ -482,6 +484,8 @@ void MainWindow::endCombat()
 
     west_btn->setEnabled(true);
     west_btn->setToolTip("");
+
+    updateNavButtons();
 }
 
 void MainWindow::teleport_btn_onclick()
