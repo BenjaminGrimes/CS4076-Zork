@@ -9,7 +9,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowIcon(QIcon(":/ZORK_APP_ICON.png"));
-    // zUL.play();
 }
 
 MainWindow::~MainWindow()
@@ -19,9 +18,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setUpLayout()
 {
-    grid = new QGridLayout;
-    // these are temp cells for groups
-    //grid->addWidget(createImageGroup(), 0, 0, 1, 2);
+    grid = new QGridLayout(this);
     createStoryGroup();
     createMapGroup();
     createPlayerInfoGroup();
@@ -35,7 +32,7 @@ void MainWindow::setUpLayout()
     grid->addWidget(nav_box, 3,2);
 
     // need to set central widget to display layout
-    auto central = new QWidget;
+    auto central = new QWidget(this);
     central->setLayout(grid);
     setCentralWidget(central);
 
@@ -50,8 +47,8 @@ void MainWindow::setUpLayout()
 
 void MainWindow::createActions()
 {
-    gameMenu = menuBar()->addMenu(tr("Game"));
-    QToolBar *gameToolBar = addToolBar(tr("Game"));
+    gameMenu = menuBar()->addMenu("Game");
+    QToolBar *gameToolBar = addToolBar("Game");
     // Temp image
     const QIcon restartIcon = QIcon::fromTheme("document-restart", QIcon(":/restart.png"));
     restartAct = new QAction(restartIcon, tr("Restart"), this);
@@ -148,7 +145,7 @@ void MainWindow::createStoryGroup()
 
 void MainWindow::createPlayerInfoGroup()
 {
-    player_box = new QGroupBox(tr("Player Info"), this);
+    player_box = new QGroupBox("Player Info", this);
     QLabel *label = new QLabel("Health:", player_box);
 
     player_health_bar = new QProgressBar(player_box);
@@ -173,8 +170,6 @@ void MainWindow::createPlayerInfoGroup()
 
     QLabel *name_title_label = new QLabel("Name:", player_box);
     QLabel *name_label = new QLabel(QString::fromStdString(zUL.player.getName()), player_box);
-    //name_label->setText(QString::fromStdString(zUL.player.getName()));
-    cout << name_label->text().toStdString() << endl;
 
     QLabel *age_title_label = new QLabel("Age:", player_box);
     QLabel *age_label = new QLabel(QString::number(zUL.player.getAge()), player_box);
@@ -183,7 +178,6 @@ void MainWindow::createPlayerInfoGroup()
     QLabel *sex_label = new QLabel(QString::fromStdString(zUL.player.getSex()), player_box);
 
     QGridLayout *p_info_grid = new QGridLayout;
-    //p_info_grid->addWidget(label, 0, 0, 1, 1);
     p_info_grid->addWidget(name_title_label, 0, 0, 1, 1);
     p_info_grid->addWidget(name_label, 0, 1, 1, 1);
     p_info_grid->addWidget(health_status_bar, 1, 0, 1, 2);
@@ -320,7 +314,6 @@ void MainWindow::updateStoryText()
 
 void MainWindow::updateRoomItems()
 {
-    // TODO Disable take button if no items in the room.
     // Clear and delete checkboxes
     while (auto item = room_items_container->takeAt(0)) {
           delete item->widget();
@@ -430,6 +423,11 @@ void MainWindow::updateCombatField()
         enemy_name_label->setText("Name: " + QString::fromStdString(zUL.currentRoom->getEnemy().getName()));
         enemy_health_bar->setValue(zUL.getCurrentRoom()->getEnemy().getHealth());
         use_sword_radio->setChecked(true);
+    }
+    else if(attack_btn->isEnabled())
+    {
+        attack_btn->setEnabled(false);
+        attack_btn->setChecked(false);
     }
 
 }
@@ -549,34 +547,17 @@ void MainWindow::use_item_btn_onclick()
 
             zUL.player.removeItemFromInventory(i);
 
-            /*
-            inv = zUL.player.getInventory();
-            for(Item i : inv)
-                cout << i.getShortDescription() << " ";
-            cout << endl;
-            */
-
             // Remove item from the list
             delete listWidget->item(i);
         }
     }
-
     updatePlayerInfo();
-
-    //QListWidgetItem *item = listWidget->currentItem();
-    //delete listWidget->takeItem(listWidget->row(item));
-
 }
 
 void MainWindow::take_item_btn_onclick()
 {
-    // TODO remove item(s) from list of items in room.
-    cout << "Taking Item(s)..." << endl;
-
-    cout << "Size: " << room_items_checkboxes.size() << endl;
-    for(unsigned int i = 0; i < room_items_checkboxes.size(); )
+    for(int i = 0; i < room_items_checkboxes.size(); )
     {
-        cout << "Here in the loop..." << endl;
         // If QCheckBox is checked add it to players inventory
         if(room_items_checkboxes.at(i)->isChecked())
         {
@@ -644,16 +625,6 @@ void MainWindow::goDirection(QString direction)
     direction = direction.toLower();
     string response = zUL.go(direction.toStdString());
 
-    QString message;
-    if(response == "ERROR")
-    {
-        message = "Can't go " + direction;
-    }
-    else
-    {
-        message = QString::fromStdString(zUL.getCurrentRoomName());
-    }
-
     updateRoomLabel();
     updateStoryText();
     updateNavButtons();
@@ -663,7 +634,4 @@ void MainWindow::goDirection(QString direction)
         startCombat();
         updateCombatField();
     }
-    //QMessageBox mBox(this);
-    //QString mBox_title = "Current Room";
-    //mBox.about(this, mBox_title, message);
 }

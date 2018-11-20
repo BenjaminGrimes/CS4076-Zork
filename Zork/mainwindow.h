@@ -15,13 +15,11 @@
 #include <QScrollArea>
 #include <QCheckBox>
 #include <QFormLayout>
-
 #include <QActionGroup>
 
 #include <string>
 
 #include "ZorkUL.h"
-//#include "item.h"
 #include "weapon.h"
 #include "potion.h"
 
@@ -47,9 +45,7 @@ private slots:
     void west_btn_onclick();
 
     void use_item_btn_onclick();
-
     void take_item_btn_onclick();
-
     void attack_btn_onclick();
 
 private:
