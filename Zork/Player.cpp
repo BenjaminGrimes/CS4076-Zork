@@ -1,16 +1,10 @@
 #include "Player.h"
-#include <weapon.h>
-#include <orc.h>
-#include <mage.h>
-#include <human.h>
-#include <race.h>
+
 Player::Player(int health) : Character (health)
 {
     magic_level = 50;
     magic_dmg = 15;
-
     p_weaponPtr = new weapon("Sword", 10, 10);
-    cout << "Weapon damage: " << p_weaponPtr->getDamage() << endl;
 }
 
 
@@ -23,7 +17,7 @@ void Player::removeItemFromInventory(int pos)
 {
     cout << "Inv size = " << inventory.size() << endl;
     inventory.erase(inventory.begin()+pos);
-    for(int i = 0; i < inventory.size(); i++)
+    for(unsigned int i = 0; i < inventory.size(); i++)
     {
         cout << inventory.at(i)->getShortDescription() << endl;
     }

@@ -17,11 +17,4 @@ int main(int argc, char *argv[])
     } while(currentExitCode == MainWindow::EXIT_CODE_REBOOT);
 
     return currentExitCode;
-
-    /*
-    MainWindow w;
-    w.setWindowTitle("Zork");
-    w.showMaximized();
-    w.show();
-    */
 }

@@ -27,7 +27,7 @@ StartMenuWindow::~StartMenuWindow()
 
 void StartMenuWindow::setUpLayout()
 {
-    QVBoxLayout *container = new QVBoxLayout(this);
+    QVBoxLayout *container = new QVBoxLayout;
 
     QLabel *imageLabel = new QLabel(this);
     QImage image(":/ZORK_TITLE.png");
@@ -44,7 +44,7 @@ void StartMenuWindow::setUpLayout()
     age_value = new QSpinBox(this);
     age_value->setRange(MIN_AGE_VAL, MAX_AGE_VAL);
     age_value->setSingleStep(1);
-    QHBoxLayout *age_container = new QHBoxLayout(this);
+    QHBoxLayout *age_container = new QHBoxLayout;
     age_container->addWidget(age_value, 0, Qt::AlignLeft);
     age_container->addWidget(age_slider);
     connect(age_slider, SIGNAL(valueChanged(int)), age_value, SLOT(setValue(int)));
@@ -65,12 +65,12 @@ void StartMenuWindow::setUpLayout()
     exit_btn = new QPushButton("Exit", this);
     connect(exit_btn, SIGNAL(released()), this, SLOT(exit_btn_onclick()));
 
-    formLayout = new QFormLayout(this);
+    formLayout = new QFormLayout;
     formLayout->addRow(name_label, name_lineEdit);
     formLayout->addRow(age_label, age_container);
     formLayout->addRow(sex_label, sex_comboBox);
 
-    QHBoxLayout *btn_container = new QHBoxLayout(this);
+    QHBoxLayout *btn_container = new QHBoxLayout;
     btn_container->addWidget(start_btn);
     btn_container->addWidget(exit_btn);
 

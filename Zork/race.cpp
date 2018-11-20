@@ -3,9 +3,7 @@
 race::race (){
 
 }
-/*race::getDamage(){
-    return att_damage;
-}*/
+
 int race::getHealth()
 {
     return att_health;

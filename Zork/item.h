@@ -12,8 +12,8 @@ class Item {
 private:
 
 	string longDescription;
-	int weightGrams;
-	float value;
+    int weightGrams;
+    float value;
 	bool weaponCheck;
 
 public:
@@ -21,15 +21,16 @@ public:
 
     Item (string description);
     Item (string description, int inWeight, float inValue);
+    virtual ~Item()=0;
 
     string getShortDescription();
     string getLongDescription();
-	int getWeight();
-	void setWeight(int weightGrams);
+    int getWeight();
+    void setWeight(int weightGrams);
     float getValue();
-	void setValue(float value);
-	int getWeaponCheck();
-	void setWeaponCheck(int weaponCheck);
+    void setValue(float value);
+    int getWeaponCheck();
+    void setWeaponCheck(int weaponCheck);
     virtual int getDamage();
     virtual int getPotionType();
 };

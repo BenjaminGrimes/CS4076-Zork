@@ -28,6 +28,11 @@ Character::Character(int h)
 
 }
 
+Character::~Character()
+{
+
+}
+
 int Character::getHealth()
 {
     return health;

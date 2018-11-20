@@ -33,6 +33,7 @@ public:
 #include <vector>
 #include <string>
 
+// Abstract class: has at least one pure virtual function
 class Character
 {
 private:
@@ -41,8 +42,8 @@ protected:
     int health;
 
 public:
-    //Character();
     Character(int health);
+    virtual ~Character() = 0; // Pure virtual destructor
 
     virtual int getHealth();
     virtual void setHealth(int h);

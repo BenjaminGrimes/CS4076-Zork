@@ -3,6 +3,7 @@
 
 #include "Character.h"
 #include "weapon.h"
+
 #include <vector>
 #include <item.h>
 #include <QString>

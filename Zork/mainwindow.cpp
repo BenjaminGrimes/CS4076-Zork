@@ -18,7 +18,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setUpLayout()
 {
-    grid = new QGridLayout(this);
+    grid = new QGridLayout();
     createStoryGroup();
     createMapGroup();
     createPlayerInfoGroup();
@@ -75,9 +75,8 @@ void MainWindow::createStatusBar()
 
 void MainWindow::createMapGroup()
 {
-    map_box = new QGroupBox("MAP", this);
-    QLabel *label = new QLabel("MAP", this);
-    QVBoxLayout *vbox = new QVBoxLayout(this);
+    map_box = new QGroupBox("MAP");
+    QVBoxLayout *vbox = new QVBoxLayout();
 
     QLabel *imageLabel = new QLabel(this);
     QImage image(":/TestImage2.jpg");
@@ -90,11 +89,11 @@ void MainWindow::createMapGroup()
 
 void MainWindow::createStoryGroup()
 {
-    story_box = new QGroupBox("Story", this);
+    story_box = new QGroupBox("Story");
 
     story_text_browser = new QTextBrowser(this);
 
-    combat_container = new QVBoxLayout(this);
+    combat_container = new QVBoxLayout();
 
     QLabel *enemy_health_label = new QLabel("Enemy Health:", this);
 
@@ -128,12 +127,12 @@ void MainWindow::createStoryGroup()
     attack_btn = new QPushButton("Attack", this);
     connect(attack_btn, SIGNAL(released()), this, SLOT(attack_btn_onclick()));
 
-    room_items_container = new QVBoxLayout(this);
+    room_items_container = new QVBoxLayout();
 
     take_item_btn = new QPushButton("Take item(s)", this);
     connect(take_item_btn, SIGNAL(released()), this, SLOT(take_item_btn_onclick()));
 
-    QGridLayout *story_grid = new QGridLayout(this);
+    QGridLayout *story_grid = new QGridLayout();
     story_grid->addWidget(story_text_browser, 0, 0, 2, 3);
     story_grid->addLayout(combat_container, 2, 0, 2, 2);
     story_grid->addWidget(attack_btn, 4, 0, 1, 2);
@@ -145,7 +144,7 @@ void MainWindow::createStoryGroup()
 
 void MainWindow::createPlayerInfoGroup()
 {
-    player_box = new QGroupBox("Player Info", this);
+    player_box = new QGroupBox("Player Info");
     QLabel *label = new QLabel("Health:", player_box);
 
     player_health_bar = new QProgressBar(player_box);
@@ -177,7 +176,7 @@ void MainWindow::createPlayerInfoGroup()
     QLabel *sex_title_label = new QLabel("Sex:", player_box);
     QLabel *sex_label = new QLabel(QString::fromStdString(zUL.player.getSex()), player_box);
 
-    QGridLayout *p_info_grid = new QGridLayout;
+    QGridLayout *p_info_grid = new QGridLayout();
     p_info_grid->addWidget(name_title_label, 0, 0, 1, 1);
     p_info_grid->addWidget(name_label, 0, 1, 1, 1);
     p_info_grid->addWidget(health_status_bar, 1, 0, 1, 2);
@@ -192,7 +191,7 @@ void MainWindow::createPlayerInfoGroup()
 
 void MainWindow::createInventoryGroup()
 {
-    inventory_box = new QGroupBox("Inventory", this);
+    inventory_box = new QGroupBox("Inventory");
 
     listWidget = new QListWidget(inventory_box);
     listWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -210,7 +209,7 @@ void MainWindow::createInventoryGroup()
 
 void MainWindow::createNavigationGroup()
 {
-    nav_box = new QGroupBox("Navigation", this);
+    nav_box = new QGroupBox("Navigation");
 
     current_room_label = new QLabel(nav_box);
 
