@@ -1,8 +1,8 @@
-#include "item.h"
-#include <string>
 #ifndef WEAPON_H
 #define WEAPON_H
 
+#include "item.h"
+#include <string>
 
 class weapon : public Item
 {

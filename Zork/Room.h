@@ -13,7 +13,8 @@ using std::vector;
 class Room {
 
 private:
-	string description;
+    string name;
+    string description;
 	map<string, Room*> exits;
 	string exitString();
     vector<Item*> itemsInRoom;
@@ -24,9 +25,10 @@ private:
 
 
 public:
-    int numberOfItems();
-	Room(string description);
-	void setExits(Room *north, Room *east, Room *south, Room *west);
+    Room(string name);
+
+    void setRoomDescription(string description);
+    void setExits(Room *north, Room *east, Room *south, Room *west);
 	string shortDescription();
 	string longDescription();
 	Room* nextRoom(string direction);
@@ -34,7 +36,7 @@ public:
     string displayItem();
     int isItemInRoom(string inString);
     void removeItemFromRoom(int location);
-
+    int numberOfItems();
     vector<Item*>* getItemsInRoom();
     vector<bool> getExits();
     bool isEnemyInRoom();

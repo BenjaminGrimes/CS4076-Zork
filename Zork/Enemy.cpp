@@ -22,8 +22,6 @@ Enemy &Enemy::operator++()
 
     if(health > MAX_HEALTH)
         health = MAX_HEALTH;
-    if(health < MIN_HEALTH)
-        health = MIN_HEALTH;
 
     return *this;
 }
@@ -34,8 +32,6 @@ Enemy Enemy::operator++(int)
 
     if(health > MAX_HEALTH)
         health = MAX_HEALTH;
-    if(health < MIN_HEALTH)
-        health = MIN_HEALTH;
 
     return *this;
 }
@@ -58,8 +54,6 @@ Enemy Enemy::operator+=(const int num)
 
     if(health > MAX_HEALTH)
         health = MAX_HEALTH;
-    if(health < MIN_HEALTH)
-        health = MIN_HEALTH;
 
     return *this;
 }
@@ -68,8 +62,6 @@ Enemy Enemy::operator-=(const int num)
 {
     health -= num;
 
-    if(health > MAX_HEALTH)
-        health = MAX_HEALTH;
     if(health < MIN_HEALTH)
         health = MIN_HEALTH;
 

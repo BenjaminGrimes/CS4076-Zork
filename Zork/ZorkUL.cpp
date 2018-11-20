@@ -2,48 +2,52 @@
 
 using namespace std;
 #include "ZorkUL.h"
-#include <weapon.h>
-/*
-int main(int argc, char argv[])
-{
-	ZorkUL temp;
-	temp.play();
-	return 0;
-}
-*/
 
 ZorkUL::ZorkUL() : player(100)
 {
     setInCombat(false);
 	createRooms();
 }
-void ZorkUL::RandomizeEnemy(){
+
+void ZorkUL::RandomizeEnemy()
+{
     int randRoom = getRandom<int>(9)+1;
-    rooms.at(randRoom) ->addEnemy(new Enemy());
+    rooms.at(randRoom)->addEnemy(new Enemy());
     cout << "Enemy add to room " << randRoom;
 }
+
 void ZorkUL::createRooms()
 {
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j;
 
 	a = new Room("a");
+        a->setRoomDescription("In room a");
         a->addItem(new Potion(Potion::PotionType::health_potion));
         a->addItem(new Potion(Potion::PotionType::magic_potion));
 	b = new Room("b");
+        b->setRoomDescription("In room b");
         b->addItem(new Potion(Potion::PotionType::magic_potion));
         b->addItem(new Potion(Potion::PotionType::health_potion));
 	c = new Room("c");
-        //c -> addItem(new weapon("Sword",getRandom<int>(100),getRandom<int>(100)));
+        c->setRoomDescription("In room c");
 	d = new Room("d");
+        d->setRoomDescription("In room d");
         //d->addEnemy(new Enemy());
 	e = new Room("e");
+        e->setRoomDescription("In room e");
 	f = new Room("f");
+        f->setRoomDescription("In room f");
 	g = new Room("g");
-	h = new Room("h");
-	i = new Room("i");
+        g->setRoomDescription("In room g");
+    h = new Room("h");
+        h->setRoomDescription("In room h");
+    i = new Room("i");
+        i->setRoomDescription("In room i");
     j = new Room("j");
+        j->setRoomDescription("In room j");
 
-//             (N, E, S, W)
+
+    //         (N, E, S, W)
 	a->setExits(f, b, d, c);
 	b->setExits(NULL, NULL, NULL, a);
 	c->setExits(NULL, a, NULL, NULL);
@@ -69,7 +73,6 @@ void ZorkUL::createRooms()
     rooms.push_back(j);
 
     RandomizeEnemy();
-
 }
 
 /**

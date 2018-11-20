@@ -1,11 +1,16 @@
 #include "Room.h"
 #include "Command.h"
 
-
-Room::Room(string description)
+Room::Room(string name)
 {
-	this->description = description;
+    this->name = name;
+    this->description = "";
     enemyInRoom = false;
+}
+
+void Room::setRoomDescription(string description)
+{
+    this->description = description;
 }
 
 void Room::setExits(Room *north, Room *east, Room *south, Room *west)
@@ -51,12 +56,12 @@ void Room::setExits(Room *north, Room *east, Room *south, Room *west)
 
 string Room::shortDescription()
 {
-	return description;
+    return name;
 }
 
 string Room::longDescription()
 {
-    return "room = " + description + "\n" + displayEnemy() + "\n";
+    return description;
 }
 
 string Room::exitString()
@@ -83,14 +88,14 @@ void Room::addItem(Item *inItem)
 void Room::removeItemFromRoom(int location)
 {
     itemsInRoom.erase(itemsInRoom.begin()+location);
-    for(int i = 0; i < itemsInRoom.size(); i++)
+    for(unsigned int i = 0; i < itemsInRoom.size(); i++)
         cout << itemsInRoom.at(i)->getShortDescription() << endl;
 }
 
 string Room::displayItem()
 {
     string tempString = "items in room = ";
-    int sizeItems = (itemsInRoom.size());
+    unsigned int sizeItems = (itemsInRoom.size());
     if (itemsInRoom.size() < 1)
     {
         tempString = "no items in room";
@@ -98,7 +103,7 @@ string Room::displayItem()
     else if (itemsInRoom.size() > 0)
     {
         int x = (0);
-        for (int n = sizeItems; n > 0; n--)
+        for (unsigned int n = sizeItems; n > 0; n--)
         {
             tempString = tempString + itemsInRoom[x]->getShortDescription() + "  " ;
             x++;
@@ -112,11 +117,7 @@ string Room::displayEnemy()
     string tempString;
     if(isEnemyInRoom())
     {
-        tempString = enemy.getDescription() + "\n-------------Starting Combat-------------";
-    }
-    else
-    {
-        tempString = "No enemy in room.";
+        tempString = "An enemy has appeared!\n-------------Starting Combat-------------\n";
     }
 
     return tempString;
@@ -129,7 +130,7 @@ int Room::numberOfItems()
 
 int Room::isItemInRoom(string inString)
 {
-    int sizeItems = (itemsInRoom.size());
+    unsigned int sizeItems = itemsInRoom.size();
     if (itemsInRoom.size() < 1)
     {
         return false;
@@ -137,7 +138,7 @@ int Room::isItemInRoom(string inString)
     else if (itemsInRoom.size() > 0)
     {
         int x = (0);
-        for (int n = sizeItems; n > 0; n--)
+        for (unsigned int n = sizeItems; n > 0; n--)
         {
             // compare inString with short description
             int tempFlag = inString.compare( itemsInRoom[x]->getShortDescription());

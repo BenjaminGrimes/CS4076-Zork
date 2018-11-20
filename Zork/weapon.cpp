@@ -8,19 +8,11 @@ weapon::weapon( string des , int in_damage , int in_durability ) : Item(descript
     description =des + " D " + to_string(in_damage) + "Dur " + to_string(in_durability);
 }
 
-/*
-weapon::weapon( int in_damage , int in_durability , int in_level ) : Item(description)
-{
-    weapon_damage = in_damage;
-    weapon_durability = in_durability;
-    weapon_level = in_level;
-}
-*/
-
 weapon weapon::operator ++()
 {
     this -> weapon_damage += 50;
     this -> weapon_durability +=50;
+    return *this;
 }
 
 int weapon::getDamage()
@@ -50,11 +42,11 @@ weapon weapon::operator --()
     else{
         weapon_damage = 0;
     }
+    return *this;
 }
 
 string weapon::getDescription()
 {
-    string temp = "";
-    temp += weapon_durability + "+" + weapon_damage;
+    string temp = std::to_string(weapon_durability) + "+" + std::to_string(weapon_damage);
     return temp;
 }
