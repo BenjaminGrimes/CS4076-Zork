@@ -247,7 +247,7 @@ void MainWindow::updateNavButtons()
 {
     //teleport_btn->setEnabled(false);
 
-    vector<bool>exits = zUL.currentRoom->getExits();
+    vector<bool>exits = zUL.getCurrentRoom()->getExits();
     cout << "N:" << exits[0] << " E:" << exits[1] << " S:" << exits[2] << " W:" << exits[3] << endl;
     if(!exits[0])
     {
@@ -381,6 +381,7 @@ void MainWindow::updatePlayerInfo()
 
     if(zUL.player.getHealth() <= 0)
     {
+        zUL.player.onDeath();
         QMessageBox mBox;
         mBox.setText("Game Over!");
         QAbstractButton *restartBtn = mBox.addButton("Restart", QMessageBox::YesRole);
@@ -402,7 +403,7 @@ void MainWindow::updatePlayerInfo()
 
 void MainWindow::updateCombatField()
 {
-    if(zUL.currentRoom->isEnemyInRoom())
+    if(zUL.getCurrentRoom()->isEnemyInRoom())
     {
         cout << "Enemy in room..." << endl;
 
@@ -419,7 +420,7 @@ void MainWindow::updateCombatField()
         use_magic_radio->setVisible(true);
 
         // Set widgets
-        enemy_name_label->setText("Name: " + QString::fromStdString(zUL.currentRoom->getEnemy().getName()));
+        enemy_name_label->setText("Name: " + QString::fromStdString(zUL.getCurrentRoom()->getEnemy().getName()));
         enemy_health_bar->setValue(zUL.getCurrentRoom()->getEnemy().getHealth());
         use_sword_radio->setChecked(true);
     }
@@ -615,7 +616,7 @@ void MainWindow::take_item_btn_onclick()
             string storyText = "You've taken " + itemsInRoom->at(i)->getShortDescription();
             story_text_browser->append(QString::fromStdString(storyText));
             // Remove the item from the room
-            zUL.currentRoom->removeItemFromRoom(i);
+            zUL.getCurrentRoom()->removeItemFromRoom(i);
 
             // Remove element from vector, this avoids a crash
             room_items_checkboxes.erase(room_items_checkboxes.begin()+i);

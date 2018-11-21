@@ -54,7 +54,7 @@ void Player::setMagicLevel(int _level)
 
 void Player::setMagicDamage(int _damage)
 {
-    magic_dmg = _damage;
+    //magic_dmg = _damage;
 }
 
 string Player::getSex()
@@ -79,12 +79,12 @@ int Player::getWeaponDamage()
 
 void Player::onDeath()
 {
-    // TODO show game over screen
+    cout << "Player has died..." << endl;
 }
 
 Player &Player::operator++()
 {
-    magic_level += 10;
+    magic_level += MAGIC_POTION_AMOUNT;
 
     if(magic_level > MAX_MAGIC_LEVEL)
         magic_level = MAX_MAGIC_LEVEL;
@@ -114,7 +114,7 @@ Player &Player::operator--()
 
 Player Player::operator--(int)
 {
-    magic_level -= 10;
+    magic_level -= MAGIC_POTION_AMOUNT;
 
     if(magic_level < MIN_MAGIC_LEVEL)
         magic_level = MIN_MAGIC_LEVEL;

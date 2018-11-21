@@ -21,91 +21,95 @@ void ZorkUL::createRooms()
         cave->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *woods = new Room("Woods");
-        woods->setRoomDescription("You find yourself in some spooky woods.\nYou are nowhere near home...");
+        woods->setRoomDescription("Woods?? I hate the woods!\nIt's so spoopy and I'm nowhere near home...");
 
     Room *abandoned_house = new Room("Abandoned House");
-        abandoned_house->setRoomDescription("You've stubbled upon an abandoned house.\nIt looks like bad things went on here...");
+        abandoned_house->setRoomDescription("An abandoned house?\nIt looks like bad things went down around here...");
         abandoned_house->addEnemy(new Enemy("Greeny"));
         abandoned_house->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *field = new Room("Field");
-        field->setRoomDescription("In Field");
+        field->setRoomDescription("Nothing as far as the eye can see.\nI should get going.");
 
     Room *meadow = new Room("Meadow");
-        meadow->setRoomDescription("In room e");
+        meadow->setRoomDescription("More nothing as far as the eye can see!");
 
     Room *abandoned_mill = new Room("Abandoned Mill");
-        abandoned_mill->setRoomDescription("In room f");
+        abandoned_mill->setRoomDescription("Not much around here, I should keep moving...");
         abandoned_mill->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *bridge = new Room("Bridge");
-        bridge->setRoomDescription("In room g");
+        bridge->setRoomDescription("Hmm I wonder if there's a troll under this bridge?");
         bridge->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *empty_well = new Room("Empty Well");
-        empty_well->setRoomDescription("In room h");
+        empty_well->setRoomDescription("Great the well has dried out...\nI guess I'll wait for a drink then.");
         empty_well->addItem(new Potion(Potion::PotionType::health_potion));
         empty_well->addItem(new Potion(Potion::PotionType::magic_potion));
         empty_well->addItem(new Potion(Potion::PotionType::teleportation_potion));
 
     Room *stables = new Room("Stables");
-        stables->setRoomDescription("In room i");
+        stables->setRoomDescription("Stables...\nBut no horses to around. How strange.");
         stables->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *abandoned_town = new Room("Abandoned Town");
-        abandoned_town->setRoomDescription("In room j");
+        abandoned_town->setRoomDescription("This town is pretty banged up.\nI wonder what happened...");
         abandoned_town->addEnemy(new Enemy("Fred the Fireman"));
         abandoned_town->addItem(new Potion(Potion::PotionType::health_potion));
         abandoned_town->addItem(new Potion(Potion::PotionType::magic_potion));
 
     Room *destroyed_fort = new Room("Destroyed Fort");
-        destroyed_fort->setRoomDescription("");
+        destroyed_fort->setRoomDescription("Boy oh boy this place has been F'ed up!");
         destroyed_fort->addEnemy(new Enemy("Philip the Orc"));
 
     Room *ridge = new Room("Ridge");
-        ridge->setRoomDescription("");
+        ridge->setRoomDescription("I better be careful...\nI don't want to lose my balance here.");
         ridge->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *mountains = new Room("Mountains");
-        mountains->setRoomDescription("");
+        mountains->setRoomDescription("I'm up so high here!\nI think I can see my house.");
         mountains->addEnemy(new Enemy("Todd the Elf"));
         mountains->addItem(new Potion(Potion::PotionType::magic_potion));
 
     Room *valley = new Room("Valley");
-        valley->setRoomDescription("");
+        valley->setRoomDescription("Walking... So much walking.....");
+        valley->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *shoreline = new Room("Shoreline");
-        shoreline->setRoomDescription("");
+        shoreline->setRoomDescription("Just smell that fresh air!\nI think I'm closer to home.");
         shoreline->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *river = new Room("River");
-        river->setRoomDescription("");
+        river->setRoomDescription("Great now I'm wet...");
+        river->addItem(new Potion(Potion::PotionType::magic_potion));
 
     Room *island = new Room("Island");
-        island->setRoomDescription("");
+        island->setRoomDescription("I think I could be King of this Island\nI should get moving, I'm close now.");
         island->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *beach = new Room("Beach");
-        beach->setRoomDescription("");
+        beach->setRoomDescription("The beach... so sandy");
 
     Room *rocky_hills = new Room("Rocky Hills");
-        rocky_hills->setRoomDescription("");
+        rocky_hills->setRoomDescription("Oh my feet! These hills are so rocky.");
+        rocky_hills->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *graveyard = new Room("Graveyard");
-        graveyard->setRoomDescription("Betty Birds");
+        graveyard->setRoomDescription("Graveyard? I hate graveyards...\nI shouldn't stick around here!");
         graveyard->addEnemy(new Enemy("Betty Birds"));
         graveyard->addItem(new Potion(Potion::PotionType::magic_potion));
 
     Room *old_castle = new Room("Old Castle");
-        old_castle->setRoomDescription("");
+        old_castle->setRoomDescription("Boy this castle sure is spooky!");
         old_castle->addEnemy(new Enemy("Hairy Harry"));
+        old_castle->addItem(new Potion(Potion::PotionType::health_potion));
         old_castle->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *grassland = new Room("Grassland");
-        grassland->setRoomDescription("You're almost at your journey end.");
+        grassland->setRoomDescription("I think I'm almost home!!!");
 
     Room *home = new Room("Home");
-        home->setRoomDescription("You have found your way home!");
+        home->setRoomDescription("Finally I'm home!\nIt's about time... I really needed to use the toilet!");
 
     // (N, E, S, W)
     cave->setExits(woods, field, NULL, NULL);

@@ -16,6 +16,7 @@ class ZorkUL {
 private:
     vector<Room*> rooms;
     bool inCombat;
+    Room *currentRoom;
 
     void createRooms();
 	void printHelp();
@@ -25,9 +26,9 @@ private:
     void displayItems();
 
 public:
-    string printWelcome();
-    Room *currentRoom;
     Player player;
+
+    string printWelcome();
     void RandomizeEnemy();
 	ZorkUL();
 	void play();
