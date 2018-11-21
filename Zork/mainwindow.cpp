@@ -13,6 +13,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    delete story_box;
+    delete player_box;
+    delete nav_box;
+    delete inventory_box;
+    delete map_box;
     delete ui;
 }
 
