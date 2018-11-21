@@ -1,9 +1,11 @@
 #include "Enemy.h"
 
 Enemy::Enemy() : Character (MAX_HEALTH)
+{}
+
+Enemy::Enemy(string n) : Character (MAX_HEALTH), name(n)
 {
-    name = "ENEMY";
-    dmg = 5;
+    dmg = 5 + rand() % (10-5+1);
 }
 
 void Enemy::onDeath()

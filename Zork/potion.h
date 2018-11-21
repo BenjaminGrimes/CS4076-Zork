@@ -3,6 +3,9 @@
 
 #include "item.h"
 
+#define HEALTH_POTION_AMOUNT 15
+#define MAGIC_POTION_AMOUNT 10
+
 class Potion : public Item
 {
 public:

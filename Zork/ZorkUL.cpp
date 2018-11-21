@@ -1,6 +1,3 @@
-#include <iostream>
-
-using namespace std;
 #include "ZorkUL.h"
 
 ZorkUL::ZorkUL() : player(100)
@@ -12,7 +9,7 @@ ZorkUL::ZorkUL() : player(100)
 void ZorkUL::RandomizeEnemy()
 {
     int randRoom = getRandom<int>(9)+1;
-    rooms.at(randRoom)->addEnemy(new Enemy());
+    rooms.at(randRoom)->addEnemy(new Enemy("Boogy"));
     cout << "Enemy add to room " << randRoom;
 }
 
@@ -21,13 +18,14 @@ void ZorkUL::createRooms()
     Room *cave = new Room("Cave");
         cave->setRoomDescription("An empty cave...\nTheres nothing to see here, I better get moving...");
         cave->addItem(new Potion(Potion::PotionType::health_potion));
+        cave->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *woods = new Room("Woods");
         woods->setRoomDescription("You find yourself in some spooky woods.\nYou are nowhere near home...");
 
     Room *abandoned_house = new Room("Abandoned House");
         abandoned_house->setRoomDescription("You've stubbled upon an abandoned house.\nIt looks like bad things went on here...");
-        abandoned_house->addEnemy(new Enemy());
+        abandoned_house->addEnemy(new Enemy("Greeny"));
         abandoned_house->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *field = new Room("Field");
@@ -38,43 +36,54 @@ void ZorkUL::createRooms()
 
     Room *abandoned_mill = new Room("Abandoned Mill");
         abandoned_mill->setRoomDescription("In room f");
+        abandoned_mill->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *bridge = new Room("Bridge");
         bridge->setRoomDescription("In room g");
+        bridge->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *empty_well = new Room("Empty Well");
         empty_well->setRoomDescription("In room h");
+        empty_well->addItem(new Potion(Potion::PotionType::health_potion));
         empty_well->addItem(new Potion(Potion::PotionType::magic_potion));
         empty_well->addItem(new Potion(Potion::PotionType::teleportation_potion));
 
     Room *stables = new Room("Stables");
         stables->setRoomDescription("In room i");
+        stables->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *abandoned_town = new Room("Abandoned Town");
         abandoned_town->setRoomDescription("In room j");
+        abandoned_town->addEnemy(new Enemy("Fred the Fireman"));
+        abandoned_town->addItem(new Potion(Potion::PotionType::health_potion));
+        abandoned_town->addItem(new Potion(Potion::PotionType::magic_potion));
 
     Room *destroyed_fort = new Room("Destroyed Fort");
         destroyed_fort->setRoomDescription("");
-        destroyed_fort->addEnemy(new Enemy());
+        destroyed_fort->addEnemy(new Enemy("Philip the Orc"));
 
     Room *ridge = new Room("Ridge");
         ridge->setRoomDescription("");
+        ridge->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *mountains = new Room("Mountains");
         mountains->setRoomDescription("");
-        mountains->addEnemy(new Enemy());
+        mountains->addEnemy(new Enemy("Todd the Elf"));
+        mountains->addItem(new Potion(Potion::PotionType::magic_potion));
 
     Room *valley = new Room("Valley");
         valley->setRoomDescription("");
 
     Room *shoreline = new Room("Shoreline");
         shoreline->setRoomDescription("");
+        shoreline->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *river = new Room("River");
         river->setRoomDescription("");
 
     Room *island = new Room("Island");
         island->setRoomDescription("");
+        island->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *beach = new Room("Beach");
         beach->setRoomDescription("");
@@ -83,10 +92,14 @@ void ZorkUL::createRooms()
         rocky_hills->setRoomDescription("");
 
     Room *graveyard = new Room("Graveyard");
-        graveyard->setRoomDescription("");
+        graveyard->setRoomDescription("Betty Birds");
+        graveyard->addEnemy(new Enemy("Betty Birds"));
+        graveyard->addItem(new Potion(Potion::PotionType::magic_potion));
 
     Room *old_castle = new Room("Old Castle");
         old_castle->setRoomDescription("");
+        old_castle->addEnemy(new Enemy("Hairy Harry"));
+        old_castle->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *grassland = new Room("Grassland");
         grassland->setRoomDescription("You're almost at your journey end.");
@@ -213,11 +226,12 @@ void ZorkUL::printMap()
 void ZorkUL::teleport()
 {
     srand(time(0));
-    int index = rand() & rooms.size();
+    // -1 so that we don't teleport into Home room
+    int index = rand() % (rooms.size() - 1);
     Room* nextRoom = rooms[index];
     while(nextRoom->shortDescription().compare(currentRoom->shortDescription()) == 0)
     {
-        index = rand() % rooms.size();
+        index = rand() % (rooms.size() - 1);
         nextRoom = rooms[index];
     }
     currentRoom = nextRoom;

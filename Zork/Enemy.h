@@ -17,6 +17,7 @@ private:
 
 public:
     Enemy();
+    Enemy(string n);
 
     void onDeath();
 

@@ -3,9 +3,9 @@
 
 #include "Character.h"
 #include "weapon.h"
-
+#include "item.h"
+#include "potion.h"
 #include <vector>
-#include <item.h>
 #include <QString>
 #include <string>
 #include <QMessageBox>

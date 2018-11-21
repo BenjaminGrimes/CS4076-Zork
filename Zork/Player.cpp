@@ -3,8 +3,8 @@
 Player::Player(int health) : Character (health)
 {
     magic_level = 50;
-    magic_dmg = 15;
-    p_weaponPtr = new weapon("Sword", 10, 10);
+    magic_dmg = 23;
+    p_weaponPtr = new weapon("Sword", 17, 20);
 }
 
 
@@ -94,7 +94,7 @@ Player &Player::operator++()
 
 Player Player::operator++( int )
 {
-    magic_level += 10;
+    magic_level += MAGIC_POTION_AMOUNT;
 
     if(magic_level > MAX_MAGIC_LEVEL)
         magic_level = MAX_MAGIC_LEVEL;
@@ -104,7 +104,7 @@ Player Player::operator++( int )
 
 Player &Player::operator--()
 {
-    magic_level -= 10;
+    magic_level -= MAGIC_POTION_AMOUNT;
 
     if(magic_level < MIN_MAGIC_LEVEL)
         magic_level = MIN_MAGIC_LEVEL;

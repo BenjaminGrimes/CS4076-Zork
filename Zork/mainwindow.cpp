@@ -492,20 +492,29 @@ void MainWindow::endCombat()
 
 void MainWindow::teleport_btn_onclick()
 {
-    zUL.teleport();
-    teleport_btn->setEnabled(false);
-    teleport_btn->setToolTip("Teleport unavailable");
-    string message = "You have teleported to " + zUL.getCurrentRoomName();
-    story_text_browser->append(QString::fromStdString(message));
-
-    updateRoomLabel();
-    updateStoryText();
-    updateNavButtons();
-    updateRoomItems();
-    if(zUL.getCurrentRoom()->isEnemyInRoom())
+    if(zUL.getCurrentRoom()->isEnemyInRoom() == false)
     {
-        startCombat();
-        updateCombatField();
+        zUL.teleport();
+        teleport_btn->setEnabled(false);
+        teleport_btn->setToolTip("Teleport unavailable");
+        string message = "You have teleported to " + zUL.getCurrentRoomName();
+        story_text_browser->append(QString::fromStdString(message));
+
+        updateRoomLabel();
+        updateStoryText();
+        updateNavButtons();
+        updateRoomItems();
+        if(zUL.getCurrentRoom()->isEnemyInRoom())
+        {
+            startCombat();
+            updateCombatField();
+        }
+    }
+    else
+    {
+        QMessageBox mBox;
+        mBox.setText("You cannot teleport\n during combat.");
+        mBox.exec();
     }
 }
 
@@ -557,25 +566,38 @@ void MainWindow::use_item_btn_onclick()
                 case Potion::PotionType::health_potion:
                     cout << "Increasing health..." << endl;
                     story_text_browser->append("You've used a health potion!");
-                    zUL.player += 10;
+                    zUL.player += HEALTH_POTION_AMOUNT;
+                    zUL.player.removeItemFromInventory(i);
+                    // Remove item from the list
+                    delete listWidget->item(i);
                     break;
                 case Potion::PotionType::magic_potion:
                     cout << "Increasing Magic level..." << endl;
                     story_text_browser->append("You've used a magic potion!");
                     zUL.player++;
+                    zUL.player.removeItemFromInventory(i);
+                    // Remove item from the list
+                    delete listWidget->item(i);
                 break;
                 case Potion::PotionType::teleportation_potion:
+                if(zUL.getCurrentRoom()->isEnemyInRoom() == false)
+                {
                     cout << "Teleport now available..." << endl;
                     story_text_browser->append("You've used a teleportation potion.\nTeleportation is now available!");
                     teleport_btn->setEnabled(true);
                     teleport_btn->setToolTip("");
+                    zUL.player.removeItemFromInventory(i);
+                    // Remove item from the list
+                    delete listWidget->item(i);
+                }
+                else
+                {
+                    QMessageBox mBox;
+                    mBox.setText("You cannot use a teleportation potion\nduring combat.");
+                    mBox.exec();
+                }
                 break;
             }
-
-            zUL.player.removeItemFromInventory(i);
-
-            // Remove item from the list
-            delete listWidget->item(i);
         }
     }
     updatePlayerInfo();
@@ -615,7 +637,7 @@ void MainWindow::attack_btn_onclick()
     if(use_sword_radio->isChecked())
     {
         e -= zUL.player.getWeaponDamage();
-        story_text_browser->append("You attacked the enemy with your sword!");
+        story_text_browser->append(QString::fromStdString("You attacked " + e.getName() + " with your sword!"));
     }
     else if(use_magic_radio->isChecked())
     {
@@ -624,19 +646,19 @@ void MainWindow::attack_btn_onclick()
         {
             e -= zUL.player.getMagicDamage();
             zUL.player--;
-            story_text_browser->append("You attacked the enemy with magic!");
+            story_text_browser->append(QString::fromStdString("You attacked " + e.getName() + " with magic!"));
         }
     }
     if(e.getHealth() > 0)
     {
         zUL.player -= e.getDamage();
-        story_text_browser->append("The enemy hit back!");
+        story_text_browser->append(QString::fromStdString(e.getName() + " hit back!"));
         updatePlayerInfo();
     }
     else
     {
         zUL.getCurrentRoom()->removeEnemy();
-        story_text_browser->append("The enemy has been defeated!");
+        story_text_browser->append(QString::fromStdString(e.getName() + " has been defeated!"));
         endCombat();
     }
     updateCombatField();
@@ -655,5 +677,25 @@ void MainWindow::goDirection(QString direction)
     {
         startCombat();
         updateCombatField();
+    }
+    else if(zUL.getCurrentRoom()->shortDescription().compare("Home") == 0)
+    {
+        cout << "You are home!";
+        QMessageBox mBox;
+        mBox.setText("Well Done!\nYou made it home!");
+        QAbstractButton *playAgainBtn = mBox.addButton("Play Again", QMessageBox::YesRole);
+        QAbstractButton *exitBtn = mBox.addButton("Exit", QMessageBox::NoRole);
+        mBox.exec();
+
+        if(mBox.clickedButton() == playAgainBtn)
+        {
+            cout << "Restarting..." << endl;
+            restartAct->trigger();
+        }
+        else if(mBox.clickedButton() == exitBtn)
+        {
+            cout << "Exiting..." << endl;
+            qApp->exit(0);
+        }
     }
 }
