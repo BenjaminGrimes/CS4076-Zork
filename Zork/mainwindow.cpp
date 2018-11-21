@@ -312,6 +312,7 @@ void MainWindow::updateRoomLabel()
 
 void MainWindow::updateStoryText()
 {
+    story_text_browser->append("===============================");
     story_text_browser->append(QString::fromStdString(zUL.getCurrentRoomDescription()));
 }
 
@@ -433,6 +434,7 @@ void MainWindow::startCombat()
 {
     // Start combat
     zUL.setInCombat(true);
+    story_text_browser->append("-----------Entering Combat----------");
 
     // disable nav buttons
     north_btn->setEnabled(false);
@@ -541,10 +543,12 @@ void MainWindow::use_item_btn_onclick()
             {
                 case Potion::PotionType::health_potion:
                     cout << "Increasing health..." << endl;
+                    story_text_browser->append("You've used a health potion!");
                     zUL.player += 10;
                     break;
                 case Potion::PotionType::magic_potion:
                     cout << "Increasing Magic level..." << endl;
+                    story_text_browser->append("You've used a magic potion!");
                     zUL.player++;
                 break;
             }
@@ -567,7 +571,8 @@ void MainWindow::take_item_btn_onclick()
         {
             cout << room_items_checkboxes.at(i)->text().toStdString() << " is checked" << endl;
             zUL.player.addItemToInvetory(itemsInRoom->at(i));
-
+            string storyText = "You've taken " + itemsInRoom->at(i)->getShortDescription();
+            story_text_browser->append(QString::fromStdString(storyText));
             // Remove the item from the room
             zUL.currentRoom->removeItemFromRoom(i);
 
@@ -591,7 +596,8 @@ void MainWindow::attack_btn_onclick()
     if(use_sword_radio->isChecked())
     {
         e -= zUL.player.getWeaponDamage();
-        if(e.getHealth() > 0)
+        story_text_browser->append("You attacked the enemy with your sword!");
+        /*if(e.getHealth() > 0)
         {
             zUL.player -= e.getDamage();
             updatePlayerInfo();
@@ -599,8 +605,9 @@ void MainWindow::attack_btn_onclick()
         else
         {
             current_room->removeEnemy();
+            story_text_browser->append("The enemy has been defeated!");
             endCombat();
-        }
+        }*/
     }
     else if(use_magic_radio->isChecked())
     {
@@ -609,17 +616,32 @@ void MainWindow::attack_btn_onclick()
         {
             e -= zUL.player.getMagicDamage();
             zUL.player--;
-            if(e.getHealth() > 0)
+            story_text_browser->append("You attacked the enemy with magic!");
+            /*if(e.getHealth() > 0)
             {
                 zUL.player -= e.getDamage();
+                story_text_browser->append("The enemy hit back!");
                 updatePlayerInfo();
             }
             else
             {
                 current_room->removeEnemy();
+                story_text_browser->append("The enemy has been defeated!");
                 endCombat();
-            }
+            }*/
         }
+    }
+    if(e.getHealth() > 0)
+    {
+        zUL.player -= e.getDamage();
+        story_text_browser->append("The enemy hit back!");
+        updatePlayerInfo();
+    }
+    else
+    {
+        zUL.getCurrentRoom()->removeEnemy();
+        story_text_browser->append("The enemy has been defeated!");
+        endCombat();
     }
     updateCombatField();
 }

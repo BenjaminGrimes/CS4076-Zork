@@ -119,7 +119,7 @@ string Room::displayEnemy()
     string tempString;
     if(isEnemyInRoom())
     {
-        tempString = "An enemy has appeared!\n-------------Starting Combat-------------\n";
+        tempString = "An enemy has appeared!";
     }
 
     return tempString;

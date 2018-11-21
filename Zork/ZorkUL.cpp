@@ -23,7 +23,7 @@ void ZorkUL::createRooms()
         cave->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *woods = new Room("Woods");
-        woods->setRoomDescription("You find yourself in some spooky woods.\nYou are nowhere near home...\n");
+        woods->setRoomDescription("You find yourself in some spooky woods.\nYou are nowhere near home...");
 
     Room *abandoned_house = new Room("Abandoned House");
         abandoned_house->setRoomDescription("You've stubbled upon an abandoned house.\nIt looks like bad things went on here...");
@@ -91,7 +91,7 @@ void ZorkUL::createRooms()
         grassland->setRoomDescription("You're almost at your journey end.");
 
     Room *home = new Room("Home");
-        home->setRoomDescription("You have found your way home!\n");
+        home->setRoomDescription("You have found your way home!");
 
     // (N, E, S, W)
     cave->setExits(woods, field, NULL, NULL);
