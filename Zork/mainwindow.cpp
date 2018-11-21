@@ -307,7 +307,7 @@ void MainWindow::updateRoomLabel()
 {
     string temp = zUL.getCurrentRoomName();
     QString c_room = QString::fromStdString(temp);
-    current_room_label->setText("Current Room: " + c_room);
+    current_room_label->setText("Current Room:\n " + c_room);
 }
 
 void MainWindow::updateStoryText()
@@ -372,8 +372,10 @@ void MainWindow::updateInventory()
 
 void MainWindow::updatePlayerInfo()
 {
-    cout << "Updating player info..." << endl;
-    cout << "Player health: " << zUL.player.getHealth() << endl;
+    //cout << "Updating player info..." << endl;
+    //cout << "Player health: " << zUL.player.getHealth() << endl;
+    player_health_bar->setValue(zUL.player.getHealth());
+    player_magic_bar->setValue(zUL.player.getMagicLevel());
 
     if(zUL.player.getHealth() <= 0)
     {
@@ -393,11 +395,6 @@ void MainWindow::updatePlayerInfo()
             cout << "Exiting..." << endl;
             qApp->exit(0);
         }
-    }
-    else
-    {
-        player_health_bar->setValue(zUL.player.getHealth());
-        player_magic_bar->setValue(zUL.player.getMagicLevel());
     }
 }
 

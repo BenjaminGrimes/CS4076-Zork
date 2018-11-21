@@ -61,6 +61,7 @@ void ZorkUL::createRooms()
 
     Room *mountains = new Room("Mountains");
         mountains->setRoomDescription("");
+        mountains->addEnemy(new Enemy());
 
     Room *valley = new Room("Valley");
         valley->setRoomDescription("");
@@ -143,7 +144,7 @@ void ZorkUL::createRooms()
     rooms.push_back(grassland);
     rooms.push_back(home);
 
-    RandomizeEnemy();
+    //RandomizeEnemy();
 }
 
 /**
