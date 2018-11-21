@@ -45,6 +45,7 @@ void ZorkUL::createRooms()
     Room *empty_well = new Room("Empty Well");
         empty_well->setRoomDescription("In room h");
         empty_well->addItem(new Potion(Potion::PotionType::magic_potion));
+        empty_well->addItem(new Potion(Potion::PotionType::teleportation_potion));
 
     Room *stables = new Room("Stables");
         stables->setRoomDescription("In room i");

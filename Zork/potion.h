@@ -6,7 +6,7 @@
 class Potion : public Item
 {
 public:
-    enum PotionType {health_potion, magic_potion};
+    enum PotionType {health_potion, magic_potion, teleportation_potion};
 
     Potion(PotionType t);
 

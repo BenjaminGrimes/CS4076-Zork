@@ -597,17 +597,6 @@ void MainWindow::attack_btn_onclick()
     {
         e -= zUL.player.getWeaponDamage();
         story_text_browser->append("You attacked the enemy with your sword!");
-        /*if(e.getHealth() > 0)
-        {
-            zUL.player -= e.getDamage();
-            updatePlayerInfo();
-        }
-        else
-        {
-            current_room->removeEnemy();
-            story_text_browser->append("The enemy has been defeated!");
-            endCombat();
-        }*/
     }
     else if(use_magic_radio->isChecked())
     {
@@ -617,18 +606,6 @@ void MainWindow::attack_btn_onclick()
             e -= zUL.player.getMagicDamage();
             zUL.player--;
             story_text_browser->append("You attacked the enemy with magic!");
-            /*if(e.getHealth() > 0)
-            {
-                zUL.player -= e.getDamage();
-                story_text_browser->append("The enemy hit back!");
-                updatePlayerInfo();
-            }
-            else
-            {
-                current_room->removeEnemy();
-                story_text_browser->append("The enemy has been defeated!");
-                endCombat();
-            }*/
         }
     }
     if(e.getHealth() > 0)
