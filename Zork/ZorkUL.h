@@ -21,7 +21,6 @@ private:
     bool inCombat;
 
     void createRooms();
-	void printWelcome();
 	bool processCommand(Command command);
 	void printHelp();
     void printMap();
@@ -31,6 +30,7 @@ private:
     void displayItems();
 
 public:
+    string printWelcome();
     Room *currentRoom;
     Player player;
     void RandomizeEnemy();

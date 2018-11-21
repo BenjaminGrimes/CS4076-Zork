@@ -19,78 +19,78 @@ void ZorkUL::RandomizeEnemy()
 void ZorkUL::createRooms()
 {
     Room *cave = new Room("Cave");
-    cave->setRoomDescription("In Cave");
-    cave->addItem(new Potion(Potion::PotionType::health_potion));
-    cave->addItem(new Potion(Potion::PotionType::magic_potion));
+        cave->setRoomDescription("An empty cave...\nTheres nothing to see here, I better get moving...");
+        cave->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *woods = new Room("Woods");
-    woods->setRoomDescription("In Woods");
-    woods->addItem(new Potion(Potion::PotionType::magic_potion));
-    woods->addItem(new Potion(Potion::PotionType::health_potion));
+        woods->setRoomDescription("You find yourself in some spooky woods.\nYou are nowhere near home...\n");
 
     Room *abandoned_house = new Room("Abandoned House");
-    abandoned_house->setRoomDescription("In Abandoned House");
+        abandoned_house->setRoomDescription("You've stubbled upon an abandoned house.\nIt looks like bad things went on here...");
+        abandoned_house->addEnemy(new Enemy());
+        abandoned_house->addItem(new Potion(Potion::PotionType::health_potion));
 
     Room *field = new Room("Field");
-    field->setRoomDescription("In Field");
-    //d->addEnemy(new Enemy());
+        field->setRoomDescription("In Field");
 
     Room *meadow = new Room("Meadow");
-    meadow->setRoomDescription("In room e");
+        meadow->setRoomDescription("In room e");
 
     Room *abandoned_mill = new Room("Abandoned Mill");
-    abandoned_mill->setRoomDescription("In room f");
+        abandoned_mill->setRoomDescription("In room f");
 
     Room *bridge = new Room("Bridge");
-    bridge->setRoomDescription("In room g");
+        bridge->setRoomDescription("In room g");
 
     Room *empty_well = new Room("Empty Well");
-    empty_well->setRoomDescription("In room h");
+        empty_well->setRoomDescription("In room h");
+        empty_well->addItem(new Potion(Potion::PotionType::magic_potion));
 
     Room *stables = new Room("Stables");
-    stables->setRoomDescription("In room i");
+        stables->setRoomDescription("In room i");
 
     Room *abandoned_town = new Room("Abandoned Town");
-    abandoned_town->setRoomDescription("In room j");
+        abandoned_town->setRoomDescription("In room j");
 
     Room *destroyed_fort = new Room("Destroyed Fort");
-    destroyed_fort->setRoomDescription("");
+        destroyed_fort->setRoomDescription("");
+        destroyed_fort->addEnemy(new Enemy());
 
     Room *ridge = new Room("Ridge");
-    ridge->setRoomDescription("");
+        ridge->setRoomDescription("");
 
     Room *mountains = new Room("Mountains");
-    mountains->setRoomDescription("");
+        mountains->setRoomDescription("");
 
     Room *valley = new Room("Valley");
-    valley->setRoomDescription("");
+        valley->setRoomDescription("");
 
     Room *shoreline = new Room("Shoreline");
-    shoreline->setRoomDescription("");
+        shoreline->setRoomDescription("");
 
     Room *river = new Room("River");
-    river->setRoomDescription("");
+        river->setRoomDescription("");
 
     Room *island = new Room("Island");
-    island->setRoomDescription("");
+        island->setRoomDescription("");
 
     Room *beach = new Room("Beach");
-    beach->setRoomDescription("");
+        beach->setRoomDescription("");
 
     Room *rocky_hills = new Room("Rocky Hills");
-    rocky_hills->setRoomDescription("");
+        rocky_hills->setRoomDescription("");
 
     Room *graveyard = new Room("Graveyard");
-    graveyard->setRoomDescription("");
+        graveyard->setRoomDescription("");
 
     Room *old_castle = new Room("Old Castle");
-    old_castle->setRoomDescription("");
+        old_castle->setRoomDescription("");
 
     Room *grassland = new Room("Grassland");
-    grassland->setRoomDescription("");
+        grassland->setRoomDescription("You're almost at your journey end.");
 
     Room *home = new Room("Home");
-    home->setRoomDescription("");
+        home->setRoomDescription("You have found your way home!\n");
 
     // (N, E, S, W)
     cave->setExits(woods, field, NULL, NULL);
@@ -170,12 +170,9 @@ void ZorkUL::play()
 	cout << "end" << endl;
 }
 
-void ZorkUL::printWelcome()
+string ZorkUL::printWelcome()
 {
-	cout << "start"<< endl;
-	cout << "info for help"<< endl;
-	cout << endl;
-	cout << currentRoom->longDescription() << endl;
+    return "You have woken in a cave, find your way home...\n";
 }
 
 /**

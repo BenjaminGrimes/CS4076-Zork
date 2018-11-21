@@ -95,6 +95,7 @@ void MainWindow::createStoryGroup()
     story_box = new QGroupBox("Story");
 
     story_text_browser = new QTextBrowser(this);
+    story_text_browser->append(QString::fromStdString(zUL.printWelcome()));
 
     combat_container = new QVBoxLayout();
 
