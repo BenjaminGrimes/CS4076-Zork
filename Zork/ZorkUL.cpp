@@ -105,7 +105,7 @@ void ZorkUL::createRooms()
     empty_well->setExits(bridge, NULL, NULL, abandoned_town);
     stables->setExits(NULL, NULL, abandoned_town, field);
     abandoned_town->setExits(stables, empty_well, destroyed_fort, NULL);
-    destroyed_fort->setExits(abandoned_house, NULL, ridge, NULL);
+    destroyed_fort->setExits(abandoned_town, NULL, ridge, NULL);
     ridge->setExits(destroyed_fort, mountains, NULL, NULL);
     mountains->setExits(NULL, NULL, valley, ridge);
     valley->setExits(mountains, NULL, NULL, shoreline);
@@ -212,11 +212,15 @@ void ZorkUL::printMap()
 
 void ZorkUL::teleport()
 {
-    // TODO Check if teleporting to currentRoom.
-    int index = rand() % rooms.size();
+    srand(time(0));
+    int index = rand() & rooms.size();
     Room* nextRoom = rooms[index];
+    while(nextRoom->shortDescription().compare(currentRoom->shortDescription()) == 0)
+    {
+        index = rand() % rooms.size();
+        nextRoom = rooms[index];
+    }
     currentRoom = nextRoom;
-    cout << currentRoom->longDescription() << endl;
 }
 
 Room* ZorkUL::getCurrentRoom()

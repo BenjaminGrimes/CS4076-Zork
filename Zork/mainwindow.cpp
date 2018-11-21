@@ -219,6 +219,7 @@ void MainWindow::createNavigationGroup()
 
     teleport_btn = new QPushButton("Teleport", nav_box);
     teleport_btn->connect(teleport_btn, SIGNAL(released()), this, SLOT(teleport_btn_onclick()));
+    teleport_btn->setEnabled(false);
 
     north_btn = new QPushButton("North", nav_box);
     north_btn->connect(north_btn, SIGNAL(released()), this, SLOT(north_btn_onclick()));
@@ -244,7 +245,7 @@ void MainWindow::createNavigationGroup()
 
 void MainWindow::updateNavButtons()
 {
-    teleport_btn->setEnabled(false);
+    //teleport_btn->setEnabled(false);
 
     vector<bool>exits = zUL.currentRoom->getExits();
     cout << "N:" << exits[0] << " E:" << exits[1] << " S:" << exits[2] << " W:" << exits[3] << endl;
@@ -293,13 +294,13 @@ void MainWindow::updateNavButtons()
 
     if(!exits[4])
     {
-        teleport_btn->setEnabled(false);
-        teleport_btn->setToolTip("Teleport unavailable");
+        //teleport_btn->setEnabled(false);
+        //teleport_btn->setToolTip("Teleport unavailable");
     }
     else
     {
-        teleport_btn->setEnabled(true);
-        teleport_btn->setToolTip("");
+        //teleport_btn->setEnabled(true);
+        //teleport_btn->setToolTip("");
     }
 }
 
@@ -436,6 +437,8 @@ void MainWindow::startCombat()
     zUL.setInCombat(true);
     story_text_browser->append("-----------Entering Combat----------");
 
+    attack_btn->setChecked(false);
+
     // disable nav buttons
     north_btn->setEnabled(false);
     north_btn->setToolTip("Cannot go to room, you are in combat");
@@ -490,38 +493,48 @@ void MainWindow::endCombat()
 void MainWindow::teleport_btn_onclick()
 {
     zUL.teleport();
-    string message = zUL.getCurrentRoomName();
-    QString m = QString::fromStdString(message);
-    QMessageBox messageBox(this);
-    messageBox.about(this, "Current Room", m);
+    teleport_btn->setEnabled(false);
+    teleport_btn->setToolTip("Teleport unavailable");
+    string message = "You have teleported to " + zUL.getCurrentRoomName();
+    story_text_browser->append(QString::fromStdString(message));
+
+    updateRoomLabel();
+    updateStoryText();
+    updateNavButtons();
+    updateRoomItems();
+    if(zUL.getCurrentRoom()->isEnemyInRoom())
+    {
+        startCombat();
+        updateCombatField();
+    }
 }
 
 void MainWindow::north_btn_onclick()
 {
-    north_btn->setChecked(false);
     QString direction = north_btn->text();
     goDirection(direction);
+    north_btn->setChecked(false);
 }
 
 void MainWindow::south_btn_onclick()
 {
-    south_btn->setChecked(false);
     QString direction = south_btn->text();
     goDirection(direction);
+    south_btn->setChecked(false);
 }
 
 void MainWindow::east_btn_onclick()
 {
-    east_btn->setChecked(false);
     QString direction = east_btn->text();
     goDirection(direction);
+    east_btn->setChecked(false);
 }
 
 void MainWindow::west_btn_onclick()
 {
-    west_btn->setChecked(false);
     QString direction = west_btn->text();
     goDirection(direction);
+    west_btn->setChecked(false);
 }
 
 void MainWindow::use_item_btn_onclick()
@@ -550,6 +563,12 @@ void MainWindow::use_item_btn_onclick()
                     cout << "Increasing Magic level..." << endl;
                     story_text_browser->append("You've used a magic potion!");
                     zUL.player++;
+                break;
+                case Potion::PotionType::teleportation_potion:
+                    cout << "Teleport now available..." << endl;
+                    story_text_browser->append("You've used a teleportation potion.\nTeleportation is now available!");
+                    teleport_btn->setEnabled(true);
+                    teleport_btn->setToolTip("");
                 break;
             }
 
