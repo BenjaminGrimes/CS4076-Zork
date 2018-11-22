@@ -13,6 +13,10 @@
 
 #include "mainwindow.h"
 
+/**
+ * @author Benjamin
+ */
+
 namespace Ui {
 class StartMenuWindow;
 }

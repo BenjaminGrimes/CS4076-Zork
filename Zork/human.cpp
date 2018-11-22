@@ -1,5 +1,9 @@
 #include "human.h"
 
+/**
+ * @author Daniel
+ */
+
 human::human() : race(){
     setAtt();
 }

@@ -10,6 +10,10 @@
 using namespace std;
 using std::vector;
 
+/**
+ * @author Benjamin
+ */
+
 class Room {
 
 private:

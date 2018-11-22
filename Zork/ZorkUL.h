@@ -12,6 +12,11 @@
 #include <vector>
 using namespace std;
 
+/**
+ * @author Benjamin
+ * Template by Daniel
+ */
+
 class ZorkUL {
 private:
     vector<Room*> rooms;

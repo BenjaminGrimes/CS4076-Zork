@@ -1,6 +1,10 @@
 #include "Room.h"
 #include "Command.h"
 
+/**
+ * @author Benjamin
+ */
+
 Room::Room(string name)
 {
     this->name = name;

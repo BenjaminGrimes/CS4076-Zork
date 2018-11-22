@@ -1,6 +1,10 @@
 #include "startmenuwindow.h"
 #include "ui_startmenuwindow.h"
 
+/**
+ * @author Benjamin
+ */
+
 #define MIN_AGE_VAL 1
 #define MAX_AGE_VAL 100
 

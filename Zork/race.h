@@ -2,6 +2,11 @@
 #define RACE_H
 #include <string>
 using namespace std;
+
+/**
+ * @author Daniel
+ */
+
 class race {
 
 private:

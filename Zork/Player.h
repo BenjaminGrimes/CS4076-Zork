@@ -10,6 +10,10 @@
 #include <string>
 #include <QMessageBox>
 
+/**
+ * @author Benjamin
+ */
+
 using std::string;
 
 #define MAX_HEALTH 100

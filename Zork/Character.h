@@ -33,6 +33,10 @@ public:
 #include <vector>
 #include <string>
 
+/**
+ * @author Benjamin
+ */
+
 // Abstract class: has at least one pure virtual function
 class Character
 {

@@ -8,6 +8,10 @@ using namespace std;
 
 #define DEFAULT_DAMAGE 0
 
+/**
+ * @author Benjamin
+ */
+
 class Item {
 private:
 

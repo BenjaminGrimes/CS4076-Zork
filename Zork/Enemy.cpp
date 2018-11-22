@@ -1,5 +1,9 @@
 #include "Enemy.h"
 
+/**
+ * @author Benjamin
+ */
+
 Enemy::Enemy() : Character (MAX_HEALTH)
 {}
 

@@ -1,5 +1,10 @@
 #include "Player.h"
 
+/**
+ * @author Benjamin
+ * Functions By Daniel: setAttributes(), setMagicDamage(), setMagicLevel(), setRace()
+ */
+
 Player::Player(int health) : Character (health)
 {
     magic_level = 50;
@@ -58,6 +63,13 @@ int Player::getAge()
     return age;
 }
 
+/*
+void Player::setAttributes(){
+    setMagicLevel( pl_race->getMagicLevel());
+    setMagicDamage( pl_race->getMagicDamage());
+}
+*/
+
 void Player::setMagicLevel(int _level)
 {
     magic_level = _level;
@@ -92,6 +104,22 @@ void Player::onDeath()
 {
     cout << "Player has died..." << endl;
 }
+
+/*
+void Player::setRace(){
+    qsrand(time(NULL));
+    int rand = (qrand()%2)+1;
+    if(rand ==1){
+        orc *a = new orc();
+        this -> pl_race = a;
+    }else if(rand ==2){
+        mage *b = new mage();
+        this -> pl_race = b;
+    }else if(rand ==3){
+        human *c = new human();
+        this -> pl_race = c;
+    }
+ }*/
 
 Player &Player::operator++()
 {

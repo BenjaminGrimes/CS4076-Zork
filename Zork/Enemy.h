@@ -9,6 +9,11 @@ using std::string;
 #define MAX_HEALTH 100
 #define MIN_HEALTH 0
 
+
+/**
+ * @author Benjamin
+ */
+
 class Enemy : public Character
 {
 private:

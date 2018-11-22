@@ -1,5 +1,10 @@
 #include "ZorkUL.h"
 
+/**
+ * @author Benjamin
+ * Functions By Daniel: RandomizeEnemy()
+ */
+
 ZorkUL::ZorkUL() : player(100)
 {
     setInCombat(false);

@@ -1,5 +1,9 @@
 #include "race.h"
 
+/**
+ * @author Daniel
+ */
+
 race::race (){
 
 }

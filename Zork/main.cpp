@@ -2,6 +2,10 @@
 #include "startmenuwindow.h"
 #include <QApplication>
 
+/**
+ * @author Benjamin
+ */
+
 int main(int argc, char *argv[])
 {
     int currentExitCode = 0;

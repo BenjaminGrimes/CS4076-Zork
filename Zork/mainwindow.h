@@ -23,6 +23,10 @@
 #include "weapon.h"
 #include "potion.h"
 
+/**
+ * @author Benjamin
+ */
+
 namespace Ui {
 class MainWindow;
 }

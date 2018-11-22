@@ -1,5 +1,10 @@
 #include "weapon.h"
 
+/**
+ * @author Daniel
+ * Fixed by Benjamins
+ */
+
 weapon::weapon( string des , int in_damage , int in_durability ) : Item(description)
 {
     weapon_damage = in_damage;

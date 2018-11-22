@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+/**
+ * @author Benjamin
+ */
+
 int const MainWindow::EXIT_CODE_REBOOT = -123456789;
 
 MainWindow::MainWindow(QWidget *parent) :

@@ -22,6 +22,10 @@ string Characterx::longDescription()
 
 #include "Character.h"
 
+/**
+ * @author Benjamin
+ */
+
 Character::Character(int h)
     : health( h )
 {

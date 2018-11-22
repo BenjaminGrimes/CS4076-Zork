@@ -1,5 +1,9 @@
 #include "orc.h"
 
+/**
+ * @author Daniel
+ */
+
 orc::orc() : race(){
      setAtt();
 }

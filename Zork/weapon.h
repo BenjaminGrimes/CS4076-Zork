@@ -4,6 +4,10 @@
 #include "item.h"
 #include <string>
 
+/**
+ * @author Daniel
+ */
+
 class weapon : public Item
 {
 

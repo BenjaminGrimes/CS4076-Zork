@@ -1,5 +1,9 @@
 #include "item.h"
 
+/**
+ * @author Benjamin
+ */
+
 Item::Item(string inDescription)
 {
     description = inDescription;

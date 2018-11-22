@@ -1,5 +1,9 @@
 #include "mage.h"
 
+/**
+ * @author Daniel
+ */
+
 mage::mage() : race(){
     setAtt();
 }
