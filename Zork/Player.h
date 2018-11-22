@@ -34,6 +34,7 @@ private:
 
 public:
     Player(int health);
+    ~Player();
 
     void addItemToInvetory(Item  *item);
     void removeItemFromInventory(int pos);

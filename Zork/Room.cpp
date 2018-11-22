@@ -8,6 +8,18 @@ Room::Room(string name)
     enemyInRoom = false;
 }
 
+Room::~Room()
+{
+    cout << "Destroying room " << shortDescription() << "..." << endl;
+    /*for(vector<Item*>::iterator itr = itemsInRoom.begin(); itr != itemsInRoom.end(); itr++)
+    {
+        cout << "Deleting item" << endl;
+        delete (*itr);
+    }
+    itemsInRoom.clear();
+    */
+}
+
 void Room::setRoomDescription(string description)
 {
     this->description = description;

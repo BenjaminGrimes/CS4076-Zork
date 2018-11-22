@@ -6,6 +6,17 @@ ZorkUL::ZorkUL() : player(100)
 	createRooms();
 }
 
+ZorkUL::~ZorkUL()
+{
+    cout << "Destroying ZorkUL..." << endl;
+    for(vector<Room*>::iterator itr = rooms.begin(); itr != rooms.end(); itr++)
+    {
+        //cout << "Deleting " << endl;
+        delete (*itr);
+    }
+    rooms.clear();
+}
+
 void ZorkUL::RandomizeEnemy()
 {
     int randRoom = getRandom<int>(9)+1;

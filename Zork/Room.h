@@ -26,6 +26,7 @@ private:
 
 public:
     Room(string name);
+    ~Room();
 
     void setRoomDescription(string description);
     void setExits(Room *north, Room *east, Room *south, Room *west);

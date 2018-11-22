@@ -7,6 +7,17 @@ Player::Player(int health) : Character (health)
     p_weaponPtr = new weapon("Sword", 17, 20);
 }
 
+Player::~Player()
+{
+    cout << "Deleting player..." << endl;
+    /*for(vector<Item*>::iterator itr = inventory.begin(); itr != inventory.end(); itr++)
+    {
+        cout << "Deleting item from inventory" << endl;
+        delete (*itr);
+    }
+    inventory.clear();*/
+}
+
 
 void Player::addItemToInvetory(Item *item)
 {

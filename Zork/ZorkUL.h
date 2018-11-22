@@ -28,10 +28,11 @@ private:
 public:
     Player player;
 
+	ZorkUL();
+    ~ZorkUL();
     string printWelcome();
     void RandomizeEnemy();
-	ZorkUL();
-	void play();
+    void play();
     void teleport();
     Room* getCurrentRoom();
     string getCurrentRoomName();
